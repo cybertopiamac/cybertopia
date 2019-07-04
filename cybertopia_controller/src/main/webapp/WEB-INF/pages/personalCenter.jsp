@@ -25,77 +25,77 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/public.css"/>--%>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/jquery.bxslider.css"/>--%>
-<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>--%>
-<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery1.11.3.min.js"></script>--%>
-<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery.bxslider.min.js"></script>--%>
-<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/indexJS.js"></script>--%>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/jquery.bxslider.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
+    <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
     <script src="<%=basePath%>/js/personalCenter_js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-<%--<!--top-->--%>
-<%--<div class="top" id="top">--%>
-<%--    <div class="wrap clearfloat">--%>
-<%--        <div class="nav">--%>
-<%--            <ul class="clearfloat">--%>
-<%--                <li class="active">--%>
-<%--                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>--%>
-<%--                    <div class="navDown">--%>
-<%--                        <a href="">精选文章</a>--%>
-<%--                        <a href="">教师经验</a>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>--%>
-<%--                    <div class="navDown">--%>
-<%--                        <a href="">精选问题</a>--%>
-<%--                        <a href="">热搜问题</a>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>--%>
-<%--                    <div class="navDown">--%>
-<%--                        <a href="">登录</a>--%>
-<%--                        <a href="">个人信息查看</a>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-<%--                <li>--%>
-<%--                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>--%>
-<%--                    <div class="navDown">--%>
-<%--                        <a href="">常见问题</a>--%>
-<%--                        <a href="">在线视频</a>--%>
-<%--                    </div>--%>
-<%--                </li>--%>
-<%--            </ul>--%>
-<%--        </div>--%>
+<!--top-->
+<div class="top" id="top">
+    <div class="wrap clearfloat">
+        <div class="nav">
+            <ul class="clearfloat">
+                <li class="active">
+                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>
+                </li>
+                <li>
+                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                    <div class="navDown">
+                        <a href="">精选文章</a>
+                        <a href="">教师经验</a>
+                    </div>
+                </li>
+                <li>
+                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>
+                    <div class="navDown">
+                        <a href="">精选问题</a>
+                        <a href="">热搜问题</a>
+                    </div>
+                </li>
+                <li>
+                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
+                    <div class="navDown">
+                        <a href="">登录</a>
+                        <a href="">个人信息查看</a>
+                    </div>
+                </li>
+                <li>
+                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
+                    <div class="navDown">
+                        <a href="">常见问题</a>
+                        <a href="">在线视频</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-<%--        <div class="topRight clearfloat">--%>
-<%--            <div class="topLang">--%>
-<%--                <span class="topLangBtn"></span>--%>
-<%--                <a class="topLangEn" href="">English</a>--%>
-<%--                <a class="topLangCh" href="">China</a>--%>
-<%--            </div>--%>
-<%--            <div class="topSearch">--%>
-<%--                <span class="topSearchBtn"></span>--%>
-<%--                <div class="topSearchWrap clearfloat">--%>
-<%--                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>--%>
-<%--                    <button></button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+        <div class="topRight clearfloat">
+            <div class="topLang">
+                <span class="topLangBtn"></span>
+                <a class="topLangEn" href="">English</a>
+                <a class="topLangCh" href="">China</a>
+            </div>
+            <div class="topSearch">
+                <span class="topSearchBtn"></span>
+                <div class="topSearchWrap clearfloat">
+                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>
+                    <button></button>
+                </div>
+            </div>
+        </div>
 
-<%--    </div>--%>
-<%--    <div class="muen">--%>
-<%--        <span class="muenX"></span>--%>
-<%--        <span class="muenY"></span>--%>
-<%--        <span class="muenZ"></span>--%>
-<%--    </div>--%>
-<%--</div>--%>
+    </div>
+    <div class="muen">
+        <span class="muenX"></span>
+        <span class="muenY"></span>
+        <span class="muenZ"></span>
+    </div>
+</div>
 <%--<!--top-->--%>
 
 <div class="sequence">
@@ -105,7 +105,7 @@
 </div>
 
 
-<nav style="background: rgba(101, 202, 193, 0.75);">
+<nav>
     <div class="logo">
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>

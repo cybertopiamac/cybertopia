@@ -9,31 +9,37 @@
 }
 .slides .slide:nth-child(1) {
     /*background: rgba(255, 255, 255, 0);*/
-    background-image: url("../../images/personalCenter_images/back.jpg");
+    background-image: url("../../images/personalCenter_images/background.jpg");
 }
 .slides .slide:nth-child(2) {
     /*background: rgba(255, 255, 255, 0);*/
-    background-image: url("../../images/personalCenter_images/back.jpg");
+    background-image: url("../../images/personalCenter_images/background.jpg");
 }
 .slides .slide:nth-child(3) {
     /*background: rgba(255, 255, 255, 0);*/
-    background-image: url("../../images/personalCenter_images/back.jpg");
+    background-image: url("../../images/personalCenter_images/background.jpg");
 }
 .slides .slide:nth-child(4) {
     /*background: rgba(255, 255, 255, 0);*/
-    background-image: url("../../images/personalCenter_images/back.jpg");
+    background-image: url("../../images/personalCenter_images/background.jpg");
 }
 .slides .slide:nth-child(5) {
     /*background: rgba(255, 255, 255, 0);*/
-    background-image: url("../../images/personalCenter_images/back.jpg");
+    background-image: url("../../images/personalCenter_images/background.jpg");
 }
 .slides .slide .content{
-    top:15vh;
-    background: rgba(101, 202, 193, 0.75);
+    top:17vh;
+    width: 70%;
+    height: 75%;
+    background: rgba(0, 0, 0, 0.5);
     /*background-image: url("../img/back.jpg");*/
 }
 nav{
-    top:15vh;
+    top:17vh;
+    width: 25%;
+    height: 75%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 .second-content .col-md-6{
     width: 100%;

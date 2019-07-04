@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.macteam.cybertopia.dao.IPersonalCenterDao" >
 
-    <select id="getUserArticleCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Article"></select>
-    <select id="getUserCompetitionCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition"></select>
+    <select id="getUserArticleCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Article">
+        select * from artclecollect inner join article on articlecollect.articleId = article.id where userId = #{id}
+    </select>
+    <select id="getUserCompetitionCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition">
+        select * from competitioncollect inner join competition on competitioncollect.competitionId = competition.id where userId = #{id}
+    </select>
 </mapper>

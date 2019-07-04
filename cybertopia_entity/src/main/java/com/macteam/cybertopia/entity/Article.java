@@ -55,4 +55,16 @@ public class Article {
     public void setBrowseNum(int browseNum) {
         this.browseNum = browseNum;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", authorId=" + authorId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", browseNum=" + browseNum +
+                '}';
+    }
 }

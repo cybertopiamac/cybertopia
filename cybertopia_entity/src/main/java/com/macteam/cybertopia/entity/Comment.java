@@ -46,4 +46,15 @@ public class Comment {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", articleId=" + articleId +
+                ", userId='" + userId + '\'' +
+                '}';
+    }
 }

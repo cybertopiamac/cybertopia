@@ -55,4 +55,16 @@ public class Competition {
     public void setLink(String link) {
         this.link = link;
     }
+
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", desc='" + desc + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
 }

@@ -11,5 +11,8 @@ public class PersonalCenterController {
     @Autowired
     IPersonalCenterService personalCenterService;
 
-
+    @RequestMapping("home")
+    public String getPage(){
+        return "personalCenter";
+    }
 }

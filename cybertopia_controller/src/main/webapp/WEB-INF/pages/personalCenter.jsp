@@ -1,15 +1,17 @@
+<%@ page import="com.macteam.cybertopia.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
+    User user= (User) session.getAttribute("user");
 %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>HomePage</title>
+    <title>个人信息</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -23,17 +25,83 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/public.css"/>--%>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/jquery.bxslider.css"/>--%>
+<%--    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>--%>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery1.11.3.min.js"></script>--%>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery.bxslider.min.js"></script>--%>
+<%--    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/indexJS.js"></script>--%>
     <script src="<%=basePath%>/js/personalCenter_js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" type="text/javascript"></script>
 </head>
 
 <body>
+<%--<!--top-->--%>
+<%--<div class="top" id="top">--%>
+<%--    <div class="wrap clearfloat">--%>
+<%--        <div class="nav">--%>
+<%--            <ul class="clearfloat">--%>
+<%--                <li class="active">--%>
+<%--                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>--%>
+<%--                    <div class="navDown">--%>
+<%--                        <a href="">精选文章</a>--%>
+<%--                        <a href="">教师经验</a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>--%>
+<%--                    <div class="navDown">--%>
+<%--                        <a href="">精选问题</a>--%>
+<%--                        <a href="">热搜问题</a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>--%>
+<%--                    <div class="navDown">--%>
+<%--                        <a href="">登录</a>--%>
+<%--                        <a href="">个人信息查看</a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--                <li>--%>
+<%--                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>--%>
+<%--                    <div class="navDown">--%>
+<%--                        <a href="">常见问题</a>--%>
+<%--                        <a href="">在线视频</a>--%>
+<%--                    </div>--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+
+<%--        <div class="topRight clearfloat">--%>
+<%--            <div class="topLang">--%>
+<%--                <span class="topLangBtn"></span>--%>
+<%--                <a class="topLangEn" href="">English</a>--%>
+<%--                <a class="topLangCh" href="">China</a>--%>
+<%--            </div>--%>
+<%--            <div class="topSearch">--%>
+<%--                <span class="topSearchBtn"></span>--%>
+<%--                <div class="topSearchWrap clearfloat">--%>
+<%--                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>--%>
+<%--                    <button></button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+<%--    </div>--%>
+<%--    <div class="muen">--%>
+<%--        <span class="muenX"></span>--%>
+<%--        <span class="muenY"></span>--%>
+<%--        <span class="muenZ"></span>--%>
+<%--    </div>--%>
+<%--</div>--%>
+<%--<!--top-->--%>
 
 <div class="sequence">
-
     <div class="seq-preloader">
         <svg width="39" height="16" viewBox="0 0 39 16" xmlns="http://www.w3.org/2000/svg" class="seq-preload-indicator"><g fill="#F96D38"><path class="seq-preload-circle seq-preload-circle-1" d="M3.999 12.012c2.209 0 3.999-1.791 3.999-3.999s-1.79-3.999-3.999-3.999-3.999 1.791-3.999 3.999 1.79 3.999 3.999 3.999z"/><path class="seq-preload-circle seq-preload-circle-2" d="M15.996 13.468c3.018 0 5.465-2.447 5.465-5.466 0-3.018-2.447-5.465-5.465-5.465-3.019 0-5.466 2.447-5.466 5.465 0 3.019 2.447 5.466 5.466 5.466z"/><path class="seq-preload-circle seq-preload-circle-3" d="M31.322 15.334c4.049 0 7.332-3.282 7.332-7.332 0-4.049-3.282-7.332-7.332-7.332s-7.332 3.283-7.332 7.332c0 4.05 3.283 7.332 7.332 7.332z"/></g></svg>
     </div>
-
 </div>
 
 
@@ -56,15 +124,35 @@
                 <div class="col-md-3">
                     <div class="author-image"><img src="<%=basePath%>/images/personalCenter_images/author_image.png" alt=""></div>
                 </div>
+
                 <div class="col-md-9">
-                    <h2>昵称</h2>
+                    <h2><%=user.getNickName()%></h2>
                     <table>
-                        <tr><td><p><em>姓名:</em>赵耀邦</p></td><td><p><em>性别:</em>男</p></td></tr>
-                        <tr><td><p><em>学校:</em>武汉理工大学</p></td><td><p><em>专业:</em>计算机科学与技术</p></td></tr>
-                        <tr><td><p><em>年级:</em>大四</p></td><td><p><em>电话:</em>88888888</p></td></tr>
-                        <tr><td><p><em>邮箱:</em>test@whut.edu.com</p></td><td><p><em>个人简介:</em>唱、跳、rap、篮球</p></td></tr>
+                        <tr>
+                            <td><p><em>姓名:</em><input class="text-style" type="text" value="<%=user.getName()%>" readonly="readonly"></p></td>
+                            <td><p><em>性别:</em><input class="text-style" type="text" value="<%=user.getSex()%>" readonly="readonly"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p><em>学校:</em><input class="text-style" type="text" value="<%=user.getSchool()%>" readonly="readonly"></p></td>
+                            <td><p><em>专业:</em><input class="text-style" type="text" value="<%=user.getMajor()%>" readonly="readonly"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p><em>年级:</em><input class="text-style" type="text" value="<%=user.getGrade()%>" readonly="readonly"></p></td>
+                            <td><p><em>电话:</em><input class="text-style" type="text" value="<%=user.getPhone()%>" readonly="readonly"></p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p><em>邮箱:</em><input class="text-style" style="width: 70%" type="text" value="<%=user.getEmail()%>" readonly="readonly"></p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p>
+                                    <em>个人简介:</em>
+                                    <textarea class="text-style" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDesc()%></textarea>
+                                </p>
+                            </td>
+                        </tr>
                     </table>
-                    <div class="fb-btn"><a href="#" target="_blank">修改个人信息</a></div>
+                    <div class="fb-btn"><input type="button" onclick="changeState" value="修改个人信息"></div>
                 </div>
             </div>
         </div>
@@ -75,8 +163,10 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h2>文章标题</h2>
-                        <p>内容。。。。................................................................................................内容。。。。内容。。。。内容。。。。内容。。。。内容。。。。内容。。。。内容。。。。</p>
-                        <div class="main-btn"><a href="#3">Read More</a></div>
+                        <p>内容。。。。</p>
+                        <div class="main-btn">
+                            <input type="button" value="更多">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,12 +182,14 @@
                                 <div class="row">
                                     <div class="col-md-6" style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%">
                                         <div style="float: top;position: fixed;">
-                                            <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(101, 202, 193,0.75)">文章</h2>
+                                            <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(101, 202, 193,0.75);">文章</h2>
                                         </div>
                                         <div class="left-content" >
                                             <h2>标题</h2>
                                             <p>内容</p>
-                                            <div class="main-btn"><a href="#3">Continue Reading</a></div>
+                                            <div class="main-btn">
+                                                <input type="button" value="查看详情">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
@@ -107,7 +199,9 @@
                                         <div class="right-content">
                                             <h2>标题</h2>
                                             <p>内容</p>
-                                            <div class="main-btn"><a href="#3">Continue Reading</a></div>
+                                            <div class="main-btn">
+                                                <input type="button" value="查看详情">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

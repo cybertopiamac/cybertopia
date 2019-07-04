@@ -305,9 +305,9 @@ nav a:hover::before {
 }
 
 
-.main-btn a:hover {
+.main-btn input:hover {
+	color: #232323;
 	background-color: #fff;
-	color: #232323!important;
 }
 
 
@@ -357,15 +357,15 @@ nav a:hover::before {
 	margin-right: 15px;
 }
 
-.first-content .main-btn a {
+.first-content .main-btn input {
 	display: inline-block;
 	border: 2px solid #fff;
+	background-color: transparent;
 	padding: 8px 15px;
 	font-size: 13px;
 	letter-spacing: 1px;
 	color: #fff;
 	text-decoration: none;
-	transition: all 0.5s;
 	transition: all 0.5s;
 }
 
@@ -373,21 +373,25 @@ nav a:hover::before {
 	display: inline-block;
 }
 
-.first-content .fb-btn a {
+.first-content .fb-btn input {
 	display: inline-block;
-	background-color: #fff;
+	background-color: transparent;
 	border: 2px solid #fff;
 	padding: 8px 15px;
 	font-size: 13px;
 	letter-spacing: 1px;
-	color: #232323;
+	color: #fff;
 	text-decoration: none;
 	transition: all 0.5s;
 }
 
-.first-content .fb-btn a:hover {
-	color: #fff;
-	background-color: transparent;
+.first-content .fb-btn input:hover {
+	color: #232323;
+	background-color: #fff;
+}
+
+.first-content .fb-btn input:focus{
+	outline: none;
 }
 
 
@@ -428,13 +432,14 @@ nav a:hover::before {
 	margin-bottom: 30px;
 }
 
-.second-content a {
+.second-content input {
 	color: #fff;
 	text-decoration: underline;
 }
 
-.second-content .main-btn a {
+.second-content .main-btn input {
 	display: inline-block;
+	background-color: transparent;
 	border: 2px solid #fff;
 	padding: 8px 15px;
 	font-size: 13px;
@@ -444,6 +449,14 @@ nav a:hover::before {
 	transition: all 0.5s;
 }
 
+.second-content .main-btn input:hover{
+	color: #232323;
+	background-color: #fff;
+}
+
+.second-content .main-btn input:focus{
+	outline: none;
+}
 
 .third-content {
 	text-align: left;
@@ -488,8 +501,9 @@ nav a:hover::before {
 	margin-bottom: 20px;
 }
 
-.third-content .main-btn a {
+.third-content .main-btn input {
 	display: inline-block;
+	background-color: transparent;
 	border: 2px solid #fff;
 	padding: 8px 15px;
 	font-size: 13px;
@@ -499,6 +513,14 @@ nav a:hover::before {
 	transition: all 0.5s;
 }
 
+.third-content .main-btn input:hover{
+	color: #232323;
+	background-color: #fff;
+}
+
+.third-content .main-btn input:focus{
+	outline: none;
+}
 .third-content .col-md-6 {
 	margin: 0px;
 	padding: 0px;

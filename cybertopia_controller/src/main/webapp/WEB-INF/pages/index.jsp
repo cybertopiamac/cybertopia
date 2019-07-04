@@ -38,7 +38,7 @@
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="">登录</a>
                         <a href="">个人信息查看</a>

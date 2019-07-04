@@ -63,3 +63,16 @@ nav{
     margin-top: 0px;
 }
 
+.first-content .text-style{
+    border: none;
+    background: none;
+}
+
+.first-content .text-style:focus{
+    outline: none;
+}
+
+.first-content {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("personalCenter")
 public class PersonalCenterController {
-//    @Autowired
-//    IPersonalCenterService personalCenterService;
+    @Autowired
+    IPersonalCenterService personalCenterService;
 
 
 }

@@ -1,14 +1,15 @@
-package com.macteam.cybertopia.service.ipml;
+package com.macteam.cybertopia.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
+
 import com.macteam.cybertopia.dao.IPersonalCenterDao;
 import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.service.IPersonalCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 
-public class IPersonalCenterIpml implements IPersonalCenterService {
+public class IPersonalCenterImpl implements IPersonalCenterService {
     @Autowired
     IPersonalCenterDao personalCenterDao;
     @Autowired

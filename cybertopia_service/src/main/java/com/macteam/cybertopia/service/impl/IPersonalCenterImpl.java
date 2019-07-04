@@ -49,4 +49,10 @@ public class IPersonalCenterImpl implements IPersonalCenterService {
         List<Competition> competitions = personalCenterDao.getUserCompetitionCollectByUserId(user.getId());
         return competitions;
     }
+
+    public int updateUserInfo(User user) {
+        int iErrorCode = 0;
+        iErrorCode = personalCenterDao.updateUserInfo(user);
+        return iErrorCode;
+    }
 }

@@ -13,4 +13,5 @@ public interface IPersonalCenterService {
     List<Article> getArticleCollectByUser(User user);
     List<Competition> getCompetitionById(int id);
     List<Competition> getCompetitionByUser(User user);
+    int updateUserInfo(User user);
 }

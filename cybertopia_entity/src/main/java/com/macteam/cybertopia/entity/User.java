@@ -5,12 +5,12 @@ public class User {
     private String username;//用户名
     private String password;
     private String name;//真实姓名
-    private String role;
+    private int role;
     private String nickName;//昵称
-    private String sex;
+    private int sex;
     private String school;
     private String major;
-    private String grade;
+    private int grade;
     private String email;
     private String desc;
     private String picture;
@@ -48,11 +48,11 @@ public class User {
         this.name = name;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -64,11 +64,11 @@ public class User {
         this.nickName = nickName;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -88,11 +88,11 @@ public class User {
         this.major = major;
     }
 
-    public String getGrade() {
+    public int getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     }
 

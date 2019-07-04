@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.macteam.cybertopia.dao.IPersonalCenterDao" >
-
     <select id="getUserArticleCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Article">
         select * from artclecollect inner join article on articlecollect.articleId = article.id where userId = #{id}
     </select>
     <select id="getUserCompetitionCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition">
         select * from competitioncollect inner join competition on competitioncollect.competitionId = competition.id where userId = #{id}
     </select>
+    <update id="updateUserInfo" parameterType="User">
+        update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}
+    </update>
+    <update id="updateUserPassword">
+        update `user` set password = #{password} where id = #{id}
+    </update>
+    <update id="updateUserDesc">
+        update `user` set desc = #{desc}
+    </update>
 </mapper>

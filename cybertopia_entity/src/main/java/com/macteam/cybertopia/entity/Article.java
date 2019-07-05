@@ -1,11 +1,13 @@
 package com.macteam.cybertopia.entity;
 
+import java.util.Date;
+
 public class Article {
     private int id;
     private int authorId;
     private String title;
     private String content;
-    private String date;
+    private Date date;
     private int browseNum;
 
     public int getId() {
@@ -40,11 +42,11 @@ public class Article {
         this.content = content;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

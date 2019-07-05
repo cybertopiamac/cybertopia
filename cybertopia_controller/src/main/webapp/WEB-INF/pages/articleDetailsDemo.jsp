@@ -1,13 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="no-js">
-
     <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
 %>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -109,40 +107,6 @@
 
     </div>
     <div class="article_content">
-         <p>内容</p>
-         <h2>标题2222222222word成绩单</h2>
-         <p>内容</p>
-         <ul>
-             <li>
-                 我们呢饭积分年纪
-             </li>
-             <br/>
-
-             <li>
-                word nej nasj出假大空
-             </li>
-             <br/>
-             <li>
-                 陈纳德愁眉苦脸
-             </li>
-         </ul>
-         <code>hello world</code>
-        <p>cbonvfbonf</p>
-        <pre>
-            int a=1;
-            int b=4;
-            System.out.println(a+b）;
-        </pre>
-       <p>初步欧式保持合订本逊尼派初步殴打年长江口不错多级哦女儿家偶发cnfdojnvskkbl jcl bsoufn sojbf ab ohdjna 初步欧式差别动薄弱传播点击
-           cnjc xbsi bcjsndapobvjzmkcjosb cnaj cc sjkc zall fjsrfbqianzlkxnKClsnnfac 出鸟兽散snocdon</p>
-        <p>cbdujcfdn</p>
-        <p>xsbiocjkmla</p>
-        <p> bxnkxsbocjnkma需哦刹那间</p>
-        <p>cdbocsdcsd写小便斗</p>
-        <p>dcbson小便斗斯诺克崇明岛</p>
-        <p>小波手机电池年</p>
-        <p>xzbcojkdfvnpos传播界女裤疲惫vj</p>
-
     </div>
 
     <div class="comment_bar">

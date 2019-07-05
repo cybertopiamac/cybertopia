@@ -5,7 +5,7 @@ public class Competition {
     private String type;
     private String name;
     private String date;
-    private String desc;
+    private String description;
     private String link;
 
     public int getId() {
@@ -41,11 +41,11 @@ public class Competition {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.description = desc;
     }
 
     public String getLink() {
@@ -63,7 +63,7 @@ public class Competition {
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", date='" + date + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 ", link='" + link + '\'' +
                 '}';
     }

@@ -5,13 +5,13 @@ public class User {
     private String username;//用户名
     private String password;
     private int role;
-    private String nickName;//昵称
+    private String nickname;//昵称
     private int sex;
     private String school;
     private String major;
     private int grade;
     private String email;
-    private String desc;
+    private String description;
     private String picture;
     private String phone;
 
@@ -48,11 +48,11 @@ public class User {
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public String getSex() {
@@ -144,11 +144,11 @@ public class User {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.description = desc;
     }
 
     public String getPicture() {
@@ -174,13 +174,13 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", nickName='" + nickName + '\'' +
+                ", nickName='" + nickname + '\'' +
                 ", sex='" + sex + '\'' +
                 ", school='" + school + '\'' +
                 ", major='" + major + '\'' +
                 ", grade='" + grade + '\'' +
                 ", email='" + email + '\'' +
-                ", desc='" + desc + '\'' +
+                ", desc='" + description + '\'' +
                 ", picture='" + picture + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';

@@ -47,13 +47,23 @@ public class User {
         this.role = role;
     }
 
-    public String getNickName() {
+
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickname = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
     public String showSex() {
         String sexString = "未知";
@@ -152,13 +162,7 @@ public class User {
         this.email = email;
     }
 
-    public String getDesc() {
-        return description;
-    }
 
-    public void setDesc(String desc) {
-        this.description = desc;
-    }
 
     public String getPicture() {
         return picture;

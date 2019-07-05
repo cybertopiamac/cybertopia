@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en" class="no-js">
 <html>
 <head>
@@ -38,9 +39,9 @@
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">登录</a>
+                        <a href="${pageContext.request.contextPath}/user/login.do">登录</a>
                         <a href="">个人信息查看</a>
                     </div>
                 </li>
@@ -110,7 +111,7 @@
                     <p>
                         大赛是创新创业人才培养计算机教育实践平台的具体举措，目的是提高大学生综合素质，具体落实、进一步推动高校本科面向21世纪的计算机教学的知识体系、课程体系、教学内容和教学……
                     </p>
-                    <a href="">+</a>
+                    <a href="http://jsjds.ruc.edu.cn">+</a>
                 </li>
                 <li>
                     <h3>华为软件精英挑战赛</h3>
@@ -119,7 +120,7 @@
                     <p>
                         华为软件精英挑战赛是华为公司面向在校大学生举办的大型软件竞赛，从2015年至今已成功举办四届。在软件精英挑战赛的舞台上，我们相信您可以充分展示软件设计与编程的能力、享受……
                     </p>
-                    <a href="">+</a>
+                    <a href="https://codecraft.huawei.com">+</a>
                 </li>
                 <li>
                     <h3>全国并行应用挑战赛</h3>
@@ -128,7 +129,7 @@
                     <p>
                         竞赛定位于中国的戈登贝尔奖，并于2014年开办“竞赛集训营”——为参赛者助跑，为从业者加速，共享平台，共赢未来。从第一届到第七届，PAC始终坚持初心，为寻找行业最佳应用、培养……
                     </p>
-                    <a href="">+</a>
+                    <a href="http://www.pac-hpc.com">+</a>
                 </li>
             </ul>
         </div>
@@ -255,128 +256,63 @@
 <%--        </div>--%>
 
         <div class="homeTitle">
-            <h2>校园动态</h2>
-            <h3><span>Campus dynamics</span></h3>
+            <h2>竞赛库</h2>
+            <h3><span>Competition Treasury</span></h3>
             <div class="line"></div>
         </div>
 
         <div class="homeCamWrap">
-            <ul class="homeCamList clearfloat">
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img1.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img2.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img3.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="homeCamList clearfloat">
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img1.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img2.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img3.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="homeCamList clearfloat">
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img1.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img2.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/temp/home.cum.img3.jpg"/></a></div>
-                    <div class="homeCamCont">
-                        <h3 class="single-line"><a href="">会员收费活动 | 英语思维之桌游系列</a></h3>
-                        <h4>2018-07-10</h4>
-                        <div class="line"></div>
-                        <p class="multi-line">
-                            我们为您准备了 30-500 人的各类活动专用场地，并配备了音箱、投影、桌椅、茶歇等增值动专用场地，并配备了音箱、投影、桌椅、茶歇等增值服务。我们撤掉…
-                        </p>
-                        <a class="more" href="">MORE+</a>
-                    </div>
-                </li>
-            </ul>
+            <c:set var="i" value="${-1}" scope="session"/>
+            <c:forEach var="item" items="${comps}" step="3">
+                <ul class="homeCamList clearfloat">
+                    <c:set var="i" value="${i+1}" scope="session"/>
+                    <c:if test="${i<count}">
+                        <li>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="homeCamCont">
+                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
+                                <h4>2018-07-10</h4>
+                                <div class="line"></div>
+                                <p class="multi-line">
+                                        ${comps[i].description.substring(0,50)}${'...'}
+                                </p>
+                                <a class="more" href="">MORE+</a>
+                            </div>
+                        </li>
+                    </c:if>
+                    <c:set var="i" value="${i+1}" scope="session"/>
+                    <c:if test="${i<count}">
+                        <li>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="homeCamCont">
+                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
+                                <h4>2018-07-10</h4>
+                                <div class="line"></div>
+                                <p class="multi-line">
+                                        ${comps[i].description.substring(0,50)}${'...'}
+                                </p>
+                                <a class="more" href="">MORE+</a>
+                            </div>
+                        </li>
+                    </c:if>
+                    <c:set var="i" value="${i+1}" scope="session"/>
+                    <c:if test="${i<count}">
+                        <li>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="homeCamCont">
+                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
+                                <h4>2018-07-10</h4>
+                                <div class="line"></div>
+                                <p class="multi-line">
+                                        ${comps[i].description.substring(0,50)}${'...'}
+                                </p>
+                                <a class="more" href="">MORE+</a>
+                            </div>
+                        </li>
+                    </c:if>
+                </ul>
+            </c:forEach>
         </div>
-
     </div>
 </div>
 

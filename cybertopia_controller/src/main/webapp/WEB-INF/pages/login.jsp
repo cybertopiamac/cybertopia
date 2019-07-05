@@ -22,6 +22,9 @@
             var password=document.getElementById("password").value;
             if(name==""||password==""){
                 alert("账号或密码不能为空！");
+                form.action = "${pageContext.request.contextPath}/user/toLogin.do";
+                form.method = "post";
+                form.submit();
             }
             else{
                 var form = document.forms[0];
@@ -69,8 +72,8 @@
     </div>
     <div class="footer">
         <div class="footer_signup_link">
-            <a class="signup_link" href="">注册</a>
-            <a href=""  class="link unnamed_1">首页</a>
+            <a class="signup_link" href="${pageContext.request.contextPath}/newuser/toRegister.do">注册</a>
+            <a href="${pageContext.request.contextPath}/main/index.do"  class="link unnamed_1">首页</a>
             <a href=""  class="link unnamed_2">联系我们</a>
         </div>
         <div class="design_show">

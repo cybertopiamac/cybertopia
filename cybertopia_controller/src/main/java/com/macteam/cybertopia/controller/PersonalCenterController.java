@@ -16,10 +16,7 @@ public class PersonalCenterController {
 
     @RequestMapping("home")
     public String getPage(){
-
         return "personalCenter";
     }
-
-
 
 }

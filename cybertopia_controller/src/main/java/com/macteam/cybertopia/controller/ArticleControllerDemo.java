@@ -10,7 +10,7 @@ public class ArticleControllerDemo {
     //全部文章列表
     @RequestMapping("/allDemo.do")
     public String articleLists(){
-        return "articleListDemo";
+        return "articleList";
     }
 
    //文章详情

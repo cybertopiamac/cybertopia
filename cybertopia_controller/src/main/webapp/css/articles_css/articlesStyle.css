@@ -1,7 +1,7 @@
 body{
     background-color:#ECF0F1;
 }
-.content_div{
+.article-feed {
     width:80%;
     /*margin:30% 15% auto 15%;*/
     margin-top:150px;
@@ -13,18 +13,18 @@ body{
     /*border:1px solid red;*/
 
 }
-.articles_title{
+.article_title{
     margin:8px;
     border:1px solid #CCC;
     box-shadow: 0px 0px 10px #ccc;
     border-radius: 5px;
     background-color: #FFF;
 }
-.articles_title a{
+.article_title a{
     text-decoration: none;
 }
 
-.articles_title h1{
+.article_title h1{
     margin:10px;
     padding:5px;
     font-size:25px;
@@ -32,20 +32,20 @@ body{
     word-wrap:break-word;
 
 }
-.articles_title p {
+.article_title p {
     font-size:14px;
     margin:10px;
     padding:5px;
 }
-.articles_title span{
+.article_title span{
     margin:10px;
     font-size:14px;
 }
-.ArticlePub_time
+.pub_time
 {
     color:#666;
 }
-.readNumber{
+.read_number{
     float:right;
     color:#666;
 }

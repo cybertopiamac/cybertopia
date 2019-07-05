@@ -271,7 +271,7 @@
                             <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
                             <div class="homeCamCont">
                                 <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2018-07-10</h4>
+                                <h4>2019-${comps[i].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[i].description.substring(0,50)}${'...'}
@@ -286,7 +286,7 @@
                             <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
                             <div class="homeCamCont">
                                 <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2018-07-10</h4>
+                                <h4>2019-${comps[i].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[i].description.substring(0,50)}${'...'}
@@ -301,7 +301,7 @@
                             <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
                             <div class="homeCamCont">
                                 <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2018-07-10</h4>
+                                <h4>2019-${comps[i].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[i].description.substring(0,50)}${'...'}

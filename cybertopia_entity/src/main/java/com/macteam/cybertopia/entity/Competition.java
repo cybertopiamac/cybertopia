@@ -8,6 +8,14 @@ public class Competition {
     private String description;
     private String link;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }
@@ -38,14 +46,6 @@ public class Competition {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getDesc() {
-        return description;
-    }
-
-    public void setDesc(String desc) {
-        this.description = desc;
     }
 
     public String getLink() {

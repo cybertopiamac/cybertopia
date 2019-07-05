@@ -25,78 +25,16 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/public.css"/>
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/jquery.bxslider.css"/>
-    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
-    <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
     <script src="<%=basePath%>/js/personalCenter_js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-<!--top-->
-<div class="top" id="top">
-    <div class="wrap clearfloat">
-        <div class="nav">
-            <ul class="clearfloat">
-                <li class="active">
-                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>
-                </li>
-                <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">精选文章</a>
-                        <a href="">教师经验</a>
-                    </div>
-                </li>
-                <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">精选问题</a>
-                        <a href="">热搜问题</a>
-                    </div>
-                </li>
-                <li>
-                    <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">登录</a>
-                        <a href="">个人信息查看</a>
-                    </div>
-                </li>
-                <li>
-                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">常见问题</a>
-                        <a href="">在线视频</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="topRight clearfloat">
-            <div class="topLang">
-                <span class="topLangBtn"></span>
-                <a class="topLangEn" href="">English</a>
-                <a class="topLangCh" href="">China</a>
-            </div>
-            <div class="topSearch">
-                <span class="topSearchBtn"></span>
-                <div class="topSearchWrap clearfloat">
-                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>
-                    <button></button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="muen">
-        <span class="muenX"></span>
-        <span class="muenY"></span>
-        <span class="muenZ"></span>
-    </div>
+<%--back--%>
+<div class="backToIndex">
+    <a href="<%=basePath%>/user/main.do">
+    <img src="<%=basePath%>/images/personalCenter_images/prev.png">返回</a>
 </div>
-<%--<!--top-->--%>
+<%--back--%>
 
 <div class="sequence">
     <div class="seq-preloader">
@@ -129,19 +67,16 @@
                     <h2><%=user.getNickName()%></h2>
                     <table>
                         <tr>
-                            <td><p><em>姓名:</em><input class="text-style" type="text" value="<%=user.getName()%>" readonly="readonly"></p></td>
                             <td><p><em>性别:</em><input class="text-style" type="text" value="<%=user.getSex()%>" readonly="readonly"></p></td>
-                        </tr>
-                        <tr>
                             <td><p><em>学校:</em><input class="text-style" type="text" value="<%=user.getSchool()%>" readonly="readonly"></p></td>
+                        </tr>
+                        <tr>
                             <td><p><em>专业:</em><input class="text-style" type="text" value="<%=user.getMajor()%>" readonly="readonly"></p></td>
-                        </tr>
-                        <tr>
                             <td><p><em>年级:</em><input class="text-style" type="text" value="<%=user.getGrade()%>" readonly="readonly"></p></td>
-                            <td><p><em>电话:</em><input class="text-style" type="text" value="<%=user.getPhone()%>" readonly="readonly"></p></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><p><em>邮箱:</em><input class="text-style" style="width: 70%" type="text" value="<%=user.getEmail()%>" readonly="readonly"></p></td>
+                            <td><p><em>电话:</em><input class="text-style" type="text" value="<%=user.getPhone()%>" readonly="readonly"></p></td>
+                            <td><p><em>邮箱:</em><input class="text-style" style="width: 70%" type="text" value="<%=user.getEmail()%>" readonly="readonly"></p></td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -182,7 +117,7 @@
                                 <div class="row">
                                     <div class="col-md-6" style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%">
                                         <div style="float: top;position: fixed;">
-                                            <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(101, 202, 193,0.75);">文章</h2>
+                                            <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">文章</h2>
                                         </div>
                                         <div class="left-content" >
                                             <h2>标题</h2>
@@ -194,7 +129,7 @@
                                     </div>
                                     <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
                                         <div style="float:top;position: fixed">
-                                            <h2 style="height:26px;width:50px;background-color: rgba(101, 202, 193,0.75);border-bottom: none">竞赛</h2>
+                                            <h2 style="height:26px;width:50px;background-color: rgba(0, 0, 0,0.75);border-bottom: none">竞赛</h2>
                                         </div>
                                         <div class="right-content">
                                             <h2>标题</h2>

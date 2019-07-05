@@ -8,19 +8,25 @@
 %>
 <html>
 <body>
-<div class="article_title">
-    <a href="https://some2501.me">
-        <h1>标题是什么，不知道的第${pageIndex}号选手</h1>
-        <p><span>张三</span>
-            <span class="pub_time">2019年7月3日</span>
-            <span class="read_number"> 浏览量:<span>${pageIndex}</span></span>
-        </p>
-    </a>
+<div class="article_titles">
+<c:forEach var="article_title" items="${article_titles}" varStatus="status">
+    <div class="article_title">
+        <a href="https://some2501.me">
+            <h1>${article_title.title}不知道的第${pageIndex}号选手</h1>
+            <p><span>${article_title.authorName}</span>
+                <span class="pub_time">${article_title.date}</span>
+                <span class="read_number">
+                    浏览量:<span>${article_title.browseNum}</span>
+                </span>
+            </p>
+        </a>
+    </div>
+</c:forEach>
 </div>
 <c:if test="${haveNext == true}">
-<p class="pagination">
-    <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=${nextIndex}">Next page</a>
-</p>
+    <p class="pagination">
+        <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=${pageIndex+1}">下一页</a>
+    </p>
 </c:if>
 </body>
 </html>

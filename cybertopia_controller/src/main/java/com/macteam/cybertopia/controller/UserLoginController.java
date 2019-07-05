@@ -52,6 +52,15 @@ public class UserLoginController {
         return "index";
     }
 
-
+    public User getCurrentUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Object userId = session.getAttribute("user");
+        if(userId != null){
+            User user = userDao.getUserById((Integer)userId);
+            return user;
+        }
+        else
+            return null;
+    }
 
 }

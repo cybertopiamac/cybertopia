@@ -13,7 +13,7 @@
     </select>
 
     <insert id="addNewUser" parameterType="User">
-        insert into user(username,password,role,nickname,sex,school,major,grade,email,description,phone) values (#{username},#{password},#{role},#{nickname},#{sex},#{school},#{major},#{grade},#{email},#{description},#{phone})
+        insert into user(username,password,role,nickname,sex,school,major,grade,email,description,phone) values (#{username},password(#{password}),#{role},#{nickname},#{sex},#{school},#{major},#{grade},#{email},#{description},#{phone})
     </insert>
 
 </mapper>

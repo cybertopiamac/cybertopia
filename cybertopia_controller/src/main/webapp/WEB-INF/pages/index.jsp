@@ -41,7 +41,7 @@
                 <li>
                     <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="${pageContext.request.contextPath}/user/login.do">登录</a>
+                        <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
                         <a href="">个人信息查看</a>
                     </div>
                 </li>
@@ -64,7 +64,7 @@
             <div class="topSearch">
                 <span class="topSearchBtn"></span>
                 <div class="topSearchWrap clearfloat">
-                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>
+<%--                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>--%>
                     <button></button>
                 </div>
             </div>

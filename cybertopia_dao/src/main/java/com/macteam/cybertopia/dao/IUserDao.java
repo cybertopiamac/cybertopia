@@ -8,4 +8,5 @@ public interface IUserDao {
     User getUserByUsername(String username);
     User deleteUserById(int id);
     User deleteUserByuserName(String userName);
+    String getPasswordCode(@Param("input") String input);
 }

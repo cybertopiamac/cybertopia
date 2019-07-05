@@ -8,5 +8,8 @@
         select * from user where username=#{username}
     </select>
     <select id="getUserById" resultType="com.macteam.cybertopia.entity.User"></select>
+    <select id="getPasswordCode" resultType="java.lang.String">
+        select password( #{input} )
+    </select>
 
 </mapper>

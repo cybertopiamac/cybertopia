@@ -39,7 +39,9 @@ public class UserLoginController {
             System.out.println("不存在该用户");
             return "login";
         }
-        if (!rightUser.getPassword().equals(user.getPassword())) {
+        System.out.println("input"+rightUser.getPassword());
+        System.out.println(userDao.getPasswordCode(user.getPassword()));
+        if (!rightUser.getPassword().equals(userDao.getPasswordCode(user.getPassword()))) {
             model.addAttribute("msg", "账号或密码错误");
             System.out.println("账号或密码错误");
             return "login";

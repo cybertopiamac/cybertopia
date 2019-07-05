@@ -17,7 +17,7 @@ public class ArticleControllerDemo {
    @RequestMapping("/detailDemo.do")
    public String articleDetails(/*int article_id*/) {
         //传入文章id
-       return "articleDetailsDemo";
+       return "articleDetail";
    }
 
    //发表文章

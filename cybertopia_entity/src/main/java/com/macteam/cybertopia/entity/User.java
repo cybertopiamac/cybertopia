@@ -4,7 +4,6 @@ public class User {
     private int id;
     private String username;//用户名
     private String password;
-    private String name;//真实姓名
     private int role;
     private String nickName;//昵称
     private int sex;
@@ -40,14 +39,6 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getRole() {
         return role;
     }
@@ -64,8 +55,15 @@ public class User {
         this.nickName = nickName;
     }
 
-    public int getSex() {
-        return sex;
+    public String getSex() {
+        String sexString = "未知";
+        if (sex == 1){
+            sexString = "男";
+        }
+        else if(sex == 0){
+            sexString = "女";
+        }
+        return sexString;
     }
 
     public void setSex(int sex) {
@@ -88,8 +86,49 @@ public class User {
         this.major = major;
     }
 
-    public int getGrade() {
-        return grade;
+    public String getGrade() {
+        String gradeString = "未知";
+        switch (grade){
+            case 1:{
+                gradeString = "大一";
+                break;
+            }
+            case 2:{
+                gradeString = "大二";
+                break;
+            }
+            case 3:{
+                gradeString = "大三";
+                break;
+            }
+            case 4:{
+                gradeString = "大四";
+                break;
+            }
+            case 5:{
+                gradeString = "研一";
+                break;
+            }
+            case 6:{
+                gradeString = "研二";
+                break;
+            }
+            case 7:{
+                gradeString = "研三";
+                break;
+            }
+            case 8:{
+                gradeString = "博一";
+                break;
+            }
+            case 9:{
+                gradeString = "博二";
+                break;
+            }
+            default:{break;}
+        }
+
+        return gradeString;
     }
 
     public void setGrade(int grade) {
@@ -134,7 +173,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", sex='" + sex + '\'' +

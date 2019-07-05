@@ -44,6 +44,7 @@ public class UserLoginController {
             System.out.println("账号或密码错误");
             return "login";
         }
+
         HttpSession session = request.getSession();
         session.setAttribute("user", rightUser);
         return "index";

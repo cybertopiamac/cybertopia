@@ -42,6 +42,7 @@ public class UserLoginController {
             return "login";
         }
         HttpSession session = request.getSession();
+        rightUser.setPassword("就不告诉你");
         session.setAttribute("recent_user", rightUser);
         return "redirect:/main/index.do";
     }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("article")
-public class ArticlesController {
+public class ArticleControllerDemo {
 
     //全部文章列表
     @RequestMapping("/allDemo.do")

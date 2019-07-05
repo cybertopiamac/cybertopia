@@ -102,68 +102,71 @@
 <div class="slides">
     <div class="slide" id="1">
         <div class="content first-content">
-            <div class="container-fluid">
-                <div class="col-md-3">
-                    <div class="author-image">
-                        <img id="change_icon" src="<%=basePath%>/images/head_icon/<%=user.getPicture()%>">
-                        <a class="file">
-                            <center>
-                                修改头像<input type="file" id="file" accept="image/gif,image/jpeg,image/png,image/jpg" onchange="preImg('file','change_icon')">
-                            </center>
-                        </a>
+            <form action="">
+                <a class="change-password"><i class="fa fa-check"></i>修改密码</a>
+                <div class="container-fluid">
+                    <div class="col-md-3">
+                        <div class="author-image">
+                            <img id="change_icon" src="<%=basePath%>/images/head_icon/<%=user.getPicture()%>">
+                            <a class="file">
+                                <center>
+                                    修改头像<input type="file" id="file" accept="image/gif,image/jpeg,image/png,image/jpg" onchange="preImg('file','change_icon')">
+                                </center>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <h2><%=user.getNickName()%></h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p><em>性别:</em>
+                                        <select class="text-style" id="sex-select" disabled="true">
+                                            <%if (user.showSex().equals("未知")){%>
+                                            <option><%=user.showSex()%></option>
+                                            <%}%>
+                                            <option><%=sex%></option>
+                                            <option><%=sex_a%></option>
+                                        </select>
+                                    </p>
+                                </td>
+                                <td><p><em>学校:</em><input class="text-style" id="school-input" type="text" value="<%=user.getSchool()%>" disabled="true"></p></td>
+                            </tr>
+                            <tr>
+                                <td><p><em>专业:</em><input class="text-style" id="major-input" type="text" value="<%=user.getMajor()%>" disabled="true"></p></td>
+                                <td>
+                                    <p><em>年级:</em>
+                                        <select class="text-style" id="grade-select" disabled="true">
+                                            <%if (user.showGrade().equals("未知")){%>
+                                            <option><%=user.showGrade()%></option>
+                                            <%}%>
+                                            <option><%=grade_1%></option>
+                                            <option><%=grade_2%></option>
+                                            <option><%=grade_3%></option>
+                                            <option><%=grade_4%></option>
+                                        </select>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><p><em>电话:</em><input class="text-style" id="phone-input" type="text" value="<%=user.getPhone()%>" disabled="true"></p></td>
+                                <td><p><em>邮箱:</em><input class="text-style" id="email-input" style="width: 70%" type="text" value="<%=user.getEmail()%>" disabled="true"></p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>
+                                        <em>个人简介:</em>
+                                        <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDesc()%></textarea>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                       <div class="fb-btn"><input type="button" value="编辑" onclick="changeState()"></div>
+                        <div class="fb-btn"><input type="button"  value="确认修改"></div>
                     </div>
                 </div>
-
-                <div class="col-md-9">
-                    <h2><%=user.getNickName()%></h2>
-                    <table>
-                        <tr>
-                            <td>
-                                <p><em>性别:</em>
-                                    <select class="text-style" id="sex-select" disabled="true">
-                                        <%if (user.showSex().equals("未知")){%>
-                                        <option><%=user.getSex()%></option>
-                                        <%}%>
-                                        <option><%=sex%></option>
-                                        <option><%=sex_a%></option>
-                                    </select>
-                                </p>
-                            </td>
-                            <td><p><em>学校:</em><input class="text-style" id="school-input" type="text" value="<%=user.getSchool()%>" disabled="true"></p></td>
-                        </tr>
-                        <tr>
-                            <td><p><em>专业:</em><input class="text-style" id="major-input" type="text" value="<%=user.getMajor()%>" disabled="true"></p></td>
-                            <td>
-                                <p><em>年级:</em>
-                                    <select class="text-style" id="grade-select" disabled="true">
-                                        <%if (user.showGrade().equals("未知")){%>
-                                        <option><%=user.getGrade()%></option>
-                                        <%}%>
-                                        <option><%=grade_1%></option>
-                                        <option><%=grade_2%></option>
-                                        <option><%=grade_3%></option>
-                                        <option><%=grade_4%></option>
-                                    </select>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p><em>电话:</em><input class="text-style" id="phone-input" type="text" value="<%=user.getPhone()%>" disabled="true"></p></td>
-                            <td><p><em>邮箱:</em><input class="text-style" id="email-input" style="width: 70%" type="text" value="<%=user.getEmail()%>" disabled="true"></p></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <p>
-                                    <em>个人简介:</em>
-                                    <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDesc()%></textarea>
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                   <div class="fb-btn"><input type="button" value="编辑" onclick="changeState()"></div>
-                    <div class="fb-btn"><input type="button"  value="确认修改"></div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <div class="slide" id="2">

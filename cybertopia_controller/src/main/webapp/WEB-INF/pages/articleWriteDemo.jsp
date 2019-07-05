@@ -1,18 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" class="no-js">
+
     <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
 %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>文章详情页面</title>
+    <title>发表文章页面</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/public.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/jquery.bxslider.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
@@ -31,6 +33,19 @@
                 $(this).toggleClass("like_click")
             });
         });
+
+        function publish(){
+            var r=confirm("确认发表吗?");
+            if(r==true){
+                //向文章表写入数据
+                alert("发表成功！");
+            }
+            else{
+                //继续编辑，不提交
+                alert("取消发表");
+            }
+
+        }
     </script>
 </head>
 
@@ -98,23 +113,41 @@
 </div>
 <!--top-->
 
-<!--articleDetails-->
+<!--articleWrite-->
+
+
+
 <div class="article-feed">
-    <div class="article_title article_detail_title">
-            <h1>文章文章文章文章文章文章文章文章文章文章文章文章articals articals articals什么东西word 我们不一样啊啊啊你好吗</h1>
-            <p><span>张三</span> <span class="pub_time">发表于&nbsp;&nbsp;2019年7月3日&nbsp;20:12</span><span class="read_number">浏览量:2</span></p>
-        <hr/>
+   <!--button-->
+    <div class="publish_bar">
+        <button type="button" class="publish_button"  onclick="publish()">发表</button>
+    </div>
+    <!---->
+
+    <!--填充title-->
+    <div class="article_title article_detail_title publsh_title">
 
     </div>
+    <!--title-->
+
+ <!--填充content-->
     <div class="article_content">
-    </div>
 
-    <div class="comment_bar">
-        <p class="comment_bar_p">
-            <a class="like" href="#" title="点击收藏此文章"><span class="star">&#9733;</span>收藏&nbsp;</a>|
-            <a href="#"  title="点击发表评论"><span class="write_comment">&#9997;</span>发表评论</a>
-        </p>
+        <p>xpids</p>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <p>cdbocjsd</p>
+        <p>dc</p>
+
     </div>
+    <!--content-->
 
 </div>
 

@@ -19,4 +19,10 @@ public class ArticleControllerDemo {
         //传入文章id
        return "articleDetailsDemo";
    }
+
+   //发表文章
+    @RequestMapping("/publishDemo.do")
+    public String articleWrite(){
+        return "articleWriteDemo";
+    }
 }

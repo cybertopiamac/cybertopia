@@ -1,6 +1,7 @@
 package com.macteam.cybertopia.controller;
 
 import com.macteam.cybertopia.entity.Article;
+import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
 import com.macteam.cybertopia.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -16,6 +18,9 @@ public class ArticleController {
 
     @Autowired
     private IArticleService articleService;
+
+    @Autowired
+    private UserLoginController userLoginController;
 
     @RequestMapping("/all.do")
     public String articleList(){
@@ -42,13 +47,23 @@ public class ArticleController {
     }
 
     @RequestMapping("/write.do")
-    public String articleWrite(){
-        return "articleWriet";
+    public String articleWrite(HttpServletRequest request){
+        User user = userLoginController.getCurrentUser(request);
+        if(user != null)
+            return "articleWriet";
+        else
+            return "login";
     }
 
     @RequestMapping("/post.do")
-    public String articlePost(Article article){
-        articleService.insertArticle(article);
-        return "redirect:/article/all.do";
+    public String articlePost(HttpServletRequest request,Article article){
+        User user = userLoginController.getCurrentUser(request);
+        if(user != null) {
+            article.setAuthorId(user.getId());
+            articleService.insertArticle(article);
+            return "redirect:/article/all.do";
+        }
+        else
+            return "login";
     }
 }

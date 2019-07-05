@@ -154,3 +154,13 @@ nav a.active{
 .first-content .fb-btn {
     padding-right: 50px;
 }
+.first-content .change-password{
+    float: right;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+.first-content .change-password:hover{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}

@@ -116,13 +116,13 @@ body{
     color:#666;
     text-decoration: none;
 }
-.like{
+.like .star{
     vertical-align: middle;
     cursor:pointer;
     font-size:25px;
     color:#CCC;
 }
-.like_click{
+.like_click .star{
     color:red;
     font-size:25px;
     cursor: pointer;

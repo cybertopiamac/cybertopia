@@ -21,19 +21,16 @@
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/articlesStyle.css"/>
 
-
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
 
+    <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-    <script type="text/javascript">
-
-
+    <script>
         $(document).ready(function(){
-            $("button").onclick(function(){
-                $(".like").style.color="red";
-
+            $(".like").click(function(){
+                $(this).toggleClass("like_click")
             });
         });
     </script>
@@ -150,16 +147,12 @@
 
     <div class="comment_bar">
         <p class="comment_bar_p">
-            <a href="#"  title="点击收藏此文章"><span class="like">&#9733;</span>收藏&nbsp;</a>|
+            <a class="like" href="#" title="点击收藏此文章"><span class="star">&#9733;</span>收藏&nbsp;</a>|
             <a href="#"  title="点击发表评论"><span class="write_comment">&#9997;</span>发表评论</a>
         </p>
     </div>
 
 </div>
 
-
 </body>
 </html>
-
-
-

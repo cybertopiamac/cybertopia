@@ -55,7 +55,7 @@ public class User {
         this.nickname = nickName;
     }
 
-    public String getSex() {
+    public String showSex() {
         String sexString = "未知";
         if (sex == 1){
             sexString = "男";
@@ -64,6 +64,15 @@ public class User {
             sexString = "女";
         }
         return sexString;
+    }
+
+
+    public int getSex() {
+        return sex;
+    }
+
+    public int getGrade() {
+        return grade;
     }
 
     public void setSex(int sex) {
@@ -86,7 +95,7 @@ public class User {
         this.major = major;
     }
 
-    public String getGrade() {
+    public String showGrade() {
         String gradeString = "未知";
         switch (grade){
             case 1:{

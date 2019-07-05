@@ -14,6 +14,6 @@
         update `user` set password = #{password} where id = #{id}
     </update>
     <update id="updateUserDesc">
-        update `user` set desc = #{desc}
+        update `user` set description = #{desc}
     </update>
 </mapper>

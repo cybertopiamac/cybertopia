@@ -31,6 +31,20 @@
 
         <!--配置加载映射文件 UserMapper.xml-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+        <!--配置分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="reasnable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!-- 自动生成dao,mapper-->
@@ -40,6 +54,8 @@
         <property name="basePackage" value="com.macteam.cybertopia.dao"/>
         <!-- 注入sqlSessionFactory -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+
+
     </bean>
 
 

@@ -49,7 +49,7 @@ public class UserLoginController {
 
         HttpSession session = request.getSession();
         session.setAttribute("user", rightUser);
-        return "index";
+        return "redirect:/main/index.do";
     }
 
     public User getCurrentUser(HttpServletRequest request){

@@ -16,7 +16,14 @@
 
     <!-- 2.配置映射处理和适配器-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                </bean>
+            </list>
+        </property>
+    </bean>
 
     <!-- 3.视图的解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

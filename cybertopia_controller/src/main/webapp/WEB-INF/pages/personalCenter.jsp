@@ -60,7 +60,7 @@
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/fontAwesome.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/light-box.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/templatemo-main.css" type="text/css">
-    <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/change.css" type="text/css">
+    <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/newchange.css" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -98,10 +98,13 @@
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>
     <ul>
+<<<<<<< HEAD
         <li><a href="#1" onclick="x()"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
+=======
+>>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
     </ul>
 </nav>
 
@@ -110,12 +113,11 @@
     <div class="slide" id="1">
         <div class="content first-content">
             <form action="">
-                <a class="change-password"><i class="fa fa-check"></i>修改密码</a>
                 <div class="container-fluid">
                     <div class="col-md-3">
                         <div class="author-image">
                             <img id="change_icon" src="<%=basePath%>/images/head_icon/<%=user.getPicture()%>">
-                            <a class="file">
+                            <a class="file" id="show_word" style="visibility: hidden">
                                 <center>
                                     修改头像<input type="file" id="file" accept="image/gif,image/jpeg,image/png,image/jpg"
                                                onchange="preImg('file','change_icon')">
@@ -125,8 +127,10 @@
                     </div>
 
                     <div class="col-md-9">
-                        <h2><%=user.getNickname()%>
-                        </h2>
+<<<<<<< HEAD
+=======
+                        <h2><%=user.getNickname()%></h2>
+>>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                         <table>
                             <tr>
                                 <td>
@@ -181,9 +185,10 @@
                                 <td colspan="2">
                                     <p>
                                         <em>个人简介:</em>
-                                        <textarea class="text-style" id="desc-input"
-                                                  style="vertical-align:top;resize:none;" rows="3" cols="50"
-                                                  readonly="readonly"><%=user.getDescription()%></textarea>
+<<<<<<< HEAD
+=======
+                                        <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDescription()%></textarea>
+>>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                                     </p>
                                 </td>
                             </tr>
@@ -199,14 +204,19 @@
     <div class="slide" id="2">
         <div class="content second-content">
             <div class="container-fluid">
+<<<<<<< HEAD
+=======
                 <div class="col-md-6" id="div1">
-                    <%--                    <div class="left-content">--%>
-                    <%--                        <h2>${article.titile}</h2>--%>
-                    <%--                        <p>内容。。。。</p>--%>
-                    <%--                        <div class="main-btn" id="div3">--%>
-                    <%--                            <input type="button" value="更多">--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
+                    <div class="left-content">
+                        <h2>文章标题</h2>
+                        <p>内容。。。。</p>
+                        <div class="main-btn">
+                            <a style="color: #FFFFFF">发表日期：xx-xx-xx</a>&ensp;&ensp;&ensp;
+                            <a style="color: #FFFFFF">浏览量：xxx</a>
+                            <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>article/detail.do'" value="更多">
+                        </div>
+                    </div>
+>>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                 </div>
             </div>
         </div>
@@ -227,12 +237,16 @@
                                             <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">
                                                 文章</h2>
                                         </div>
-                                        <div class="left-content">
-                                            <h2>标题</h2>
-                                            <p>内容</p>
-                                            <div class="main-btn">
-                                                <input type="button" value="查看详情">
-                                            </div>
+
+                                        <div class="left-content" >
+                                            <c:forEach items="articles" var="article">
+                                                <h2>${article.getTitle()}</h2>
+                                                <p>内容</p>
+                                                <div class="main-btn">
+                                                    <input type="button" onclick="window.location='<%=basePath%>article/detail.do'" value="查看详情">
+                                                </div>
+                                            </c:forEach>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
@@ -244,7 +258,7 @@
                                             <h2>标题</h2>
                                             <p>内容</p>
                                             <div class="main-btn">
-                                                <input type="button" value="查看详情">
+                                                <input type="button" onclick="window.location='<%=basePath%>竞赛详情页'" value="查看详情">
                                             </div>
                                         </div>
                                     </div>
@@ -261,24 +275,51 @@
             <div class="container-fluid">
                 <div class="col-md-6">
                     <div class="left-content">
-                        <a href=""><h3>文章</h3></a>
+                        <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a>
                         <p>用户名：评论.....</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="slide" id="5">
+        <div class="content fifth-content">
+            <div class="container-fluid">
+                <div class="new-style" style="padding-top: 60px">
+                    <form id="passwordForm">
+                        <center>
+                            <table>
+                                <tr>
+                                    <td><p><em>原密码：</em></p></td>
+                                    <td><p><input type="password" name="oldPass" id="oldPass"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><em>新密码：</em></p></td>
+                                    <td><p><input type="password" name="newPass" id="newPass"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><em>确认新密码：</em></p></td>
+                                    <td><p><input type="password" name="againPass" id="againPass"></p></td>
+                                </tr>
+                            </table>
+                            <input class="new-btn" type="button" onclick="passwordChange()" value="确认修改">
+                            <input class="new-btn" type="button" onclick="passwordReset()" value="清   空">
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
 <script src="<%=basePath%>/js/personalCenter_js/vendor/jquery-1.11.2.min.js"></script>
-
 <script src="<%=basePath%>/js/personalCenter_js/vendor/bootstrap.min.js"></script>
-
 <script src="<%=basePath%>/js/personalCenter_js/datepicker.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/plugins.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/main.js"></script>
+<script src="<%=basePath%>/js/personalCenter_js/getUserInfo.js"></script>
 
+<<<<<<< HEAD
 <script type="text/javascript">
     $(document).ready(function () {
         // navigation click actions
@@ -354,6 +395,26 @@
         email.disabled = false;
         desc.disabled = false;
     }
+
+    //修改密码
+    function passwordChange() {
+        var oldPass=document.getElementById("oldPass").value;
+        var newPass=document.getElementById("newPass").value;
+        var againPass=document.getElementById("againPass").value;
+        //密码为空
+        if((oldPass=="")||(newPass=="")||(againPass=="")){
+            alert("密码不能为空");
+        }
+        //新密码不相同
+        else if(newPass!=againPass){
+            alert("新密码两次输入不一致");
+        }
+        else {
+            var form=document.getElementById("passwordForm");
+            form.action="<%=basePath%>personalCenter/changePassword.do";
+            form.method="post";
+            form.submit();
+        }
     <%--    ///////文章收藏的ajax--%>
     function getArticleHistory() {
         $.ajax(
@@ -400,9 +461,9 @@
         )
     }
     // 收藏文章的ajax
-    function getArticleCollect(){
+    // function getArticleCollect()
 
-    }
+
 </script>
 </body>
 </html>

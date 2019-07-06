@@ -20,32 +20,95 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/articlesStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/markdown.css"/>
 
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/main_js/marked.min.js"></script>
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $(".like").click(function(){
-                $(this).toggleClass("like_click")
-            });
-        });
 
-        function publish(){
-            var r=confirm("确认发表吗?");
-            if(r==true){
-                //向文章表写入数据
-                alert("发表成功！");
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#input_title").focus(setDefault('#input_title'));
+            $("#input_content").focus(setDefault('#input_content'));
+        })
+
+        function isPublish() {
+            //获得文章标题
+            var title = $('#input_title').val();
+            var check_blank = true;
+            if (title == "" && $.trim(title).length == 0) {
+                $('#input_title').css('color', 'red').val("标题不能为空");
+                check_blank = false;
             }
-            else{
-                //继续编辑，不提交
-                alert("取消发表");
+            var raw_content = $('#input_content').val();
+            if (raw_content == "" && $.trim(raw_content).length == 0) {
+                $('#input_content').css('color', 'red').val("内容不能为空");
+                check_blank = false;
             }
+            if (check_blank != false) {
+                var r = confirm("确认发表吗?");
+                if (r == true) {
+                    //传入title和content
+                    //向文章表写入数据
+                    post_article();
+                    alert("发表成功！");
+                    return true;
+                } else {
+                    //不提交表单申请
+                    alert("取消发表");
+                    return false;
+                }
+            }
+            return false;
 
         }
+
+        function changeMarkdown(){
+            document.getElementById("browser_tip").style.display="block";
+            document.getElementById("previous_div").style.display="block";
+            document.getElementById('previous_div').innerHTML =
+                marked(document.getElementById('input_content').value);
+        }
+        function hiddenBrowser(){
+            document.getElementById('input_content').style.height=document.getElementById('input_content').scrollHeight+'px';
+            document.getElementById("browser_tip").style.display="none";
+            document.getElementById("previous_div").style.display="none";
+        }
+        function setDefault(input_id) {
+            return function () {
+                var color = $(input_id).css('color');
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    $(input_id).css('color', '#000').val("");
+                }
+            };
+        }
+        function post_article() {
+            var article = {
+                "title":$('#input_title').val(),
+                "content":marked($('#input_content').val())
+            };
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "<%=basePath%>/article/postDemo.do",
+                data: JSON.stringify(article), // Note it is important
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("post error")
+                }
+            });
+        }
+
+        // contentType: 'application/json; charset=utf-8',
+
     </script>
 </head>
 
@@ -114,40 +177,37 @@
 <!--top-->
 
 <!--articleWrite-->
-
-
-
 <div class="article-feed">
+
    <!--button-->
     <div class="publish_bar">
-        <button type="button" class="publish_button"  onclick="publish()">发表</button>
+
+        <form action="" name="publishForm" method="post" onsubmit="return isPublish()">
+
+        <button type="submit" class="publish_button" name="submit">发表</button>
+
+        </form>
+
+        <button type="button" class="previous_browser" onclick="changeMarkdown()">点击预览</button>
     </div>
     <!---->
 
     <!--填充title-->
-    <div class="article_title article_detail_title publsh_title">
-
+    <div class="article_title article_detail_title publish_title title_box">
+        <div class="title_left"></div>
+        <input type="text" name="input_title" id="input_title" placeholder="请输入标题..."></h1>
+        <div class="title_right"></div>
     </div>
     <!--title-->
 
  <!--填充content-->
     <div class="article_content">
-
-        <p>xpids</p>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <p>cdbocjsd</p>
-        <p>dc</p>
-
+  <textarea placeholder="请输入内容..."  row="1"  id="input_content" oninput="hiddenBrowser()"></textarea>
     </div>
     <!--content-->
+    <p id="browser_tip" style="display:none;margin:10px;">预览内容如下：</p>
+    <div class="markdown" id="previous_div" style="display:none;"></div>
+
 
 </div>
 

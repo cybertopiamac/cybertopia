@@ -7,6 +7,7 @@ import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.service.IPersonalCenterService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -31,7 +33,6 @@ public class PersonalCenterController {
 
     @RequestMapping("/home.do")
     public String getPage(){
-
         return "personalCenter";
     }
     @RequestMapping("update.do")
@@ -108,6 +109,24 @@ public class PersonalCenterController {
         }
 
         return "index";
+
+    }
+    @RequestMapping("/changePassword.do")
+    public String changePassword(HttpSession session, @RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("againPass") String againPass){
+        User user= (User) session.getAttribute("user");
+        //原密码错误
+        if(!oldPass.equals(user.getPassword())){
+        }
+        //更新密码
+        else {
+        }
+        System.out.println(oldPass);
+        return "personalCenter";
+    }
+
+    @RequestMapping("/toArticleDetails.do")
+    public String toArticleDetails(){
+        return "redirect:/article/detail.do";
 
     }
 }

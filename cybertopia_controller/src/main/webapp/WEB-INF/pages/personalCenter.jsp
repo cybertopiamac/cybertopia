@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.macteam.cybertopia.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
@@ -65,7 +66,7 @@
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/fontAwesome.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/light-box.css" type="text/css">
     <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/templatemo-main.css" type="text/css">
-    <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/change.css" type="text/css">
+    <link rel="stylesheet" href="<%=basePath%>/css/personalCenter_css/newchange.css" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -96,6 +97,7 @@
         <li><a href="#2"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
+        <li><a href="#5"><i class="fa fa-key"></i> <em>修改密码</em></a></li>
     </ul>
 </nav>
 
@@ -103,12 +105,11 @@
     <div class="slide" id="1">
         <div class="content first-content">
             <form action="">
-                <a class="change-password"><i class="fa fa-check"></i>修改密码</a>
                 <div class="container-fluid">
                     <div class="col-md-3">
                         <div class="author-image">
                             <img id="change_icon" src="<%=basePath%>/images/head_icon/<%=user.getPicture()%>">
-                            <a class="file">
+                            <a class="file" id="show_word" style="visibility: hidden">
                                 <center>
                                     修改头像<input type="file" id="file" accept="image/gif,image/jpeg,image/png,image/jpg" onchange="preImg('file','change_icon')">
                                 </center>
@@ -177,7 +178,9 @@
                         <h2>文章标题</h2>
                         <p>内容。。。。</p>
                         <div class="main-btn">
-                            <input type="button" value="更多">
+                            <a style="color: #FFFFFF">发表日期：xx-xx-xx</a>&ensp;&ensp;&ensp;
+                            <a style="color: #FFFFFF">浏览量：xxx</a>
+                            <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>article/detail.do'" value="更多">
                         </div>
                     </div>
                 </div>
@@ -197,11 +200,14 @@
                                             <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">文章</h2>
                                         </div>
                                         <div class="left-content" >
-                                            <h2>标题</h2>
-                                            <p>内容</p>
-                                            <div class="main-btn">
-                                                <input type="button" value="查看详情">
-                                            </div>
+                                            <c:forEach items="articles" var="article">
+                                                <h2>${article.getTitle()}</h2>
+                                                <p>内容</p>
+                                                <div class="main-btn">
+                                                    <input type="button" onclick="window.location='<%=basePath%>article/detail.do'" value="查看详情">
+                                                </div>
+                                            </c:forEach>
+
                                         </div>
                                     </div>
                                     <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
@@ -212,7 +218,7 @@
                                             <h2>标题</h2>
                                             <p>内容</p>
                                             <div class="main-btn">
-                                                <input type="button" value="查看详情">
+                                                <input type="button" onclick="window.location='<%=basePath%>竞赛详情页'" value="查看详情">
                                             </div>
                                         </div>
                                     </div>
@@ -229,92 +235,70 @@
             <div class="container-fluid">
                 <div class="col-md-6">
                     <div class="left-content">
-                        <a href=""><h3>文章</h3></a>
+                        <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a>
                         <p>用户名：评论.....</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="slide" id="5">
+        <div class="content fifth-content">
+            <div class="container-fluid">
+                <div class="new-style" style="padding-top: 60px">
+                    <form id="passwordForm">
+                        <center>
+                            <table>
+                                <tr>
+                                    <td><p><em>原密码：</em></p></td>
+                                    <td><p><input type="password" name="oldPass" id="oldPass"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><em>新密码：</em></p></td>
+                                    <td><p><input type="password" name="newPass" id="newPass"></p></td>
+                                </tr>
+                                <tr>
+                                    <td><p><em>确认新密码：</em></p></td>
+                                    <td><p><input type="password" name="againPass" id="againPass"></p></td>
+                                </tr>
+                            </table>
+                            <input class="new-btn" type="button" onclick="passwordChange()" value="确认修改">
+                            <input class="new-btn" type="button" onclick="passwordReset()" value="清   空">
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
 <script src="<%=basePath%>/js/personalCenter_js/vendor/jquery-1.11.2.min.js"></script>
-
 <script src="<%=basePath%>/js/personalCenter_js/vendor/bootstrap.min.js"></script>
-
 <script src="<%=basePath%>/js/personalCenter_js/datepicker.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/plugins.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/main.js"></script>
+<script src="<%=basePath%>/js/personalCenter_js/getUserInfo.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        // navigation click actions
-        $('.scroll-link').on('click', function(event){
-            event.preventDefault();
-            var sectionID = $(this).attr("data-id");
-            scrollToID('#' + sectionID, 750);
-        });
-        // scroll to top action
-        $('.scroll-top').on('click', function(event) {
-            event.preventDefault();
-            $('html, body').animate({scrollTop:0}, 'slow');
-        });
-        // mobile nav toggle
-        $('#nav-toggle').on('click', function (event) {
-            event.preventDefault();
-            $('#main-nav').toggleClass("open");
-        });
-    });
-    // scroll function
-    function scrollToID(id, speed){
-        var offSet = 0;
-        var targetOffset = $(id).offset().top - offSet;
-        var mainNav = $('#main-nav');
-        $('html,body').animate({scrollTop:targetOffset}, speed);
-        if (mainNav.hasClass("open")) {
-            mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-            mainNav.removeClass("open");
+<script>
+    //修改密码
+    function passwordChange() {
+        var oldPass=document.getElementById("oldPass").value;
+        var newPass=document.getElementById("newPass").value;
+        var againPass=document.getElementById("againPass").value;
+        //密码为空
+        if((oldPass=="")||(newPass=="")||(againPass=="")){
+            alert("密码不能为空");
         }
-    }
-    if (typeof console === "undefined") {
-        console = {
-            log: function() { }
-        };
-    }
-    //加载图片进img
-    function getFileUrl(sourceId) {
-        var url;
-        if (navigator.userAgent.indexOf("MSIE")>=1) { // IE
-            url = document.getElementById(sourceId).value;
-        } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox
-            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-        } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome
-            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+        //新密码不相同
+        else if(newPass!=againPass){
+            alert("新密码两次输入不一致");
         }
-        return url;
-    }
-    function preImg(sourceId, targetId) {
-        var url = getFileUrl(sourceId);
-        var imgPre = document.getElementById(targetId);
-        imgPre.src = url;
-    }
-    //修改input状态为可编辑
-    function changeState() {
-        var sex=document.getElementById("sex-select");
-        var school=document.getElementById("school-input");
-        var major=document.getElementById("major-input");
-        var grade=document.getElementById("grade-select");
-        var phone=document.getElementById("phone-input");
-        var email=document.getElementById("email-input");
-        var desc=document.getElementById("desc-input");
-        sex.disabled=false;
-        school.disabled=false;
-        major.disabled=false;
-        grade.disabled=false;
-        phone.disabled=false;
-        email.disabled=false;
-        desc.disabled=false;
+        else {
+            var form=document.getElementById("passwordForm");
+            form.action="<%=basePath%>personalCenter/changePassword.do";
+            form.method="post";
+            form.submit();
+        }
     }
 </script>
 </body>

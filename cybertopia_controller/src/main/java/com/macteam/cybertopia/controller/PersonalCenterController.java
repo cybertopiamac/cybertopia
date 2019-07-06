@@ -1,20 +1,25 @@
 package com.macteam.cybertopia.controller;
 
 import com.macteam.cybertopia.dao.IUserDao;
+import com.macteam.cybertopia.entity.Article;
+import com.macteam.cybertopia.entity.Comment;
+import com.macteam.cybertopia.entity.Competition;
+import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.service.IPersonalCenterService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.List;
 
 @Controller
 @RequestMapping("personalCenter")
@@ -24,17 +29,46 @@ public class PersonalCenterController {
     @Autowired
     IUserDao userDao;
 
-    @RequestMapping("home.do")
+    @RequestMapping("/home.do")
     public String getPage(){
 
         return "personalCenter";
     }
+    @RequestMapping("update.do")
+    public String update(User user){
 
-    @RequestMapping("file")
+        return "null";
+    }
+
+    @RequestMapping("/articleLike")//获取收藏的文章
+    public void getAticleCollect(int id, Model model){
+        List<Article> articles = personalCenterService.getArticleCollectById(id);
+        model.addAttribute("articles",articles);
+    }
+
+    @RequestMapping("/competitionLike")//获取收藏的文章
+    public void getCompetitionCollect(int id, Model model){
+        List<Competition> competitions = personalCenterService.getCompetitionById(id);
+        model.addAttribute("competitions", competitions);
+    }
+
+    @RequestMapping("/articleHistory")//获取收藏的文章
+    public void getAticlePublish(int id, Model model){
+        List<Article> articles = personalCenterService.getArticlePublishById(id);
+        model.addAttribute("articles", articles);
+    }
+
+    @RequestMapping("/commentHistory")
+    public void getCommentHistory(int id, Model model){
+        List<Comment> comments = personalCenterService.getCommentHistoryById(id);
+        model.addAttribute("comments", comments);
+    }
+
+    @RequestMapping("/file.do")
     public String ini(){
         return "file";
     }
-    @RequestMapping("/upLoad")
+    @RequestMapping("/upLoad.do")
     public String upLoad(HttpServletRequest request,@RequestParam("file") MultipartFile dropzFile) {
 
         System.out.println("开始");
@@ -71,25 +105,22 @@ public class PersonalCenterController {
 
         return "index";
 
+    }
+    @RequestMapping("/changePassword.do")
+    public String changePassword(HttpSession session, @RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("againPass") String againPass){
+        User user= (User) session.getAttribute("user");
+        //原密码错误
+        if(!oldPass.equals(user.getPassword())){
+        }
+        //更新密码
+        else {
+        }
+        System.out.println(oldPass);
+        return "personalCenter";
+    }
 
-
-//        //创建一个多分解的容器
-//        CommonsMultipartResolver cmr = new CommonsMultipartResolver(request.getSession().getServletContext());
-//        //设置编码
-//        cmr.setDefaultEncoding("utf-8");
-//        //判断是否有文件上传
-//        if(cmr.isMultipart(request)){
-//            //将request转换成多分解请求
-//            MultipartHttpServletRequest mhs = cmr.resolveMultipart(request);
-//            //根据input中存在的name来获取是否存在上传文件
-//            MultipartFile mf = mhs.getFile("file");//这里可以用getFiles("file")的方式来处理多个文件。返回的是一个list.然后一个一个处理就可以了
-//
-//            String path = "/用户/liuyucheng/";
-//            //创建文件保存名
-//            File file = new File(path+mf.getOriginalFilename());
-//            //上传文件
-//            mf.transferTo(file);
-//            System.out.println("成功");
-//          }
+    @RequestMapping("/toArticleDetails.do")
+    public String toArticleDetails(){
+        return "redirect:/article/detail.do";
     }
 }

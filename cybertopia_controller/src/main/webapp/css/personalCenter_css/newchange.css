@@ -45,7 +45,6 @@ nav{
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-
 a {
     color: #000000;
     text-decoration: none;
@@ -61,15 +60,24 @@ a:focus {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
+nav a{
+    color: #ffffff;
+}
 nav a.active{
     background-color: transparent;
     color: #ffffff;
+}
+nav a:focus{
+    color: #000000;
 }
 .second-content .col-md-6{
     width: 100%;
 }
 .second-content .main-btn{
     float:right;
+}
+.second-content .main-btn a:hover{
+    background-color: transparent;
 }
 .third-content .right-content{
     padding-top: 20px;
@@ -91,6 +99,7 @@ nav a.active{
     padding-bottom: 10px;
     margin-bottom: 20px;
     margin-top: 0px;
+    height: 20px;
 }
 
 .first-content .text-style{
@@ -151,16 +160,69 @@ nav a.active{
     font-size: 20px;
     color: #ffffff;
 }
+.backToIndex a:hover{
+    background-color: transparent;
+}
+
 .first-content .fb-btn {
     padding-right: 50px;
 }
-.first-content .change-password{
-    float: right;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+
+.fifth-content .new-style p{
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 15px;
 }
-.first-content .change-password:hover{
+.fifth-content .new-style p input{
+    background-color: transparent;
+    border-bottom: 1px solid #FFFFFF;
+    width: 200px;
+}
+
+.fifth-content .new-btn{
+    margin-top: 50px;
+    margin-right: 30px;
+    border: 2px solid #FFFFFF;
+    background-color: transparent;
+    width: 100px;
+    padding-left: 5px;
+}
+.fifth-content .new-btn:hover{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.fifth-content .new-style p em{
+    font-style: normal;
+}
+.second-content h3:hover{
+    color: #000000;
+}
+.second-content .main-btn .btn{
+    height: 30px;
+    width: 50px;
+    margin-left: 20px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+.second-content .main-btn .btn:hover{
+    background-color: #FFFFFF;
+    color: #000000;
+}
+.third-content .main-btn a{
+    height: 50px;
+    width: 50px;
+    margin-left: 0px;
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+.third-content .main-btn{
+    height: 50px;
+}
+.third-content .main-btn a:hover{
+    background-color: #FFFFFF;
     color: #000000;
     text-decoration: none;
-    cursor: pointer;
 }

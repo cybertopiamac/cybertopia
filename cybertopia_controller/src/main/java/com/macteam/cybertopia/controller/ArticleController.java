@@ -1,17 +1,16 @@
 package com.macteam.cybertopia.controller;
 
+import com.macteam.cybertopia.dao.ICollectionDao;
 import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
 import com.macteam.cybertopia.service.IArticleService;
+import com.macteam.cybertopia.service.ICollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -29,6 +28,9 @@ public class ArticleController {
 
     @Autowired
     private IUserDao userDao;
+
+    @Autowired
+    private ICollectionService collectionService;
 
     @RequestMapping("/all.do")
     public String articleList(){
@@ -48,13 +50,23 @@ public class ArticleController {
     }
 
     @RequestMapping("/detail.do")
-    public String articleDetail(Model model, int articleId){
+    public String articleDetail(HttpServletRequest request, Model model, int articleId){
         Article article = articleService.getArticleById(articleId);
         articleService.increaseArticleBrowseNum(article,1);
         if(article != null){
             User author = userDao.getUserById(article.getAuthorId());
+
+            //分开查询文章和作者
             model.addAttribute("article",article);
             model.addAttribute("author_name",author.getNickname());
+
+            // 查询是否已经收藏，0为未收藏，大于0为已收藏
+            User user = userLoginController.getCurrentUser(request);
+            int collctionStatus = 0;
+            if(user != null){
+                collctionStatus = collectionService.getArticleCollectStatus(user.getId(),article.getId());
+            }
+            model.addAttribute("collctionStatus",collctionStatus);
         }
         return "articleDetail";
     }
@@ -91,5 +103,21 @@ public class ArticleController {
         int result = articleService.insertArticle(article);
         System.out.println(article.toString());
         return result;
+    }
+
+    @RequestMapping(value = "/like.do", method = RequestMethod.POST)
+    @ResponseBody
+    public int articleLikeHandler(HttpServletRequest request,
+                                  @RequestParam("articleId") int articleId,
+                                  @RequestParam("action") String action){
+        User user = userLoginController.getCurrentUser(request);
+        if(user != null) {
+            if (action.equals("set")) {
+                return collectionService.insertArticleCollection(user.getId(),articleId);
+            } else if (action.equals("unset")) {
+                return collectionService.deleteArticleCollection(user.getId(),articleId);
+            }
+        }
+        return 0;
     }
 }

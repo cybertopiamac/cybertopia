@@ -21,9 +21,13 @@ public class IArticleServiceImpl implements IArticleService {
         return articleDao.getArticleById(id);
     }
     public int deleteArticleById(int id){
-        return deleteArticleById(id);
+        return articleDao.deleteArticleById(id);
     }
     public int insertArticle(Article article){
-        return insertArticle(article);
+        return articleDao.insertArticle(article);
+    }
+    public int increaseArticleBrowseNum(Article article, int delta){
+        article.setBrowseNum(article.getBrowseNum() + delta);
+        return articleDao.updateArticle(article);
     }
 }

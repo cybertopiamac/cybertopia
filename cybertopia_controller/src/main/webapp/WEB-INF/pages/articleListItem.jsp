@@ -11,8 +11,8 @@
 <div class="article_titles">
 <c:forEach var="article_title" items="${article_titles}" varStatus="status">
     <div class="article_title">
-        <a href="https://some2501.me">
-            <h1>${article_title.title}不知道的第${pageIndex}号选手</h1>
+        <a href="<%=basePath%>/article/detail.do?articleId=${article_title.id}">
+            <h1>${article_title.title}</h1>
             <p><span>${article_title.authorName}</span>
                 <span class="pub_time">${article_title.date}</span>
                 <span class="read_number">

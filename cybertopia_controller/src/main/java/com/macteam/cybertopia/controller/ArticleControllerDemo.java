@@ -29,14 +29,14 @@ public class ArticleControllerDemo {
    //发表文章
     @RequestMapping("/publishDemo.do")
     public String articleWrite(){
-        return "articleWriteDemo";
+        return "articleWrite";
     }
 
     //接受post
     @RequestMapping(value = "postDemo.do", method= RequestMethod.POST)
     @ResponseBody
-    public String articlePost(HttpServletRequest request, @RequestBody Article article){
+    public Article articlePost(HttpServletRequest request, @RequestBody Article article){
         System.out.println(article);
-        return article.toString();
+        return article;
     }
 }

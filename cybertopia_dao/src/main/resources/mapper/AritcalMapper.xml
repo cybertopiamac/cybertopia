@@ -5,7 +5,7 @@
         delete from article where id = #{id}
     </delete>
     <select id="getArticleListByRange" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
-        select id,date,title, nickname as authorName,browseNum from article, user
+        select article.id,date,title, nickname as authorName,browseNum from article, user
         where article.authorId = user.id
         order by date desc limit #{skip}, #{limit}
     </select>
@@ -16,4 +16,9 @@
         insert into article(date,title,content,authorId)
         values (#{date},#{title},#{content},#{authorId})
     </insert>
+    <update id="updateArticle" parameterType="Article">
+        update article
+        set date=#{date},title=#{title},content=#{content},authorId=#{authorId},browseNum=#{browseNum}
+        where id = #{id}
+    </update>
 </mapper>

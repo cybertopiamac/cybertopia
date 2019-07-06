@@ -24,6 +24,6 @@ public class UserServiceImpl implements IUserService {
     }
 
     public void addNewUser(User user) {
-        //userDao.addNewUser(user);
+        userDao.addNewUser(user);
     }
 }

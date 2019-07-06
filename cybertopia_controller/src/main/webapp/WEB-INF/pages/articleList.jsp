@@ -105,11 +105,11 @@
             <span class="loader-ellips__dot"></span>
             <span class="loader-ellips__dot"></span>
         </div>
-        <p class="scroller-status__message infinite-scroll-last">End of content</p>
-        <p class="scroller-status__message infinite-scroll-error">No more pages to load</p>
+        <p class="scroller-status__message infinite-scroll-last" style="text-align: center">没有文章了</p>
+        <p class="scroller-status__message infinite-scroll-error" style="text-align: center">文章列表加载错误</p>
     </div>
     <p class="pagination">
-        <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=1">Next page</a>
+        <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=0">Next page</a>
     </p>
     <script>
         var elem = document.querySelector('.article-feed');

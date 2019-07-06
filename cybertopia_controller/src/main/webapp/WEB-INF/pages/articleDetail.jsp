@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en" class="no-js">
     <%
     String path = request.getContextPath();
@@ -18,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/articlesStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/markdown.css"/>
+
 
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
@@ -25,12 +28,69 @@
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function(){
             $(".like").click(function(){
-                $(this).toggleClass("like_click")
+
+                $(this).toggleClass("like_click");
+
+                //获得点击后的颜色
+                var color=$('#like_star').css('color');
+                //alert(color);
+                //点击收藏
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    //传入文章id和用户id,写入文章收藏表
+                    //like_article()
+                    alert("已收藏");
+                }
+                //取消了收藏
+                else{
+                    //删除已传入的文章
+                    //delete_like();
+                    alert("已取消收藏");
+                }
+
+
+
             });
         });
+
+        function send_like(playload) {
+            $.ajax({
+                type: "POST",
+                // contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "<%=basePath%>/article/like.do",
+                data: playload,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("like error")
+                }
+            });
+        }
+
+        //收藏文章
+        function like_article(){
+
+            var like_article = {
+                "articleId":${article.id},
+                "action":"set"
+            };
+            send_like(like_article);
+        }
+
+        //取消收藏
+        function delete_like(){
+
+            var dislike_article = {
+                "articleId":${article.id},
+                "action":"unset"
+            };
+            send_like(dislike_article);
+        }
+
     </script>
 </head>
 
@@ -101,18 +161,20 @@
 <!--articleDetails-->
 <div class="article-feed">
     <div class="article_title article_detail_title">
-            <h1>${atticle.title}</h1>
+            <h1>${article.title}</h1>
             <p><span>${author_name}</span>
-                <span class="pub_time">发表于 ${article.date}</span>
+                <span class="pub_time">发表于
+                    <fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd" />
+                </span>
                 <span class="read_number">浏览量 ${article.browseNum}</span>
             </p>
     </div>
-    <div class="article_content">
+    <div class="article_content markdown">
         ${article.content}
     </div>
     <div class="comment_bar">
         <p class="comment_bar_p">
-            <button class="like"><span class="star">&#9733;</span>收藏&nbsp;</button>|
+            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
             <button><span class="write_comment">&#9997;</span>发表评论</button>
         </p>
     </div>

@@ -8,11 +8,12 @@ import com.macteam.cybertopia.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -60,23 +61,35 @@ public class ArticleController {
 
     @RequestMapping("/write.do")
     public String articleWrite(HttpServletRequest request){
-        User user = userLoginController.getCurrentUser(request);
-        if(user != null)
-            return "articleWrite";
-        else
-            return "login";
+//        User user = userLoginController.getCurrentUser(request);
+//        if(user != null)
+//            return "articleWrite";
+//        else
+//            return "login";
+
+        // 测试用代码
+        return "articleWrite";
     }
 
-    @RequestMapping("/post.do")
-    public String articlePost(HttpServletRequest request,Article article){
-        User user = userLoginController.getCurrentUser(request);
-        if(user != null) {
-            article.setAuthorId(user.getId());
-            article.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-            articleService.insertArticle(article);
-            return "redirect:/article/all.do";
-        }
-        else
-            return "login";
+    @RequestMapping(value = "/post.do", method= RequestMethod.POST)
+    @ResponseBody
+    public int articlePost(HttpServletRequest request, @RequestBody Article article){
+//        User user = userLoginController.getCurrentUser(request);
+//        if(user != null) {
+//            article.setAuthorId(user.getId());
+//            article.setAuthorId(1);
+//            article.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+//            articleService.insertArticle(article);
+//            return "redirect:/article/all.do";
+//        }
+//        else
+//        return "login";
+
+        // 测试用代码
+        article.setAuthorId(1);
+        article.setDate(new Date(System.currentTimeMillis()));
+        int result = articleService.insertArticle(article);
+        System.out.println(article.toString());
+        return result;
     }
 }

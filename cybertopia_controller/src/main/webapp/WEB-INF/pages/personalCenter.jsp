@@ -98,10 +98,11 @@
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>
     <ul>
-        <li><a href="#1"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
+        <li><a href="#1" onclick="x()"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
+        <li><a href="#5"><i class="fa fa-key"></i> <em>修改密码</em></a> </li>
     </ul>
 </nav>
 
@@ -274,7 +275,7 @@
         <div class="content fifth-content">
             <div class="container-fluid">
                 <div class="new-style" style="padding-top: 60px">
-                    <form id="passwordForm">
+                    <form id="passwordForm" action="">
                         <center>
                             <table>
                                 <tr>
@@ -290,7 +291,7 @@
                                     <td><p><input type="password" name="againPass" id="againPass"></p></td>
                                 </tr>
                             </table>
-                            <input class="new-btn" type="button" onclick="passwordChange()" value="确认修改">
+                            <input class="new-btn" type="button" onclick="return passwordChange()" value="确认修改">
                             <input class="new-btn" type="button" onclick="passwordReset()" value="清   空">
                         </center>
                     </form>
@@ -307,83 +308,7 @@
 <script src="<%=basePath%>/js/personalCenter_js/main.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/getUserInfo.js"></script>
 
-
 <script type="text/javascript">
-    $(document).ready(function () {
-        // navigation click actions
-        $('.scroll-link').on('click', function (event) {
-            event.preventDefault();
-            var sectionID = $(this).attr("data-id");
-            scrollToID('#' + sectionID, 750);
-        });
-        // scroll to top action
-        $('.scroll-top').on('click', function (event) {
-            event.preventDefault();
-            $('html, body').animate({scrollTop: 0}, 'slow');
-        });
-        // mobile nav toggle
-        $('#nav-toggle').on('click', function (event) {
-            event.preventDefault();
-            $('#main-nav').toggleClass("open");
-        });
-    });
-
-    // scroll function
-    function scrollToID(id, speed) {
-        var offSet = 0;
-        var targetOffset = $(id).offset().top - offSet;
-        var mainNav = $('#main-nav');
-        $('html,body').animate({scrollTop: targetOffset}, speed);
-        if (mainNav.hasClass("open")) {
-            mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-            mainNav.removeClass("open");
-        }
-    }
-
-    if (typeof console === "undefined") {
-        console = {
-            log: function () {
-            }
-        };
-    }
-
-    //加载图片进img
-    function getFileUrl(sourceId) {
-        var url;
-        if (navigator.userAgent.indexOf("MSIE") >= 1) { // IE
-            url = document.getElementById(sourceId).value;
-        } else if (navigator.userAgent.indexOf("Firefox") > 0) { // Firefox
-            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-        } else if (navigator.userAgent.indexOf("Chrome") > 0) { // Chrome
-            url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
-        }
-        return url;
-    }
-
-    function preImg(sourceId, targetId) {
-        var url = getFileUrl(sourceId);
-        var imgPre = document.getElementById(targetId);
-        imgPre.src = url;
-    }
-
-    //修改input状态为可编辑
-    function changeState() {
-        var sex = document.getElementById("sex-select");
-        var school = document.getElementById("school-input");
-        var major = document.getElementById("major-input");
-        var grade = document.getElementById("grade-select");
-        var phone = document.getElementById("phone-input");
-        var email = document.getElementById("email-input");
-        var desc = document.getElementById("desc-input");
-        sex.disabled = false;
-        school.disabled = false;
-        major.disabled = false;
-        grade.disabled = false;
-        phone.disabled = false;
-        email.disabled = false;
-        desc.disabled = false;
-    }
-
     //修改密码
     function passwordChange() {
         var oldPass = document.getElementById("oldPass").value;
@@ -397,27 +322,27 @@
         else if (newPass != againPass) {
             alert("新密码两次输入不一致");
         } else {
-            var form = document.getElementById("passwordForm");
-            form.action = "<%=basePath%>personalCenter/changePassword.do";
-            form.method = "post";
-            form.submit();
+            getChangeMsg(oldPass,newPass);
         }
+    }
+    function getChangeMsg(oldPass,newPass) {
+
     }
     <%--    ///////文章收藏的ajax--%>
     function getArticleHistory() {
-        let userid = {
-            "id":<%= user.getId()%>
-        };
         $.ajax(
             {
                 url: 'articleHistory.do',
-                type: 'GET',
-                //contentType: 'application/json; charset=utf-8',
+                type: 'get',
                 datatype: "json",
                 async: true,
-                data:userid,
+                data: {"id":<%= user.getId()%>},
+
                 success: function (data) {
-                    console.log(data);
+                    var tilte;
+                    var content;
+                    var browseanum;
+
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
                     var h2 = "<h2>";

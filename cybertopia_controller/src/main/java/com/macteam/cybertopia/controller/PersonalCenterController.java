@@ -110,16 +110,18 @@ public class PersonalCenterController {
 
     }
     @RequestMapping("/changePassword.do")
-    public String changePassword(HttpSession session, @RequestParam("oldPass") String oldPass, @RequestParam("newPass") String newPass, @RequestParam("againPass") String againPass){
-        User user= (User) session.getAttribute("user");
-        //原密码错误
-        if(!oldPass.equals(user.getPassword())){
-        }
-        //更新密码
-        else {
-        }
+    public String changePassword(HttpSession session, String oldPass, String newPass){
+//        User user= (User) session.getAttribute("user");
+//        //原密码错误
+//        if(!oldPass.equals(user.getPassword())){
+//        }
+//        //更新密码
+//        else {
+//        }
+        String pass_mag="a";
         System.out.println(oldPass);
-        return "personalCenter";
+        System.out.println(newPass);
+        return pass_mag;
     }
 
     @RequestMapping("/toArticleDetails.do")

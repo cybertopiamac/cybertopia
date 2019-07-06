@@ -11,9 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,13 +52,14 @@ public class PersonalCenterController {
         model.addAttribute("competitions", competitions);
     }
 
-    @RequestMapping(value ="/articleHistory", produces = {"text/html;charset=utf-8"})//获取发表的文章
+    @RequestMapping(value ="/articleHistory")//获取发表的文章
     @ResponseBody
-    public String getArticlePublish(int id){
+    public String getArticlePublish(@RequestParam("id") int id){
         List<Article> articles = personalCenterService.getArticlePublishById(id);
         System.out.println(JSON.toJSONString(articles));
         return JSON.toJSONString(articles);
     }
+
 
     @RequestMapping("/commentHistory")
     public void getCommentHistory(int id, Model model){

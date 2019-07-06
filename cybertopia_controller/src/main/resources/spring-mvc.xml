@@ -41,4 +41,5 @@
 <!--    <mvc:resources location="/css/" mapping="/css/**" />-->
 <!--    <mvc:resources location="/images/" mapping="/images/**" />-->
 <!--    <mvc:annotation-driven/>-->
+
 </beans>

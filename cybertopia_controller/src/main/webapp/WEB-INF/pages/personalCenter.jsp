@@ -98,7 +98,7 @@
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>
     <ul>
-        <li><a href="#1" onclick="x()"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
+        <li><a href="#1"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
@@ -405,15 +405,19 @@
     }
     <%--    ///////文章收藏的ajax--%>
     function getArticleHistory() {
+        let userid = {
+            "id":<%= user.getId()%>
+        };
         $.ajax(
             {
                 url: 'articleHistory.do',
-                type: 'get',
+                type: 'GET',
+                //contentType: 'application/json; charset=utf-8',
                 datatype: "json",
                 async: true,
-                data: {"id":<%= user.getId()%>},
-
+                data:userid,
                 success: function (data) {
+                    console.log(data);
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
                     var h2 = "<h2>";
@@ -438,8 +442,7 @@
                             div2;}
                     $("#div1").html(articleListHtml);
                 },
-                error: function (data) {
-                    consle.log(data);
+                error: function () {
                     alert("error");
                 }
             }

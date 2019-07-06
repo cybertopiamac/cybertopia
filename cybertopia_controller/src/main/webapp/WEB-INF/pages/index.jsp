@@ -172,10 +172,10 @@
                     </c:choose>
                 </li>
                 <li>
-                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
+                    <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">常见问题</a>
-                        <a href="">在线视频</a>
+                        <a href="">问题反馈</a>
+                        <a href="">版本信息</a>
                     </div>
                 </li>
             </ul>
@@ -254,7 +254,7 @@
                         <input type="text" value="" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <button type="submit" class="form-control" onclick="getcompetition()">Google</button>
+                        <button type="submit" class="form-control" onclick="getcompetition()">Go</button>
                     </div><!-- .form-group end -->
                 </form><!-- #form-search-products end -->
             </div><!-- .search-products end -->
@@ -552,7 +552,8 @@
             <div class="line"></div>
         </div>
         <div class="homeLinkWrap">
-            <a href="http://www.saikr.com">赛氪</a><a href="http://www.52jingsai.com/portal.php">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php">全国大学生C语言设计大赛</a>
+            <a href="http://www.chinasofti.com">中软国际</a><a href="http://www.github.com">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php">全国大学生C语言设计大赛</a>
+            <a href="http://www.saikr.com">赛氪</a>
         </div>
     </div>
 </div>

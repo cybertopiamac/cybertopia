@@ -78,5 +78,30 @@ function passwordReset() {
     newPass.value="";
     againPass.value="";
 }
+//修改密码
+function getPassMsg(oldPass,newPass) {
+    console.log(oldPass,newPass);
+    let psd = {
+        old : oldPass,
+        new : newPass
+    }
+    $.ajax(
+        {
+            url: 'changePassword.do',
+            type: 'post',
+            //contentType: 'application/json; charset=utf-8',
+            datatype: "json",
+            async: true,
+            data: psd,
+            success: function (data) {
+                var pass_mag=eval(data);
+                alert(pass_mag);
+            },
+            error: function () {
+                alert("error");
+            }
+        }
+    )
+}
 
 

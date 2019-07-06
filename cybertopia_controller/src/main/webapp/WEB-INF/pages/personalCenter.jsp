@@ -98,7 +98,7 @@
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>
     <ul>
-        <li><a href="#1" onclick="x()"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
+        <li><a href="#1"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
@@ -206,14 +206,13 @@
                         <div class="main-btn">
                             <a style="color: #FFFFFF">发表日期：xx-xx-xx</a>&ensp;&ensp;&ensp;
                             <a style="color: #FFFFFF">浏览量：xxx</a>
-                            <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>article/detail.do'" value="更多">
+                            <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>/article//detail.do?articleId='" value="更多">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="slide" id="3">
         <div class="content third-content">
@@ -262,6 +261,7 @@
             </div>
         </div>
     </div>
+
     <div class="slide" id="4">
         <div class="content second-content">
             <div class="container-fluid">
@@ -274,6 +274,7 @@
             </div>
         </div>
     </div>
+
     <div class="slide" id="5">
         <div class="content fifth-content">
             <div class="container-fluid">
@@ -328,11 +329,9 @@
         else if (newPass != againPass) {
             alert("新密码两次输入不一致");
         } else {
-            var form = document.getElementById("passwordForm");
-            form.action = "<%=basePath%>personalCenter/changePassword.do";
-            form.method = "post";
-            form.submit();
+            getPassMsg(oldPass,newPass);
         }
+        passwordReset();
     }
 
     <%--    ///////文章收藏的ajax--%>
@@ -340,6 +339,7 @@
         let userid = {
             "id":<%= user.getId()%>
         };
+
         $.ajax(
             {
                 url: 'articleHistory.do',

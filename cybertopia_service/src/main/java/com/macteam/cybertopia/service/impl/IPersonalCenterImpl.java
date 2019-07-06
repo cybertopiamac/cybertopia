@@ -57,6 +57,10 @@ public class IPersonalCenterImpl implements IPersonalCenterService {
         return iErrorCode;
     }
 
+    public int updateUserPassword(int id,String password) {
+        return personalCenterDao.updateUserPassword(id,password);
+    }
+
 
     public List<Article> getArticlePublishById(int id) {
         List<Article> articles = personalCenterDao.getUserArticlePublishByUserId(id);

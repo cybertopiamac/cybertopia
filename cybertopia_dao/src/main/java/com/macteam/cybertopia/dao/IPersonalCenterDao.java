@@ -13,7 +13,7 @@ public interface IPersonalCenterDao {
     List<Article> getUserArticleCollectByUserId(int id);
     List<Competition> getUserCompetitionCollectByUserId(int id);
     int updateUserInfo(User user);
-    int updateUserPassword(@Param("id") int id, @Param("password") String password);
+    int updateUserPassword(@Param("id") int id,@Param("password")String password);
     int updateUserDesc(int id, @Param("desc") String desc);
     List<Article> getUserArticlePublishByUserId(int id);
 

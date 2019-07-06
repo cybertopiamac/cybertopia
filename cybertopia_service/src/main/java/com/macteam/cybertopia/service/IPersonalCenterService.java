@@ -15,6 +15,7 @@ public interface IPersonalCenterService {
     List<Competition> getCompetitionById(int id);
     List<Competition> getCompetitionByUser(User user);
     int updateUserInfo(User user);
+    int updateUserPassword(int id,String password);
 
     List<Article> getArticlePublishById(int id);
 

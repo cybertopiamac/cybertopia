@@ -109,19 +109,28 @@ public class PersonalCenterController {
         return "index";
 
     }
-    @RequestMapping("/changePassword.do")
-    public String changePassword(HttpSession session, String oldPass, String newPass){
-//        User user= (User) session.getAttribute("user");
-//        //原密码错误
-//        if(!oldPass.equals(user.getPassword())){
-//        }
-//        //更新密码
-//        else {
-//        }
-        String pass_mag="a";
+
+    @RequestMapping(value ="/changePassword")
+    @ResponseBody
+    public String getPassMsg(HttpSession session,@RequestParam("old") String oldPass,@RequestParam("new") String newPass){
+        String pass_mag="修改失败";
+        User user= (User) session.getAttribute("user");
+        System.out.println(user);
+        //原密码错误
+        if(!(userDao.getPasswordCode(oldPass)).equals(user.getPassword())){
+            pass_mag="原密码输入错误";
+        }
+        //更新密码
+        else {
+            int result=personalCenterService.updateUserPassword(user.getId(),userDao.getPasswordCode(newPass));
+            user.setPassword(userDao.getPasswordCode(newPass));
+            if(result>0){
+                pass_mag="修改成功";
+            }
+        }
         System.out.println(oldPass);
         System.out.println(newPass);
-        return pass_mag;
+        return JSON.toJSONString(pass_mag);
     }
 
     @RequestMapping("/toArticleDetails.do")

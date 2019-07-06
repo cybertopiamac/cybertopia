@@ -3,6 +3,7 @@
 <html lang="en" class="no-js">
 <html>
 <head>
+    <link rel="stylesheet" href="bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
@@ -14,6 +15,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/indexJS.js"></script>
+
 </head>
 <body>
 <!--top-->
@@ -22,10 +24,10 @@
         <div class="nav">
             <ul class="clearfloat">
                 <li class="active">
-                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>
+                    <h2><a href="${pageContext.request.contextPath}/main/index.do">首页</a></h2>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
@@ -39,11 +41,22 @@
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
-                        <a href="">个人信息查看</a>
-                    </div>
+                    <c:choose>
+                        <c:when test="${user!=null}">
+                            <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                                <a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                        <c:when test="${user==null}">
+                            <h2><a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </li>
                 <li>
                     <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
@@ -64,7 +77,7 @@
             <div class="topSearch">
                 <span class="topSearchBtn"></span>
                 <div class="topSearchWrap clearfloat">
-<%--                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>--%>
+                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>
                     <button></button>
                 </div>
             </div>
@@ -262,58 +275,86 @@
         </div>
 
         <div class="homeCamWrap">
-            <c:set var="i" value="${-1}" scope="session"/>
-            <c:forEach var="item" items="${comps}" step="3">
+<%--            <c:set var="i" value="${-1}" scope="session"/>--%>
+            <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum" step="3">
                 <ul class="homeCamList clearfloat">
-                    <c:set var="i" value="${i+1}" scope="session"/>
-                    <c:if test="${i<count}">
+<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+<%--                    <c:if test="${i<count}">--%>
                         <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${pageNum}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2019-${comps[i].date}</h4>
+                                <h3 class="single-line"><a href="">${comps[pageNum].name}</a></h3>
+                                <h4>2019-${comps[pageNum].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
-                                        ${comps[i].description.substring(0,50)}${'...'}
+                                        ${comps[pageNum].description.substring(0,50)}${'...'}
                                 </p>
                                 <a class="more" href="">MORE+</a>
                             </div>
                         </li>
-                    </c:if>
-                    <c:set var="i" value="${i+1}" scope="session"/>
-                    <c:if test="${i<count}">
+<%--                    </c:if>--%>
+<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+<%--                    <c:if test="${i<count}">--%>
                         <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${pageNum+1}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2019-${comps[i].date}</h4>
+                                <h3 class="single-line"><a href="">${comps[pageNum+1].name}</a></h3>
+                                <h4>2019-${comps[pageNum+1].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
-                                        ${comps[i].description.substring(0,50)}${'...'}
+                                        ${comps[pageNum+1].description.substring(0,50)}${'...'}
                                 </p>
                                 <a class="more" href="">MORE+</a>
                             </div>
                         </li>
-                    </c:if>
-                    <c:set var="i" value="${i+1}" scope="session"/>
-                    <c:if test="${i<count}">
+<%--                    </c:if>--%>
+<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+<%--                    <c:if test="${i<count}">--%>
                         <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${i+1}.png"/></a></div>
+                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${pageNum+2}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[i].name}</a></h3>
-                                <h4>2019-${comps[i].date}</h4>
+                                <h3 class="single-line"><a href="">${comps[pageNum+2].name}</a></h3>
+                                <h4>2019-${comps[pageNum+2].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
-                                        ${comps[i].description.substring(0,50)}${'...'}
+                                        ${comps[pageNum+2].description.substring(0,50)}${'...'}
                                 </p>
                                 <a class="more" href="">MORE+</a>
                             </div>
                         </li>
-                    </c:if>
+<%--                    </c:if>--%>
                 </ul>
             </c:forEach>
+    <div class="page text-right clearfix" style="margin-top: 40px">
+        <!-- 当前页为第一页时href="javascript:void(0)" 禁用 a 标签的点击时间事件当前页不是第一页时请求url 中返回currentPage=${pageInfo.pageNum - 1 } 当前页 -1-->
+        <a>
+            <c:if test="${pageInfo.pageNum != pageInfo.firstPage}">href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum - 1 }"
+            </c:if> 
+            <c:if test="${pageInfo.pageNum == pageInfo.firstPage}"> href="javascript:void(0)" class="disabled"
+            </c:if>>上一页</a>
+        <!-- foreach 从 1 开始 到 总页数结束  遍历输出 -->
+        <c:forEach begin="1" end="${pageInfo.pages }" varStatus="status">
+            <a href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum}">
+               <c:if test="${status.count == pageInfo.pageNum}">
+                   <a class="select"></a>
+               </c:if>${status.count }
+            </a>
+        </c:forEach>
+        <!-- 当前页为最后一页时href="javascript:void(0)" 禁用 a 标签的点击时间事件当前页不是最后一页时请求url 中返回currentPage=${pageInfo.pageNum - 1 } 当前页 -1-->
+        <a>
+            <c:if test="${pageInfo.pageNum == pageInfo.lastPage}">
+                <a class="disabled" href="javascript:void(0)"></a>
+            </c:if> 
+            <c:if test="${pageInfo.pageNum != pageInfo.lastPage}">
+                <a href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum + 1 }"></a>
+            </c:if>下一页
+        </a>
+    </div> 
+
+
         </div>
     </div>
+
 </div>
 
 <div class="homeLink">
@@ -346,6 +387,15 @@
         'pagerType': 'full',
 
     })
+
+    function jumpTo(maxPage){
+        var page = $("#jumpTo").val();
+        if(page > maxPage || page < 1){
+            alert("对不起，无法到达该页")
+        }else{
+            $('body').load('${pageContext.request.contextPath}/main/index.do?page=' + page);
+        }
+    }
 
 </script>
 </html>

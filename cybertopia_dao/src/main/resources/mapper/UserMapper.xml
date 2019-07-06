@@ -22,7 +22,7 @@
         select password( #{input} )
     </select>
 
-    <insert id="addNewUser" parameterType="User">
+    <insert id="insertUser" parameterType="User">
         insert into user
         (username,password,role,nickname,sex,school,
          major,grade,email,description,phone)
@@ -30,5 +30,17 @@
         (#{username},password(#{password}),#{role},#{nickname},#{sex},#{school},
          #{major},#{grade},#{email},#{description},#{phone})
     </insert>
+
+    <update id="updateUserInfo" parameterType="User">
+        update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}
+    </update>
+
+    <update id="updateUserPassword">
+        update `user` set password = #{password} where id = #{id}
+    </update>
+
+    <update id="updateUserDesc">
+        update `user` set description = #{desc}
+    </update>
 
 </mapper>

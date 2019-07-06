@@ -105,12 +105,14 @@ public class ArticleController {
         return result;
     }
 
+
     @RequestMapping(value = "/like.do", method = RequestMethod.POST)
     @ResponseBody
     public int articleLikeHandler(HttpServletRequest request,
                                   @RequestParam("articleId") int articleId,
                                   @RequestParam("action") String action){
         User user = userLoginController.getCurrentUser(request);
+        // action分两种情况，set收藏，unset取消收藏
         if(user != null) {
             if (action.equals("set")) {
                 return collectionService.insertArticleCollection(user.getId(),articleId);

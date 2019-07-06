@@ -1,9 +1,7 @@
 package com.macteam.cybertopia.controller;
 
-import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.service.IUserService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,7 +65,7 @@ public class UserRegisterController {
 
         System.out.println(newuser);
 
-        userService.addNewUser(newuser);
+        userService.insertUser(newuser);
 
         return "redirect:/user/toLogin.do";
     }

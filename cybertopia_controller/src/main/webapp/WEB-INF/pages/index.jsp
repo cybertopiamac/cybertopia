@@ -121,13 +121,10 @@
 
 
         function getcompetition() {
-            var name = document.getElementById("keywords").value;
-            var type = request.getParameter("selectedType");
             var form = document.forms[0];
             form.action = "${pageContext.request.contextPath}/main/filterComp.do";
             form.method = "post";
             form.submit();
-
         }
 
 
@@ -175,10 +172,10 @@
                     </c:choose>
                 </li>
                 <li>
-                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
+                    <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">常见问题</a>
-                        <a href="">在线视频</a>
+                        <a href="">问题反馈</a>
+                        <a href="">版本信息</a>
                     </div>
                 </li>
             </ul>
@@ -212,30 +209,31 @@
 <div class="banner" id="banner">
     <ul class="sliderBanner">
         <li>
+            <a href="http://zhaopin.chinasoftinc.com"><img src="${pageContext.request.contextPath}/temp/banner2.img.jpg"/></a>
+        </li>
+        <li>
             <a href="https://job.bytedance.com/campus/position"><img src="${pageContext.request.contextPath}/temp/banner.img.jpg"/></a>
         </li>
         <li>
             <a href="https://job.alibaba.com"><img src="${pageContext.request.contextPath}/temp/banner1.img.jpg"/></a>
         </li>
         <li>
-            <a href=""><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
+            <a href="http://puyi.52jingsai.com"><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
         </li>
     </ul>
 </div>
 <!--/banner-->
 
-<div class="homeBox homeIdear">
+<div class="homeBox homeIdear"  align="center">
     <div class="wrap">
         <div class="homeTitle">
-
             <!--搜索栏-->
             <div class="search-products">
                 <form id="form-search-products" class="form-inline">
                     <div class="form-group">
                         <div class="list-select-category">
-
-                            <select name="selectedType">
-                                <option  selected="selected" value="">默认</option>
+                            <select name="selectedType" id="selectedType">
+                                <option  selected="selected" value="">所有种类</option>
                                 <option value="计算机与互联网">计算机与互联网</option>
                                 <option value="创业大赛">创业大赛</option>
                                 <option value="营销策划">营销策划</option>
@@ -253,10 +251,10 @@
                         </div><!-- .list-select-category end -->
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <input type="text" name="keywords" class="form-control" placeholder="Search ⚡ " data-alt-placeholder="Search for ...">
+                        <input type="text" value="" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <button type="submit" class="form-control" onclick="getcompetition()">Google</button>
+                        <button type="submit" class="form-control" onclick="getcompetition()">Go</button>
                     </div><!-- .form-group end -->
                 </form><!-- #form-search-products end -->
             </div><!-- .search-products end -->
@@ -276,7 +274,7 @@
                     <p>
                         大赛是创新创业人才培养计算机教育实践平台的具体举措，目的是提高大学生综合素质，具体落实、进一步推动高校本科面向21世纪的计算机教学的知识体系、课程体系、教学内容和教学……
                     </p>
-                    <a href="http://jsjds.ruc.edu.cn">+</a>
+                    <a href="http://jsjds.ruc.edu.cn" target="_blank">进入官网</a>
                 </li>
                 <li>
                     <h3>华为软件精英挑战赛</h3>
@@ -285,7 +283,7 @@
                     <p>
                         华为软件精英挑战赛是华为公司面向在校大学生举办的大型软件竞赛，从2015年至今已成功举办四届。在软件精英挑战赛的舞台上，我们相信您可以充分展示软件设计与编程的能力、享受……
                     </p>
-                    <a href="https://codecraft.huawei.com">+</a>
+                    <a href="https://codecraft.huawei.com" target="_blank">进入官网</a>
                 </li>
                 <li>
                     <h3>全国并行应用挑战赛</h3>
@@ -294,7 +292,7 @@
                     <p>
                         竞赛定位于中国的戈登贝尔奖，并于2014年开办“竞赛集训营”——为参赛者助跑，为从业者加速，共享平台，共赢未来。从第一届到第七届，PAC始终坚持初心，为寻找行业最佳应用、培养……
                     </p>
-                    <a href="http://www.pac-hpc.com">+</a>
+                    <a href="http://www.pac-hpc.com" target="_blank">进入官网</a>
                 </li>
             </ul>
         </div>
@@ -554,7 +552,8 @@
             <div class="line"></div>
         </div>
         <div class="homeLinkWrap">
-            <a href="http://www.saikr.com">赛氪</a><a href="http://www.52jingsai.com/portal.php">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php">全国大学生C语言设计大赛</a>
+            <a href="http://www.chinasofti.com" target="_blank">中软国际</a><a href="http://www.github.com" target="_blank">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php" target="_blank">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn" target="_blank">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn" target="_blank">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php" target="_blank">全国大学生C语言设计大赛</a>
+            <a href="http://www.saikr.com" target="_blank">赛氪</a>
         </div>
     </div>
 </div>

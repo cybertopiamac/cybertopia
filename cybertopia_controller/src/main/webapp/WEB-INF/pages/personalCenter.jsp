@@ -400,7 +400,11 @@
             }
         )
     }
+
     // 收藏文章的ajax
+
+    // 已经做过收藏文章的接口了，在/article/like.do
+    // 详情查看源码注释
     function getArticleCollect() {
         let userid = {
             "id":<%= user.getId()%>

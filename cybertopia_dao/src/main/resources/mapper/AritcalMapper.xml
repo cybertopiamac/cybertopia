@@ -21,4 +21,9 @@
         set date=#{date},title=#{title},content=#{content},authorId=#{authorId},browseNum=#{browseNum}
         where id = #{id}
     </update>
+
+    <select id="getArticleTitleByAuthorId" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
+        select article.id,date,title, nickname as authorName,browseNum from article, user
+        where article.authorId = user.id and article.authorId = #{authorId}
+    </select>
 </mapper>

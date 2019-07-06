@@ -23,7 +23,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-    public void addNewUser(User user) {
-        userDao.addNewUser(user);
+    public void insertUser(User user) {
+        userDao.insertUser(user);
     }
 }

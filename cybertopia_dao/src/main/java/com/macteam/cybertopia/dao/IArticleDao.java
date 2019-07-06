@@ -13,4 +13,7 @@ public interface IArticleDao {
     int deleteArticleById(int id);
     int insertArticle(Article article);
     int updateArticle(Article article);
+
+    // todo: 修改为article_title
+    List<ArticleTitle> getArticleTitleByAuthorId(int authorId);
 }

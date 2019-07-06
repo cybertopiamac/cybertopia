@@ -253,12 +253,12 @@
     <!--评论框-->
     <div  id="publish_comment_div" style="display: none">
     <div class="article_content">
-        <textarea id="comment_textarea" style="width:100%;height:150px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
+        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
     </div>
     <div class="publish_bar">
         <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
     </div>
-    </div>
+    </div>：
     <!---->
 </div>
 </body>

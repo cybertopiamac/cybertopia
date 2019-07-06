@@ -92,7 +92,7 @@ body{
     color:#CCC;
 }
 .like_click .star{
-    color:red;
+    color:rgb(255,0,0);
     font-size:25px;
     cursor: pointer;
 }

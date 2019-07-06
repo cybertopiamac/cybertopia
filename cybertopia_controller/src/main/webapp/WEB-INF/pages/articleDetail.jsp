@@ -28,12 +28,69 @@
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function(){
             $(".like").click(function(){
-                $(this).toggleClass("like_click")
+
+                $(this).toggleClass("like_click");
+
+                //获得点击后的颜色
+                var color=$('#like_star').css('color');
+                //alert(color);
+                //点击收藏
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    //传入文章id和用户id,写入文章收藏表
+                    //like_article()
+                    alert("已收藏");
+                }
+                //取消了收藏
+                else{
+                    //删除已传入的文章
+                    //delete_like();
+                    alert("已取消收藏");
+                }
+
+
+
             });
         });
+
+        function send_like(playload) {
+            $.ajax({
+                type: "POST",
+                // contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "<%=basePath%>/article/like.do",
+                data: playload,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("like error")
+                }
+            });
+        }
+
+        //收藏文章
+        function like_article(){
+
+            var like_article = {
+                "articleId":${article.id},
+                "action":"set"
+            };
+            send_like(like_article);
+        }
+
+        //取消收藏
+        function delete_like(){
+
+            var dislike_article = {
+                "articleId":${article.id},
+                "action":"unset"
+            };
+            send_like(dislike_article);
+        }
+
     </script>
 </head>
 
@@ -117,7 +174,7 @@
     </div>
     <div class="comment_bar">
         <p class="comment_bar_p">
-            <button class="like"><span class="star">&#9733;</span>收藏&nbsp;</button>|
+            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
             <button><span class="write_comment">&#9997;</span>发表评论</button>
         </p>
     </div>

@@ -30,6 +30,21 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("filterComp/.do")
+    public String searchComp(Model model, @RequestParam(defaultValue = "1")int page,@RequestParam(defaultValue = "12")int size,@RequestParam String selectedType,@RequestParam String keywords){
+        List<Competition> comps=comp.getCompetitionsBySearch(page,size,keywords,selectedType);
+
+        System.out.println(selectedType);
+        System.out.println(keywords);
+        PageInfo pageInfo=new PageInfo(comps);
+        model.addAttribute("pageInfo",pageInfo);
+
+        model.addAttribute("comps",comps);
+        model.addAttribute("count",comps.size());
+        return "index";
+    }
+
+
 
 
 }

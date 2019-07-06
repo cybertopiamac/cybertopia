@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.macteam.cybertopia.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: solist
   Date: 2019-07-02
@@ -33,12 +33,15 @@
                 form.submit();
             }
         }
-
-
     </script>
 
 </head>
 <body>
+<%
+    User user=(User)request.getSession().getAttribute("user");
+    user=null;
+    request.getSession().setAttribute("user",user);
+%>
 <div class="demo-2">
     <div class="">
         <div id="large-header" class="large-header">

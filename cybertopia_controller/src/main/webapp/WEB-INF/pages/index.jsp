@@ -3,6 +3,14 @@
 <html lang="en" class="no-js">
 <html>
 <head>
+
+    <!--以下三个用于搜索栏css-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/others/style-en.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/others/css-assets.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>
+
+
+
     <link rel="stylesheet" href="bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -11,7 +19,6 @@
     <title>首页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/public.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/jquery.bxslider.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/main_js/indexJS.js"></script>
@@ -109,6 +116,22 @@
             }
         }
     </style>
+
+    <script type="text/javascript">
+
+
+        function getcompetition() {
+            var name = document.getElementById("keywords").value;
+            var type = request.getParameter("selectedType");
+            var form = document.forms[0];
+            form.action = "${pageContext.request.contextPath}/main/filterComp.do";
+            form.method = "post";
+            form.submit();
+
+        }
+
+
+    </script>
 </head>
 <body>
 <!--top-->
@@ -138,7 +161,7 @@
                         <c:when test="${user!=null}">
                             <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
                             <div class="navDown">
-                                <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">注销</a>
                                 <a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息查看</a>
                             </div>
                         </c:when>
@@ -204,6 +227,42 @@
 <div class="homeBox homeIdear">
     <div class="wrap">
         <div class="homeTitle">
+
+            <!--搜索栏-->
+            <div class="search-products">
+                <form id="form-search-products" class="form-inline">
+                    <div class="form-group">
+                        <div class="list-select-category">
+
+                            <select name="selectedType">
+                                <option  selected="selected" value="">默认</option>
+                                <option value="计算机与互联网">计算机与互联网</option>
+                                <option value="创业大赛">创业大赛</option>
+                                <option value="营销策划">营销策划</option>
+                                <option value="金融比赛">金融比赛</option>
+                                <option value="广告创意">广告创意</option>
+                                <option value="设计大赛">设计大赛</option>
+                                <option value="文学演讲">文学演讲</option>
+                                <option value="播音主持">播音主持</option>
+                                <option value="动漫书画">动漫书画</option>
+                                <option value="影视摄影">影视摄影</option>
+                                <option value="学科学术">学科学术</option>
+                                <option value="科技大赛">科技大赛</option>
+                                <option value="公益大赛">公益大赛</option>
+                            </select>
+                        </div><!-- .list-select-category end -->
+                    </div><!-- .form-group end -->
+                    <div class="form-group">
+                        <input type="text" name="keywords" class="form-control" placeholder="Search ⚡ " data-alt-placeholder="Search for ...">
+                    </div><!-- .form-group end -->
+                    <div class="form-group">
+                        <button type="submit" class="form-control" onclick="getcompetition()">Google</button>
+                    </div><!-- .form-group end -->
+                </form><!-- #form-search-products end -->
+            </div><!-- .search-products end -->
+
+
+
             <h2>当前热门</h2>
             <h3><span>The hottest spot</span></h3>
             <div class="line"></div>

@@ -19,4 +19,19 @@ public class CompServiceImpl implements ICompService {
 
         return compDao.getCompetitions();
     }
+
+    public List<Competition> getCompetitionsBySearch(int page, int size, String keywords, String type) {
+        if(type==""){
+            PageHelper.startPage(page,size);
+            return compDao.getCompetitionsByKeywords(keywords);
+        }
+        else if(keywords==""){
+            PageHelper.startPage(page,size);
+            return compDao.getCompetitionsByType(type);
+        }
+        else{
+            PageHelper.startPage(page,size);
+            return compDao.getCompetitionsByKeywordsAndType(keywords,type);
+        }
+    }
 }

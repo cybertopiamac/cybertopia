@@ -6,4 +6,18 @@
         select * from competition
     </select>
 
+    <select id="getCompetitionsByKeywords" parameterType="String"
+            resultType="com.macteam.cybertopia.entity.Competition">
+        select * from competition where name like '%${keywords}%'
+    </select>
+
+    <select id="getCompetitionsByType" parameterType="String" resultType="com.macteam.cybertopia.entity.Competition">
+        select * from competition where type like '%${type}%'
+    </select>
+
+    <select id="getCompetitionsByKeywordsAndType" parameterType="String"
+            resultType="com.macteam.cybertopia.entity.Competition">
+        select * from competition where name like '%${keywords}%' and type like '%${type}%'
+    </select>
+
 </mapper>

@@ -8,4 +8,5 @@ public interface ICompService {
 
     List<Competition> getCompetitions(int page,int size);
 
+    List<Competition> getCompetitionsBySearch(int page,int size,String keywords,String type);
 }

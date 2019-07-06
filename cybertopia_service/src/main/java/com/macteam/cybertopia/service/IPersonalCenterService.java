@@ -1,23 +1,23 @@
 package com.macteam.cybertopia.service;
 
-import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
+import com.macteam.cybertopia.pojo.ArticleTitle;
 
 import java.util.List;
 
 public interface IPersonalCenterService {
     User getUserById(int id);
     User getUserByName(String name);
-    List<Article> getArticleCollectById(int id);
-    List<Article> getArticleCollectByUser(User user);
+    List<ArticleTitle> getArticleCollectById(int id);
+    List<ArticleTitle> getArticleCollectByUser(User user);
     List<Competition> getCompetitionById(int id);
     List<Competition> getCompetitionByUser(User user);
     int updateUserInfo(User user);
     int updateUserPassword(int id,String password);
 
-    List<Article> getArticlePublishById(int id);
+    List<ArticleTitle> getArticlePublishById(int id);
 
     List<Comment> getCommentHistoryById(int id);
 }

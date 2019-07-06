@@ -11,5 +11,10 @@ public interface IUserDao {
     String getPasswordCode(@Param("input") String input);
 
     //注册用
-    void addNewUser(User user);
+    void insertUser(User user);
+
+
+    int updateUserInfo(User user);
+    int updateUserPassword(@Param("id") int id,@Param("password")String password);
+    int updateUserDesc(int id, @Param("desc") String desc);
 }

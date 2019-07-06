@@ -6,11 +6,10 @@ import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
+import com.macteam.cybertopia.pojo.ArticleTitle;
 import com.macteam.cybertopia.service.IPersonalCenterService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,16 +39,16 @@ public class PersonalCenterController {
     }
 
     class TwoList{
-        public List<Article> articles;
+        public List<ArticleTitle> articles;
         public List<Competition> competitions;
-        TwoList(List<Article> article, List<Competition> competition){
+        TwoList(List<ArticleTitle> article, List<Competition> competition){
             articles = article;
             competitions = competition;
         }
     }
 
-    public List<Article> getAticleCollect(int id){
-        List<Article> articles = personalCenterService.getArticleCollectById(id);
+    public List<ArticleTitle> getAticleCollect(int id){
+        List<ArticleTitle> articles = personalCenterService.getArticleCollectById(id);
         return articles;
     }
 
@@ -61,9 +60,9 @@ public class PersonalCenterController {
     @RequestMapping(value ="/myLike")//获取收藏
     @ResponseBody
     public String myLike(@RequestParam("id") int id){
-        List<Article> articles = getAticleCollect(id);
+        List<ArticleTitle> article_titles = getAticleCollect(id);
         List<Competition> competitions = getCompetitionCollect(id);
-        TwoList result = new TwoList(articles, competitions);
+        TwoList result = new TwoList(article_titles, competitions);
         System.out.println(JSON.toJSONString(result));
         return JSON.toJSONString(result);
     }
@@ -72,7 +71,7 @@ public class PersonalCenterController {
     @RequestMapping(value ="/articleHistory")//获取发表的文章
     @ResponseBody
     public String getArticlePublish(@RequestParam("id") int id){
-        List<Article> articles = personalCenterService.getArticlePublishById(id);
+        List<ArticleTitle> articles = personalCenterService.getArticlePublishById(id);
         return JSON.toJSONString(articles);
     }
 

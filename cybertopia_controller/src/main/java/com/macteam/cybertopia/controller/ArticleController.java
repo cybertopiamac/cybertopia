@@ -1,5 +1,6 @@
 package com.macteam.cybertopia.controller;
 
+import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
@@ -10,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,6 +25,9 @@ public class ArticleController {
 
     @Autowired
     private UserLoginController userLoginController;
+
+    @Autowired
+    private IUserDao userDao;
 
     @RequestMapping("/all.do")
     public String articleList(){
@@ -41,8 +48,13 @@ public class ArticleController {
 
     @RequestMapping("/detail.do")
     public String articleDetail(Model model, int articleId){
+        System.out.println("文章id" + articleId);
         Article article = articleService.getArticleById(articleId);
-        model.addAttribute("article",article);
+        if(article != null){
+            User author = userDao.getUserById(article.getAuthorId());
+            model.addAttribute("article",article);
+            model.addAttribute("author_name",author.getNickname());
+        }
         return "articleDetail";
     }
 
@@ -50,7 +62,7 @@ public class ArticleController {
     public String articleWrite(HttpServletRequest request){
         User user = userLoginController.getCurrentUser(request);
         if(user != null)
-            return "articleWriet";
+            return "articleWrite";
         else
             return "login";
     }
@@ -60,6 +72,7 @@ public class ArticleController {
         User user = userLoginController.getCurrentUser(request);
         if(user != null) {
             article.setAuthorId(user.getId());
+            article.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             articleService.insertArticle(article);
             return "redirect:/article/all.do";
         }

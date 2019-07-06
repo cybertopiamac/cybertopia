@@ -66,38 +66,6 @@ body{
    /* box-shadow: 0px 0px 10px #CCC;*/
     font-size:14px;
 }
-/*
-.article_content h1{
-    margin:10px;
-    font-size:25px;
-    padding:5px;
-}
-.article_content h2{
-    margin:10px;
-    font-size:22px;
-    padding:5px;
-}
-.article_content h3{
-    margin:10px;
-    font-size:20px;
-    padding:5px;
-}
-.article_content h4{
-    margin:10px;
-    font-size:18px;
-    padding:5px;
-}
-.article_content h5{
-    margin:10px;
-    font-size:16px;
-    padding:5px;
-}
-.article_content h6{
-    margin:10px;
-    font-size:14px;
-    padding:5px;
-}*/
-
 
 .comment_bar{
     margin:10px 10px 10px 10px;
@@ -133,9 +101,8 @@ body{
 }
 
 /*publish*/
-.publsh_title{
-    margin-top:0px;
-}
+
+
 .publish_bar{
     margin:0px 0px 0px 0px;
     background-color: #ECF0F1;
@@ -146,8 +113,19 @@ body{
     vertical-align: middle;
     text-align: center;
 }
+.previous_browser{
 
-.publish_button{
+    background-color: #66cccc;
+    border:1px solid transparent;
+    color:#FFF;
+    text-align: center;
+    font-size:20px;
+    width:100px;
+    height:100%;
+    margin-right:15px;
+    float:right;
+}
+.publish_button {
      background-color: #66cccc;
      border:1px solid transparent;
      color:#FFF;
@@ -156,4 +134,52 @@ body{
      width:100px;
      height:100%;
      float:right;
+}
+
+
+.publish_title {
+    margin-top: 0px;
+}
+
+.publish_title h1 {
+    color:#000;
+    font-size:25px;
+}
+.publish_title input{
+    font-size:25px;
+}
+
+
+.title_box{
+    overflow: hidden;
+    display: flex;
+}
+
+.title_left{
+    width:1px;
+    float:left;
+}
+.title_right{
+    width:1px;
+    float:right;
+}
+.title_box input{
+    width:100%;
+    font-size:25px;
+}
+/*文本域*/
+textarea{
+    display:block;
+    width:100%;
+    height:200px;
+    resize:none;
+    outline:0 none;
+    transition: all 200ms linear;
+    margin-bottom:20px;
+    font-size:14px;
+}
+#previous_div{
+    margin:10px;
+    background-color: #FFF;
+    padding:20px;
 }

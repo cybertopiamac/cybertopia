@@ -1,20 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en" class="no-js">
-
     <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
 %>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>发表文章页面</title>
+    <title>文章详情页面</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/public.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/jquery.bxslider.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
@@ -22,41 +21,104 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/articlesStyle.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/markdown.css"/>
 
+
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/js/main_js/marked.min.js"></script>
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-
     <script type="text/javascript">
+        $(document).ready(function(){
+            $(".like").click(function(){
 
-        $(document).ready(function () {
-            $("#input_title").focus(setDefault('#input_title'));
-            $("#input_content").focus(setDefault('#input_content'));
+                $(this).toggleClass("like_click");
+
+                //获得点击后的颜色
+                var color=$('#like_star').css('color');
+                //alert(color);
+                //点击收藏
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    //传入文章id和用户id,写入文章收藏表
+                    //like_article()
+                    alert("已收藏");
+                }
+                //取消了收藏
+                else{
+                    //删除已传入的文章
+                    //delete_like();
+                    alert("已取消收藏");
+                }
+
+
+
+            });
+
+            //评论框
+            $("#comment_textarea").focus(setDefault('#comment_textarea'));
+            //
         });
+       //
+        function send_like(playload) {
+            $.ajax({
+                type: "POST",
+                // contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "<%=basePath%>/article/like.do",
+                data: playload,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("like error")
+                }
+            });
+        }
 
-        function publish() {
-            //获得文章标题
-            var title = $('#input_title').val();
+        //收藏文章
+        function like_article(){
+
+            var like_article = {
+                "articleId":${article.id},
+                "action":"set"
+            };
+            send_like(like_article);
+        }
+
+        //取消收藏
+        function delete_like(){
+
+            var dislike_article = {
+                "articleId":${article.id},
+                "action":"unset"
+            };
+            send_like(dislike_article);
+        }
+
+        function showCommentDiv(){
+             $("#publish_comment_div").show();
+        }
+        //
+        //处理评论
+        function comment(){
+
             var check_blank = true;
-            if (title == "" && $.trim(title).length == 0) {
-                $('#input_title').css('color', 'red').val("标题不能为空");
-                check_blank = false;
+            var comment_content=$("#comment_textarea").val();
+           //评论为空
+            if (comment_content == "" && $.trim(comment_content).length == 0) {
+
+                $('#comment_textarea').css('color', 'red').val("评论内容不能为空");
+                check_blank=false;
             }
-            var raw_content = $('#input_content').val();
-            if (raw_content == "" && $.trim(raw_content).length == 0) {
-                $('#input_content').css('color', 'red').val("内容不能为空");
-                check_blank = false;
-            }
+
             if (check_blank != false) {
                 var r = confirm("确认发表吗?");
                 if (r == true) {
-                    //传入title和content
-                    //向文章表写入数据
-                    post_article();
+                    //传入评论content
+                    //向评论表写入数据
+                    //post_comment();
                     alert("发表成功！");
+                    $('#comment_textarea').val("");
                     return true;
                 } else {
                     //不提交表单申请
@@ -68,17 +130,7 @@
 
         }
 
-        function changeMarkdown(){
-            document.getElementById("browser_tip").style.display="block";
-            document.getElementById("previous_div").style.display="block";
-            document.getElementById('previous_div').innerHTML =
-                marked(document.getElementById('input_content').value);
-        }
-        function hiddenBrowser(){
-            document.getElementById('input_content').style.height=document.getElementById('input_content').scrollHeight+'px';
-            document.getElementById("browser_tip").style.display="none";
-            document.getElementById("previous_div").style.display="none";
-        }
+
         function setDefault(input_id) {
             return function () {
                 var color = $(input_id).css('color');
@@ -87,17 +139,19 @@
                 }
             };
         }
-        function post_article() {
-            var article = {
-                "title":$('#input_title').val(),
-                "content":marked($('#input_content').val())
+
+
+        function post_comment() {
+            var comment = {
+                "articleId":$(article.id),
+                "content":$("#comment_textarea").val()
             };
             $.ajax({
                 type: "POST",
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                url: "<%=basePath%>/article/post.do",
-                data: JSON.stringify(article), // Note it is important
+                url: "<%=basePath%>/article/comment.do",
+                data: JSON.stringify(comment), // Note it is important
                 success: function (data) {
                     console.log(data);
                 },
@@ -106,6 +160,8 @@
                 }
             });
         }
+
+
 
     </script>
 </head>
@@ -174,40 +230,36 @@
 </div>
 <!--top-->
 
-<!--articleWrite-->
+<!--articleDetails-->
 <div class="article-feed">
-
-
-    <!--填充title-->
-    <div class="article_title article_detail_title publish_title title_box">
-        <div class="title_left"></div>
-        <input type="text" name="input_title" id="input_title" placeholder="请输入标题..."></h1>
-        <div class="title_right"></div>
+    <div class="article_title article_detail_title">
+            <h1>${article.title}</h1>
+            <p><span>${author_name}</span>
+                <span class="pub_time">发表于
+                    <fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd" />
+                </span>
+                <span class="read_number">浏览量 ${article.browseNum}</span>
+            </p>
     </div>
-    <!--title-->
-
- <!--填充content-->
+    <div class="article_content markdown">
+        ${article.content}
+    </div>
+    <div class="comment_bar">
+        <p class="comment_bar_p">
+            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
+            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>
+        </p>
+    </div>
+    <!--评论框-->
+    <div  id="publish_comment_div" style="display: none">
     <div class="article_content">
-  <textarea placeholder="请输入内容..."  row="1"  id="input_content" oninput="hiddenBrowser()"></textarea>
+        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
     </div>
-
-    <!--button-->
     <div class="publish_bar">
-
-        <button type="button" class="publish_button" onclick="publish()">发表</button>
-
-        <button type="button" class="previous_browser" onclick="changeMarkdown()">点击预览</button>
+        <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
     </div>
-
+    </div>：
     <!---->
-    <!--content-->
-    <p id="browser_tip" style="display:none;margin:10px;text-align:center;">
-        <span style="background: #fff; font-family: sans-serif;font-size: 1.5em;padding: 5px;">预览内容如下</span>
-    </p>
-    <div class="markdown" id="previous_div" style="border:0.3em solid #66cccc;display:none;"></div>
-
-
 </div>
-
 </body>
 </html>

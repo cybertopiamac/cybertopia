@@ -1,12 +1,12 @@
 package com.macteam.cybertopia.controller;
 
-import com.macteam.cybertopia.dao.ICollectionDao;
+import com.macteam.cybertopia.dao.ICommentDao;
 import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Article;
+import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
 import com.macteam.cybertopia.service.IArticleService;
-import com.macteam.cybertopia.service.ICollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +28,6 @@ public class ArticleController {
 
     @Autowired
     private IUserDao userDao;
-
-    @Autowired
-    private ICollectionService collectionService;
 
     @RequestMapping("/all.do")
     public String articleList(){
@@ -64,7 +61,7 @@ public class ArticleController {
             User user = userLoginController.getCurrentUser(request);
             int collctionStatus = 0;
             if(user != null){
-                collctionStatus = collectionService.getArticleCollectStatus(user.getId(),article.getId());
+                collctionStatus = articleService.getArticleCollectStatus(user.getId(),article.getId());
             }
             model.addAttribute("collctionStatus",collctionStatus);
         }
@@ -115,11 +112,24 @@ public class ArticleController {
         // action分两种情况，set收藏，unset取消收藏
         if(user != null) {
             if (action.equals("set")) {
-                return collectionService.insertArticleCollection(user.getId(),articleId);
+                return articleService.insertArticleCollection(user.getId(),articleId);
             } else if (action.equals("unset")) {
-                return collectionService.deleteArticleCollection(user.getId(),articleId);
+                return articleService.deleteArticleCollection(user.getId(),articleId);
             }
         }
         return 0;
+    }
+
+    @RequestMapping(value = "/comment.do", method = RequestMethod.POST)
+    @ResponseBody
+    public int articleComment(HttpServletRequest request, Comment comment){
+        User user = userLoginController.getCurrentUser(request);
+        if (user != null) {
+            comment.setUserId(user.getId());
+            comment.setDate(new Date(System.currentTimeMillis()));
+            return articleService.insertComment(comment);
+        }else{
+            return 0;
+        }
     }
 }

@@ -2,7 +2,7 @@ package com.macteam.cybertopia.entity;
 
 import java.util.Date;
 
-public class Comment {
+public class Answer {
     private int id;
     private String content;
     private Date date;
@@ -51,12 +51,13 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Answer{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", articleId=" + articleId +
-                ", userId='" + userId + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 }
+

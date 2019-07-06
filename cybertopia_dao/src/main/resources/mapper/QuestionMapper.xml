@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macteam.cybertopia.dao.IQuestionDao" >
+    <delete id="deleteQuestionById" parameterType="int">
+        delete from question where id = #{id}
+    </delete>
+    <select id="getQuestionListByRange" resultType="com.macteam.cybertopia.pojo.QuestionTitle">
+        select question.id,date,title, nickname as authorName,browseNum from question, user
+        where question.authorId = user.id
+        order by date desc limit #{skip}, #{limit}
+    </select>
+    <select id="getQuestionById" resultType="Question" parameterType="int">
+        select * from question where id = #{id}
+    </select>
+    <insert id="insertQuestion" parameterType="Question">
+        insert into question(date,title,content,authorId)
+        values (#{date},#{title},#{content},#{authorId})
+    </insert>
+    <update id="updateQuestion" parameterType="Question">
+        update question
+        set date=#{date},title=#{title},content=#{content},authorId=#{authorId},browseNum=#{browseNum}
+        where id = #{id}
+    </update>
+</mapper>

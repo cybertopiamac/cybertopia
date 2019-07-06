@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ICommentDao {
     int insertComment(Comment comment);
-    List<Comment> getCommentByUserId(int id);
+    List<Comment> getCommentByUserId(int userId);
+    List<Comment> getCommentByArticleId(int articleId);
 }

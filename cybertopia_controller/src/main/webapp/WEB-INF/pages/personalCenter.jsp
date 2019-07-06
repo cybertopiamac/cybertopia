@@ -125,7 +125,8 @@
                     </div>
 
                     <div class="col-md-9">
-                        <h2><%=user.getNickname()%></h2>
+                        <h2><%=user.getNickname()%>
+                        </h2>
                         <table>
                             <tr>
                                 <td>
@@ -180,7 +181,9 @@
                                 <td colspan="2">
                                     <p>
                                         <em>个人简介:</em>
-                                        <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDescription()%></textarea>
+                                        <textarea class="text-style" id="desc-input"
+                                                  style="vertical-align:top;resize:none;" rows="3" cols="50"
+                                                  readonly="readonly"><%=user.getDescription()%></textarea>
                                     </p>
                                 </td>
                             </tr>
@@ -308,7 +311,10 @@
 <script src="<%=basePath%>/js/personalCenter_js/main.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/getUserInfo.js"></script>
 
+
 <script type="text/javascript">
+
+
     //修改密码
     function passwordChange() {
         var oldPass = document.getElementById("oldPass").value;
@@ -322,49 +328,68 @@
         else if (newPass != againPass) {
             alert("新密码两次输入不一致");
         } else {
-            getChangeMsg(oldPass,newPass);
+            var form = document.getElementById("passwordForm");
+            form.action = "<%=basePath%>personalCenter/changePassword.do";
+            form.method = "post";
+            form.submit();
         }
     }
-    function getChangeMsg(oldPass,newPass) {
 
-    }
     <%--    ///////文章收藏的ajax--%>
     function getArticleHistory() {
+        let userid = {
+            "id":<%= user.getId()%>
+        };
         $.ajax(
             {
                 url: 'articleHistory.do',
-                type: 'get',
+                type: 'GET',
+                //contentType: 'application/json; charset=utf-8',
                 datatype: "json",
                 async: true,
-                data: {"id":<%= user.getId()%>},
-
+                data: userid,
                 success: function (data) {
-                    var tilte;
-                    var content;
-                    var browseanum;
-
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
+                    var div3 = "<div class=\"main-btn\">";
                     var h2 = "<h2>";
                     var h22 = "</h2>";
                     var p = "<p>";
                     var p2 = "</p>";
+                    var a = "<a style=\"color: #FFFFFF\">";
+                    var DATE = "发表日期：";
+                    var a2 = "</a>&ensp;&ensp;&ensp;\n";
+                    var browse = "浏览量：";
+                    var a3 = "</a>";
 
-                    var button = "<div class=\"main-btn\">\n" +
-                        "<input type=\"button\" value=\"更多\">\n" +
-                        "</div>";
+                    var button = "<input type=\"button\" style=\"margin-left: 20px\"\n onclick=\"window.location='<%=basePath%>article/detail.do'\" value=\"更多\">\n";
                     var div2 = "</div>";
-                    var list = eval(data);
-                    for (var i in list) {//拼接每个文章块的html代码
-                        articleListHtml = articleListHtml + div +
-                            h2 +
-                            list[i].title +
-                            h22 +
-                            p +
-                            list[i].content +
-                            p2 +
-                            button+
-                            div2;}
+                    if (!data) {
+                        articleListHtml = div + h2 + "你还没有发表文章喔！" + h22 + div2;
+                    } else {
+                        var list = eval(data);
+                        for (var i in list) {//拼接每个文章块的html代码
+                            articleListHtml = articleListHtml + div +
+                                h2 +
+                                list[i].title +
+                                h22 +
+                                p +
+                                list[i].content +
+                                p2 +
+                                div3 +
+                                a +
+                                DATE +
+                                list[i].date +
+                                a2 +
+                                a +
+                                browse +
+                                list[i].browseNum +
+                                a3 +
+                                button +
+                                div2 +
+                                div2;
+                        }
+                    }
                     $("#div1").html(articleListHtml);
                 },
                 error: function () {

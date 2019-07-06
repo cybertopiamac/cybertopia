@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cybertopia_entity" />
-        <module name="cybertopia_controller" />
         <module name="cybertopia_dao" />
+        <module name="cybertopia_controller" />
         <module name="cybertopia_service" />
       </profile>
     </annotationProcessing>

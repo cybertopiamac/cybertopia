@@ -121,13 +121,10 @@
 
 
         function getcompetition() {
-            var name = document.getElementById("keywords").value;
-            var type = request.getParameter("selectedType");
             var form = document.forms[0];
             form.action = "${pageContext.request.contextPath}/main/filterComp.do";
             form.method = "post";
             form.submit();
-
         }
 
 
@@ -212,30 +209,31 @@
 <div class="banner" id="banner">
     <ul class="sliderBanner">
         <li>
+            <a href="http://zhaopin.chinasoftinc.com"><img src="${pageContext.request.contextPath}/temp/banner2.img.jpg"/></a>
+        </li>
+        <li>
             <a href="https://job.bytedance.com/campus/position"><img src="${pageContext.request.contextPath}/temp/banner.img.jpg"/></a>
         </li>
         <li>
             <a href="https://job.alibaba.com"><img src="${pageContext.request.contextPath}/temp/banner1.img.jpg"/></a>
         </li>
         <li>
-            <a href=""><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
+            <a href="http://puyi.52jingsai.com"><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
         </li>
     </ul>
 </div>
 <!--/banner-->
 
-<div class="homeBox homeIdear">
+<div class="homeBox homeIdear"  align="center">
     <div class="wrap">
         <div class="homeTitle">
-
             <!--搜索栏-->
             <div class="search-products">
                 <form id="form-search-products" class="form-inline">
                     <div class="form-group">
                         <div class="list-select-category">
-
-                            <select name="selectedType">
-                                <option  selected="selected" value="">默认</option>
+                            <select name="selectedType" id="selectedType">
+                                <option  selected="selected" value="">所有种类</option>
                                 <option value="计算机与互联网">计算机与互联网</option>
                                 <option value="创业大赛">创业大赛</option>
                                 <option value="营销策划">营销策划</option>
@@ -253,7 +251,7 @@
                         </div><!-- .list-select-category end -->
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <input type="text" name="keywords" class="form-control" placeholder="Search ⚡ " data-alt-placeholder="Search for ...">
+                        <input type="text" value="" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
                     </div><!-- .form-group end -->
                     <div class="form-group">
                         <button type="submit" class="form-control" onclick="getcompetition()">Google</button>

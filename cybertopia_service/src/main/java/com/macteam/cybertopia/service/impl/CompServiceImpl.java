@@ -16,18 +16,24 @@ public class CompServiceImpl implements ICompService {
 
     public List<Competition> getCompetitions(int page,int size) {
         PageHelper.startPage(page,size);
-
         return compDao.getCompetitions();
     }
 
     public List<Competition> getCompetitionsBySearch(int page, int size, String keywords, String type) {
-        if(type==""){
+        if(type.equals("")&&!keywords.equals("")){
             PageHelper.startPage(page,size);
+            System.out.println("111111");
             return compDao.getCompetitionsByKeywords(keywords);
         }
-        else if(keywords==""){
+        else if(keywords.equals("")&&!type.equals("")){
+            System.out.println("222222");
             PageHelper.startPage(page,size);
             return compDao.getCompetitionsByType(type);
+        }
+        else if(keywords.equals("")&&type.equals("")){
+            System.out.println("333333");
+            PageHelper.startPage(page,size);
+            return compDao.getCompetitions();
         }
         else{
             PageHelper.startPage(page,size);

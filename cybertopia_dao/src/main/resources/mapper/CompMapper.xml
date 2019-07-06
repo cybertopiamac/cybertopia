@@ -11,7 +11,8 @@
         select * from competition where name like '%${keywords}%'
     </select>
 
-    <select id="getCompetitionsByType" parameterType="String" resultType="com.macteam.cybertopia.entity.Competition">
+    <select id="getCompetitionsByType" parameterType="String"
+            resultType="com.macteam.cybertopia.entity.Competition">
         select * from competition where type like '%${type}%'
     </select>
 

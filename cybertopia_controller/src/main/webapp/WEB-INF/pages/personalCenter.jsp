@@ -98,13 +98,10 @@
         <p style="color: #ffffff;font-size: 20px;">导&nbsp;航&nbsp;栏</p>
     </div>
     <ul>
-<<<<<<< HEAD
         <li><a href="#1" onclick="x()"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
-=======
->>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
     </ul>
 </nav>
 
@@ -127,10 +124,7 @@
                     </div>
 
                     <div class="col-md-9">
-<<<<<<< HEAD
-=======
                         <h2><%=user.getNickname()%></h2>
->>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                         <table>
                             <tr>
                                 <td>
@@ -185,10 +179,7 @@
                                 <td colspan="2">
                                     <p>
                                         <em>个人简介:</em>
-<<<<<<< HEAD
-=======
                                         <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDescription()%></textarea>
->>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                                     </p>
                                 </td>
                             </tr>
@@ -204,8 +195,6 @@
     <div class="slide" id="2">
         <div class="content second-content">
             <div class="container-fluid">
-<<<<<<< HEAD
-=======
                 <div class="col-md-6" id="div1">
                     <div class="left-content">
                         <h2>文章标题</h2>
@@ -216,7 +205,6 @@
                             <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>article/detail.do'" value="更多">
                         </div>
                     </div>
->>>>>>> b0d2dd99e0d33dac5516a22de03b9480f8c3e11d
                 </div>
             </div>
         </div>
@@ -319,7 +307,7 @@
 <script src="<%=basePath%>/js/personalCenter_js/main.js"></script>
 <script src="<%=basePath%>/js/personalCenter_js/getUserInfo.js"></script>
 
-<<<<<<< HEAD
+
 <script type="text/javascript">
     $(document).ready(function () {
         // navigation click actions
@@ -398,23 +386,23 @@
 
     //修改密码
     function passwordChange() {
-        var oldPass=document.getElementById("oldPass").value;
-        var newPass=document.getElementById("newPass").value;
-        var againPass=document.getElementById("againPass").value;
+        var oldPass = document.getElementById("oldPass").value;
+        var newPass = document.getElementById("newPass").value;
+        var againPass = document.getElementById("againPass").value;
         //密码为空
-        if((oldPass=="")||(newPass=="")||(againPass=="")){
+        if ((oldPass == "") || (newPass == "") || (againPass == "")) {
             alert("密码不能为空");
         }
         //新密码不相同
-        else if(newPass!=againPass){
+        else if (newPass != againPass) {
             alert("新密码两次输入不一致");
-        }
-        else {
-            var form=document.getElementById("passwordForm");
-            form.action="<%=basePath%>personalCenter/changePassword.do";
-            form.method="post";
+        } else {
+            var form = document.getElementById("passwordForm");
+            form.action = "<%=basePath%>personalCenter/changePassword.do";
+            form.method = "post";
             form.submit();
         }
+    }
     <%--    ///////文章收藏的ajax--%>
     function getArticleHistory() {
         $.ajax(
@@ -426,10 +414,6 @@
                 data: {"id":<%= user.getId()%>},
 
                 success: function (data) {
-                    var tilte;
-                    var content;
-                    var browseanum;
-
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
                     var h2 = "<h2>";
@@ -454,7 +438,8 @@
                             div2;}
                     $("#div1").html(articleListHtml);
                 },
-                error: function () {
+                error: function (data) {
+                    consle.log(data);
                     alert("error");
                 }
             }

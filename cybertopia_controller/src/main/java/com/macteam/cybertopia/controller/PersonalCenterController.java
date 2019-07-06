@@ -45,7 +45,6 @@ public class PersonalCenterController {
     @ResponseBody
     public String getAticleCollect(int id){
         List<Article> articles = personalCenterService.getArticleCollectById(id);
-
         return JSON.toJSONString(articles);
     }
 

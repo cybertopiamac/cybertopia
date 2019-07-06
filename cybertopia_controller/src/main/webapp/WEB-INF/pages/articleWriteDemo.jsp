@@ -24,28 +24,50 @@
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/indexJS.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/main_js/marked.min.js"></script>
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            $(".like").click(function(){
-                $(this).toggleClass("like_click")
-            });
-        });
 
-        function publish(){
-            var r=confirm("确认发表吗?");
-            if(r==true){
+    <script type="text/javascript">
+
+        function isPublish() {
+            //获得文章标题
+            var title=document.getElementById("input_title").value;
+            //获得文章内容
+            //var content=document.getElementById("previous_div").value;
+            //alert(title);
+            //alert(content);
+            //console.log(content);
+            //
+
+            var r = confirm("确认发表吗?");
+            if (r == true) {
+                //传入title和content
                 //向文章表写入数据
                 alert("发表成功！");
-            }
-            else{
-                //继续编辑，不提交
+                return true;
+            } else {
+                //不提交表单申请
                 alert("取消发表");
+                return false;
             }
 
         }
+
+        function changeMarkdown(){
+            document.getElementById("browser_tip").style.display="block";
+            document.getElementById("previous_div").style.display="block";
+            document.getElementById('previous_div').innerHTML =
+                marked(document.getElementById('input_content').value);
+        }
+        function hiddenBrowser(){
+            document.getElementById('input_content').style.height=document.getElementById('input_content').scrollHeight+'px';
+            document.getElementById("browser_tip").style.display="none";
+            document.getElementById("previous_div").style.display="none";
+        }
+
+
     </script>
 </head>
 
@@ -114,40 +136,37 @@
 <!--top-->
 
 <!--articleWrite-->
-
-
-
 <div class="article-feed">
+
    <!--button-->
     <div class="publish_bar">
-        <button type="button" class="publish_button"  onclick="publish()">发表</button>
+
+        <form action="" name="publishForm" method="post" onsubmit="return isPublish()">
+
+        <button type="submit" class="publish_button" name="submit">发表</button>
+
+        </form>
+
+        <button type="button" class="previous_browser" onclick="changeMarkdown()">点击预览</button>
     </div>
     <!---->
 
     <!--填充title-->
-    <div class="article_title article_detail_title publsh_title">
-
+    <div class="article_title article_detail_title publish_title title_box">
+        <div class="title_left"></div>
+        <input type="text" name="input_title" id="input_title" placeholder="请输入标题..."></h1>
+        <div class="title_right"></div>
     </div>
     <!--title-->
 
  <!--填充content-->
     <div class="article_content">
-
-        <p>xpids</p>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <p>cdbocjsd</p>
-        <p>dc</p>
-
+  <textarea placeholder="请输入内容..."  row="1"  id="input_content" oninput="hiddenBrowser()"></textarea>
     </div>
     <!--content-->
+    <p id="browser_tip" style="display:none;margin:10px;">预览内容如下：</p>
+    <div id="previous_div" style="display:none;"></div>
+
 
 </div>
 

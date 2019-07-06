@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ICompService {
 
-    List<Competition> getCompetitions();
+    List<Competition> getCompetitions(int page,int size);
 
 }

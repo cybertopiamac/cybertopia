@@ -1,5 +1,6 @@
 package com.macteam.cybertopia.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.macteam.cybertopia.dao.ICompDao;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.service.ICompService;
@@ -13,7 +14,9 @@ public class CompServiceImpl implements ICompService {
     @Autowired
     private ICompDao compDao;
 
-    public List<Competition> getCompetitions() {
+    public List<Competition> getCompetitions(int page,int size) {
+        PageHelper.startPage(page,size);
+
         return compDao.getCompetitions();
     }
 }

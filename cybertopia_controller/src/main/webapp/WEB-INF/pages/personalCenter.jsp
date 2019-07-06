@@ -118,7 +118,7 @@
                     </div>
 
                     <div class="col-md-9">
-                        <h2><%=user.getNickName()%></h2>
+                        <h2><%=user.getNickname()%></h2>
                         <table>
                             <tr>
                                 <td>
@@ -158,7 +158,7 @@
                                 <td colspan="2">
                                     <p>
                                         <em>个人简介:</em>
-                                        <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDesc()%></textarea>
+                                        <textarea class="text-style" id="desc-input" style="vertical-align:top;resize:none;" rows="3" cols="50" readonly="readonly"><%=user.getDescription()%></textarea>
                                     </p>
                                 </td>
                             </tr>

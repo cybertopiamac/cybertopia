@@ -31,7 +31,6 @@ public class PersonalCenterController {
 
     @RequestMapping("/home.do")
     public String getPage(){
-
         return "personalCenter";
     }
     @RequestMapping("update.do")

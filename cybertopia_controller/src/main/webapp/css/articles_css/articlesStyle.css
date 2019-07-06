@@ -74,11 +74,17 @@ body{
     /*box-shadow: 0px 0px 10px #CCC;*/
     word-wrap: break-word;
     padding:0.5em;
-    widht:100%;
+    width:17%;
     vertical-align: middle;
-    text-align: center;
+    float:right;
+    text-align: right;
 }
 .comment_bar_p {
+    text-align: right;
+    margin-right:5px;
+}
+.comment_bar_p button{
+    margin:2px;
 }
 .comment_bar_p a{
     font-size:16px;

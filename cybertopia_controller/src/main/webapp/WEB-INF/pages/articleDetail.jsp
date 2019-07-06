@@ -30,8 +30,24 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".like").click(function(){
 
+
+            function checkLikeStatus(){
+                //获得当前文章的收藏状态
+              var collectionStatus=${collctionStatus};
+
+              //alert(collectionStatus);
+                //已收藏，设置颜色
+              if(collectionStatus>0){
+                 $("#like_star").css("color",'red');
+              }
+
+            }
+            checkLikeStatus();
+
+
+
+            $(".like").click(function(){
                 $(this).toggleClass("like_click");
 
                 //获得点击后的颜色
@@ -40,13 +56,13 @@
                 //点击收藏
                 if (color == 'rgb(255, 0, 0)' || color == 'red') {
                     //传入文章id和用户id,写入文章收藏表
-                    //like_article()
+                    like_article();
                     alert("已收藏");
                 }
                 //取消了收藏
                 else{
                     //删除已传入的文章
-                    //delete_like();
+                    delete_like();
                     alert("已取消收藏");
                 }
 
@@ -246,8 +262,8 @@
     </div>
     <div class="comment_bar">
         <p class="comment_bar_p">
-            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
-            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>
+            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>&nbsp;|
+            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>
         </p>
     </div>
     <!--评论框-->
@@ -258,7 +274,21 @@
     <div class="publish_bar">
         <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
     </div>
-    </div>：
+    </div>
+    <!---->
+
+    <!--显示所有评论-->
+    <!--
+     <div class="all_comment" style="margin:30px;padding:0px">
+         <div style="background-color:#CCC;font-size:16px;height:40px;line-height: 40px">
+             <span style="vertical-align: middle;height:40px;">所有评论</span>
+         </div>
+         <div class="comment_detail">
+
+
+         </div>
+
+     </div>-->
     <!---->
 </div>
 </body>

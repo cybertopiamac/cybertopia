@@ -9,7 +9,4 @@ public interface IUserDao {
     User deleteUserById(int id);
     User deleteUserByuserName(String userName);
     String getPasswordCode(@Param("input") String input);
-
-    //注册用
-    void addNewUser(User user);
 }

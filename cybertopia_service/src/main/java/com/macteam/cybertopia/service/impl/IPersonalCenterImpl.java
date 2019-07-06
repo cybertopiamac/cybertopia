@@ -4,6 +4,7 @@ package com.macteam.cybertopia.service.impl;
 import com.macteam.cybertopia.dao.IPersonalCenterDao;
 import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Article;
+import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.service.IPersonalCenterService;
@@ -54,5 +55,16 @@ public class IPersonalCenterImpl implements IPersonalCenterService {
         int iErrorCode = 0;
         iErrorCode = personalCenterDao.updateUserInfo(user);
         return iErrorCode;
+    }
+
+
+    public List<Article> getArticlePublishById(int id) {
+        List<Article> articles = personalCenterDao.getUserArticlePublishByUserId(id);
+        return articles;
+    }
+
+    public List<Comment> getCommentHistoryById(int id) {
+        List<Comment> comments = personalCenterDao.getUserCommentHistoryByUserId(id);
+        return null;
     }
 }

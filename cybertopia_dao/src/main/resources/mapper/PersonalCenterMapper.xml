@@ -2,11 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.macteam.cybertopia.dao.IPersonalCenterDao" >
     <select id="getUserArticleCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Article">
-        select * from artclecollect inner join article on articlecollect.articleId = article.id where userId = #{id}
+        select * from articlecollect inner join article on articlecollect.`articleId`=article.`id` where userid = #{id}
     </select>
-    <select id="getUserCompetitionCollectByUserId" parameterType="int" resultType="Competition">
+    <select id="getUserCompetitionCollectByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition">
         select * from competitioncollect inner join competition on competitioncollect.competitionId = competition.id where userId = #{id}
     </select>
+    <select id="getUserArticlePublishByUserId" resultType="com.macteam.cybertopia.entity.Article">
+        select * from articlepublish inner join article on articlepublish.articleId = article.id where userId = #{id}
+    </select>
+    <select id="getUserCommentHistoryByUserId" resultType="com.macteam.cybertopia.entity.Comment">
+        select * from comment where userId = #{id}
+    </select>
+
     <update id="updateUserInfo" parameterType="User">
         update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}
     </update>

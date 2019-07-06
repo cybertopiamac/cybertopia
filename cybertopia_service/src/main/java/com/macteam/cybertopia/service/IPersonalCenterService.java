@@ -1,6 +1,7 @@
 package com.macteam.cybertopia.service;
 
 import com.macteam.cybertopia.entity.Article;
+import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 
@@ -14,4 +15,8 @@ public interface IPersonalCenterService {
     List<Competition> getCompetitionById(int id);
     List<Competition> getCompetitionByUser(User user);
     int updateUserInfo(User user);
+
+    List<Article> getArticlePublishById(int id);
+
+    List<Comment> getCommentHistoryById(int id);
 }

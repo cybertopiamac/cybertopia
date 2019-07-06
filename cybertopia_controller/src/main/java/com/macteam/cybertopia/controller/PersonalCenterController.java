@@ -39,32 +39,49 @@ public class PersonalCenterController {
         return "null";
     }
 
-    @RequestMapping(value ="/articleLike", produces = {"text/html;charset=utf-8"})//获取收藏的文章
-    @ResponseBody
-    public String getAticleCollect(int id){
-        List<Article> articles = personalCenterService.getArticleCollectById(id);
-        return JSON.toJSONString(articles);
+    class TwoList{
+        public List<Article> articles;
+        public List<Competition> competitions;
+        TwoList(List<Article> article, List<Competition> competition){
+            articles = article;
+            competitions = competition;
+        }
     }
 
-    @RequestMapping("/competitionLike")//获取收藏的竞赛
-    public void getCompetitionCollect(int id, Model model){
-        List<Competition> competitions = personalCenterService.getCompetitionById(id);
-        model.addAttribute("competitions", competitions);
+    public List<Article> getAticleCollect(int id){
+        List<Article> articles = personalCenterService.getArticleCollectById(id);
+        return articles;
     }
+
+    public List<Competition> getCompetitionCollect(int id){
+        List<Competition> competitions = personalCenterService.getCompetitionById(id);
+        return competitions;
+    }
+
+    @RequestMapping(value ="/myLike")//获取收藏
+    @ResponseBody
+    public String myLike(@RequestParam("id") int id){
+        List<Article> articles = getAticleCollect(id);
+        List<Competition> competitions = getCompetitionCollect(id);
+        TwoList result = new TwoList(articles, competitions);
+        System.out.println(JSON.toJSONString(result));
+        return JSON.toJSONString(result);
+    }
+
 
     @RequestMapping(value ="/articleHistory")//获取发表的文章
     @ResponseBody
     public String getArticlePublish(@RequestParam("id") int id){
         List<Article> articles = personalCenterService.getArticlePublishById(id);
-        System.out.println(JSON.toJSONString(articles));
         return JSON.toJSONString(articles);
     }
 
 
     @RequestMapping("/commentHistory")
-    public void getCommentHistory(int id, Model model){
+    @ResponseBody
+    public String getCommentHistory(@RequestParam("id") int id){
         List<Comment> comments = personalCenterService.getCommentHistoryById(id);
-        model.addAttribute("comments", comments);
+        return JSON.toJSONString(comments);
     }
 
     @RequestMapping("/file.do")

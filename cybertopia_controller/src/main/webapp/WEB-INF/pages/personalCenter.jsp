@@ -100,7 +100,7 @@
     <ul>
         <li><a href="#1"><i class="fa fa-user"></i> <em>个人信息</em></a></li>
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
-        <li><a href="#3" id="shoucang"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
+        <li><a href="#3" onclick="getArticleCollect()"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
         <li><a href="#5"><i class="fa fa-key"></i> <em>修改密码</em></a> </li>
     </ul>
@@ -213,6 +213,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="slide" id="3">
         <div class="content third-content">
@@ -334,7 +335,8 @@
         passwordReset();
     }
 
-    <%--    ///////文章收藏的ajax--%>
+    <%--    ///////文章发表的ajax--%>
+
     function getArticleHistory() {
         let userid = {
             "id":<%= user.getId()%>
@@ -399,7 +401,27 @@
         )
     }
     // 收藏文章的ajax
-    // function getArticleCollect()
+    function getArticleCollect() {
+        let userid = {
+            "id":<%= user.getId()%>
+        };
+        $.ajax(
+            {
+                url: 'articleLike.do',
+                type: 'GET',
+                datatype: "json",
+                async: true,
+                data: userid,
+
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            }
+        )
+    }
 
 
 </script>

@@ -274,7 +274,7 @@
                     <p>
                         大赛是创新创业人才培养计算机教育实践平台的具体举措，目的是提高大学生综合素质，具体落实、进一步推动高校本科面向21世纪的计算机教学的知识体系、课程体系、教学内容和教学……
                     </p>
-                    <a href="http://jsjds.ruc.edu.cn">+</a>
+                    <a href="http://jsjds.ruc.edu.cn" target="_blank">进入官网</a>
                 </li>
                 <li>
                     <h3>华为软件精英挑战赛</h3>
@@ -283,7 +283,7 @@
                     <p>
                         华为软件精英挑战赛是华为公司面向在校大学生举办的大型软件竞赛，从2015年至今已成功举办四届。在软件精英挑战赛的舞台上，我们相信您可以充分展示软件设计与编程的能力、享受……
                     </p>
-                    <a href="https://codecraft.huawei.com">+</a>
+                    <a href="https://codecraft.huawei.com" target="_blank">进入官网</a>
                 </li>
                 <li>
                     <h3>全国并行应用挑战赛</h3>
@@ -292,7 +292,7 @@
                     <p>
                         竞赛定位于中国的戈登贝尔奖，并于2014年开办“竞赛集训营”——为参赛者助跑，为从业者加速，共享平台，共赢未来。从第一届到第七届，PAC始终坚持初心，为寻找行业最佳应用、培养……
                     </p>
-                    <a href="http://www.pac-hpc.com">+</a>
+                    <a href="http://www.pac-hpc.com" target="_blank">进入官网</a>
                 </li>
             </ul>
         </div>
@@ -552,8 +552,8 @@
             <div class="line"></div>
         </div>
         <div class="homeLinkWrap">
-            <a href="http://www.chinasofti.com">中软国际</a><a href="http://www.github.com">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php">全国大学生C语言设计大赛</a>
-            <a href="http://www.saikr.com">赛氪</a>
+            <a href="http://www.chinasofti.com" target="_blank">中软国际</a><a href="http://www.github.com" target="_blank">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php" target="_blank">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn" target="_blank">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn" target="_blank">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php" target="_blank">全国大学生C语言设计大赛</a>
+            <a href="http://www.saikr.com" target="_blank">赛氪</a>
         </div>
     </div>
 </div>

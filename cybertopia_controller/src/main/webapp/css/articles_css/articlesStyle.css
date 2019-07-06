@@ -15,10 +15,11 @@ body{
 }
 .article_title{
     margin:8px;
-    border:1px solid #CCC;
-    box-shadow: 0px 0px 10px #ccc;
-    border-radius: 5px;
+    /*border:1px solid #CCC;*/
+    /*box-shadow: 0px 0px 10px #ccc;*/
+    /*border-radius: 5px;*/
     background-color: #FFF;
+    padding: 2px;
 }
 .article_title a{
     text-decoration: none;
@@ -28,7 +29,7 @@ body{
     margin:10px;
     padding:5px;
     font-size:25px;
-    color:blue;
+    /*color:blue;*/
     word-wrap:break-word;
 
 }
@@ -38,7 +39,7 @@ body{
     padding:5px;
 }
 .article_title span{
-    margin:10px;
+    /*margin:10px;*/
     font-size:14px;
 }
 .pub_time

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en" class="no-js">
     <%
     String path = request.getContextPath();
@@ -18,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
 
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/articlesStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/articles_css/markdown.css"/>
+
 
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery1.11.3.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>/js/main_js/jquery.bxslider.min.js"></script>
@@ -101,13 +104,15 @@
 <!--articleDetails-->
 <div class="article-feed">
     <div class="article_title article_detail_title">
-            <h1>${atticle.title}</h1>
+            <h1>${article.title}</h1>
             <p><span>${author_name}</span>
-                <span class="pub_time">发表于 ${article.date}</span>
+                <span class="pub_time">发表于
+                    <fmt:formatDate value="${article.date}" pattern="yyyy-MM-dd" />
+                </span>
                 <span class="read_number">浏览量 ${article.browseNum}</span>
             </p>
     </div>
-    <div class="article_content">
+    <div class="article_content markdown">
         ${article.content}
     </div>
     <div class="comment_bar">

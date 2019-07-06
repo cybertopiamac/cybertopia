@@ -35,7 +35,7 @@
         $(document).ready(function () {
             $("#input_title").focus(setDefault('#input_title'));
             $("#input_content").focus(setDefault('#input_content'));
-        })
+        });
 
         function publish() {
             //获得文章标题

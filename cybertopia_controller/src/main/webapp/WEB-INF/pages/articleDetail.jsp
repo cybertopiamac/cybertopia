@@ -53,8 +53,12 @@
 
 
             });
-        });
 
+            //评论框
+            $("#comment_textarea").focus(setDefault('#comment_textarea'));
+            //
+        });
+       //
         function send_like(playload) {
             $.ajax({
                 type: "POST",
@@ -90,6 +94,74 @@
             };
             send_like(dislike_article);
         }
+
+        function showCommentDiv(){
+             $("#publish_comment_div").show();
+        }
+        //
+        //处理评论
+        function comment(){
+
+            var check_blank = true;
+            var comment_content=$("#comment_textarea").val();
+           //评论为空
+            if (comment_content == "" && $.trim(comment_content).length == 0) {
+
+                $('#comment_textarea').css('color', 'red').val("评论内容不能为空");
+                check_blank=false;
+            }
+
+            if (check_blank != false) {
+                var r = confirm("确认发表吗?");
+                if (r == true) {
+                    //传入评论content
+                    //向评论表写入数据
+                    //post_comment();
+                    alert("发表成功！");
+                    $('#comment_textarea').val("");
+                    return true;
+                } else {
+                    //不提交表单申请
+                    alert("取消发表");
+                    return false;
+                }
+            }
+            return false;
+
+        }
+
+
+        function setDefault(input_id) {
+            return function () {
+                var color = $(input_id).css('color');
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    $(input_id).css('color', '#000').val("");
+                }
+            };
+        }
+
+
+        function post_comment() {
+            var comment = {
+                "articleId":$(article.id),
+                "content":$("#comment_textarea").val()
+            };
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                url: "<%=basePath%>/article/comment.do",
+                data: JSON.stringify(comment), // Note it is important
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function() {
+                    console.log("post error")
+                }
+            });
+        }
+
+
 
     </script>
 </head>
@@ -175,9 +247,19 @@
     <div class="comment_bar">
         <p class="comment_bar_p">
             <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
-            <button><span class="write_comment">&#9997;</span>发表评论</button>
+            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>
         </p>
     </div>
+    <!--评论框-->
+    <div  id="publish_comment_div" style="display: none">
+    <div class="article_content">
+        <textarea id="comment_textarea" style="width:100%;height:150px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
+    </div>
+    <div class="publish_bar">
+        <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
+    </div>
+    </div>
+    <!---->
 </div>
 </body>
 </html>

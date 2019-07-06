@@ -12,4 +12,5 @@ public interface IArticleDao {
     Article getArticleById(int id);
     int deleteArticleById(int id);
     int insertArticle(Article article);
+    int updateArticle(Article article);
 }

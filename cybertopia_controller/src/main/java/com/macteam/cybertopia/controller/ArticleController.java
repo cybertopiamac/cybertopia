@@ -49,8 +49,8 @@ public class ArticleController {
 
     @RequestMapping("/detail.do")
     public String articleDetail(Model model, int articleId){
-        System.out.println("文章id" + articleId);
         Article article = articleService.getArticleById(articleId);
+        articleService.increaseArticleBrowseNum(article,1);
         if(article != null){
             User author = userDao.getUserById(article.getAuthorId());
             model.addAttribute("article",article);

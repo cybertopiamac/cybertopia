@@ -26,4 +26,8 @@ public class IArticleServiceImpl implements IArticleService {
     public int insertArticle(Article article){
         return articleDao.insertArticle(article);
     }
+    public int increaseArticleBrowseNum(Article article, int delta){
+        article.setBrowseNum(article.getBrowseNum() + delta);
+        return articleDao.updateArticle(article);
+    }
 }

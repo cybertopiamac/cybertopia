@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.macteam.cybertopia.dao.IArticleDao" >
     <delete id="deleteArticleById" parameterType="int">
-        delete from article where `id` = #{id}
+        delete from article where id = #{id}
     </delete>
     <select id="getArticleListByRange" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
         select article.id,date,title, nickname as authorName,browseNum from article, user
@@ -10,10 +10,15 @@
         order by date desc limit #{skip}, #{limit}
     </select>
     <select id="getArticleById" resultType="Article" parameterType="int">
-        select * from article where `id` = #{id}
+        select * from article where id = #{id}
     </select>
     <insert id="insertArticle" parameterType="Article">
         insert into article(date,title,content,authorId)
         values (#{date},#{title},#{content},#{authorId})
     </insert>
+    <update id="updateArticle" parameterType="Article">
+        update article
+        set date=#{date},title=#{title},content=#{content},authorId=#{authorId},browseNum=#{browseNum}
+        where id = #{id}
+    </update>
 </mapper>

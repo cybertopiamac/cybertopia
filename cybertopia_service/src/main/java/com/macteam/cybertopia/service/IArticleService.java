@@ -11,4 +11,5 @@ public interface IArticleService {
     Article getArticleById(int id);
     int deleteArticleById(int id);
     int insertArticle(Article article);
+    int increaseArticleBrowseNum(Article article, int delta);
 }

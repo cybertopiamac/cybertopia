@@ -13,4 +13,6 @@ public interface ICompDao {
     List<Competition> getCompetitionsByType(@Param(value = "type") String type);
 
     List<Competition> getCompetitionsByKeywordsAndType(@Param(value = "keywords") String keywords, @Param(value = "type") String type);
+
+    Competition getCompetitionById(@Param(value = "id") int id);
 }

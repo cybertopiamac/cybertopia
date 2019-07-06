@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+    String toDetailBase = basePath+"main/compDetail.do?id=";
+%>
+
 <html lang="en" class="no-js">
 <html>
 <head>
@@ -429,47 +438,47 @@
             <c:forEach begin="1" end="${12}" var="pageNum" step="3">
                 <ul class="homeCamList clearfloat">
 <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
-    <c:if test="${(pageInfo.pageNum-1)*12+pageNum<=pageInfo.total}">
-    <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id-1}.png"/></a></div>
+                    <c:if test="${(pageInfo.pageNum-1)*12+pageNum<=pageInfo.total}">
+                        <li>
+                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum-1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id-1}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[pageNum-1].name}</a></h3>
+                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum-1].id}">${comps[pageNum-1].name}</a></h3>
                                 <h4>2019-${comps[pageNum-1].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[pageNum-1].description.substring(0,50)}${'...'}
                                 </p>
-                                <a class="more" href="">MORE+</a>
+                                <a class="more" href="<%=toDetailBase%>${comps[pageNum-1].id}">MORE+</a>
                             </div>
                         </li>
                     </c:if>
 <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
-    <c:if test="${(pageInfo.pageNum-1)*12+pageNum+1<=pageInfo.total}">
+                    <c:if test="${(pageInfo.pageNum-1)*12+pageNum+1<=pageInfo.total}">
                         <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id}.png"/></a></div>
+                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum-1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[pageNum].name}</a></h3>
+                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum-1].id}"${pageContext.request.contextPath}">${comps[pageNum].name}</a></h3>
                                 <h4>2019-${comps[pageNum].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[pageNum].description.substring(0,50)}${'...'}
                                 </p>
-                                <a class="more" href="">MORE+</a>
+                                <a class="more" href="<%=toDetailBase%>${comps[pageNum-1].id}">MORE+</a>
                             </div>
                         </li>
                     </c:if>
 <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
                     <c:if test="${(pageInfo.pageNum-1)*12+pageNum+2<=pageInfo.total}">
                         <li>
-                            <div class="pic"><a href=""><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id+1}.png"/></a></div>
+                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum-1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id+1}.png"/></a></div>
                             <div class="homeCamCont">
-                                <h3 class="single-line"><a href="">${comps[pageNum+1].name}</a></h3>
+                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum-1].id}">${comps[pageNum+1].name}</a></h3>
                                 <h4>2019-${comps[pageNum+1].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
                                         ${comps[pageNum+1].description.substring(0,50)}${'...'}
                                 </p>
-                                <a class="more" href="">MORE+</a>
+                                <a class="more" href="<%=basePath%>main/compDetail.do?id=${comps[pageNum-1].id}">MORE+</a>
                             </div>
                         </li>
                     </c:if>

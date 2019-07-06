@@ -21,4 +21,9 @@
         select * from competition where name like '%${keywords}%' and type like '%${type}%'
     </select>
 
+    <select id="getCompetitionById" parameterType="int"
+            resultType="com.macteam.cybertopia.entity.Competition">
+        select * from competition where id = #{id}
+    </select>
+
 </mapper>

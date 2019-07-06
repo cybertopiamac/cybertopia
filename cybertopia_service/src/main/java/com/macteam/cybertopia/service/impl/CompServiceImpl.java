@@ -40,4 +40,8 @@ public class CompServiceImpl implements ICompService {
             return compDao.getCompetitionsByKeywordsAndType(keywords,type);
         }
     }
+
+    public Competition getCompetitionById(int id) {
+        return compDao.getCompetitionById(id);
+    }
 }

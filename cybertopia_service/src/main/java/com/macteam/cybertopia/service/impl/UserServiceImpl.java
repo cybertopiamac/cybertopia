@@ -33,6 +33,8 @@ public class UserServiceImpl implements IUserService {
     public int updateUserInfo(User user) {
         return userDao.updateUserInfo(user);
 
+    }
+
     public User getCurrentUser(HttpServletRequest request){
         HttpSession session = request.getSession();
         Object userId = session.getAttribute("user");

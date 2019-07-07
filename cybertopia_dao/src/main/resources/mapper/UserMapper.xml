@@ -32,7 +32,10 @@
     </insert>
 
     <update id="updateUserInfo" parameterType="User">
-        update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}, description=#{desc}, picture=#{picture}
+        update user set sex=#{sex}, school=#{school},
+         major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone},
+         description=#{description}, picture=#{picture}
+         where id=#{id}
     </update>
 
     <update id="updateUserPassword">

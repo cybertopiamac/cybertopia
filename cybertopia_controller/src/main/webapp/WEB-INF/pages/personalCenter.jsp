@@ -7,44 +7,6 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
     User user = (User) session.getAttribute("user");
-    //性别
-    String sex = user.showSex();
-    String sex_a = null;
-    if (sex.equals("男")) {
-        sex_a = "女";
-    } else if (sex.equals("女")) {
-        sex_a = "男";
-    } else {
-        sex = "男";
-        sex_a = "女";
-    }
-    //年级
-    String grade_1 = user.showGrade();
-    String grade_2 = null;
-    String grade_3 = null;
-    String grade_4 = null;
-    if (grade_1.equals("大一")) {
-        grade_2 = "大二";
-        grade_3 = "大三";
-        grade_4 = "大四";
-    } else if (grade_1.equals("大二")) {
-        grade_2 = "大一";
-        grade_3 = "大三";
-        grade_4 = "大四";
-    } else if (grade_1.equals("大三")) {
-        grade_2 = "大一";
-        grade_3 = "大二";
-        grade_4 = "大四";
-    } else if (grade_1.equals("大四")) {
-        grade_2 = "大一";
-        grade_3 = "大二";
-        grade_4 = "大三";
-    } else {
-        grade_1 = "大一";
-        grade_2 = "大二";
-        grade_3 = "大三";
-        grade_4 = "大四";
-    }
 %>
 <html>
 <head>
@@ -113,7 +75,7 @@
             <form action="">
                 <div class="container-fluid">
                     <div class="col-md-3">
-                        <div class="author-image">
+                        <div class="author-image" style="height: 150px">
                             <img id="change_icon" src="<%=basePath%>/images/head_icon/<%=user.getPicture()%>">
                             <a class="file" id="show_word" style="visibility: hidden">
                                 <center>
@@ -133,14 +95,9 @@
                                     <p><em>性别:</em>
                                         <select class="text-style" id="sex-select" disabled="true"
                                                 style="background-color: transparent">
-                                            <%if (user.showSex().equals("未知")) {%>
-                                            <option><%=user.showSex()%>
-                                            </option>
-                                            <%}%>
-                                            <option><%=sex%>
-                                            </option>
-                                            <option><%=sex_a%>
-                                            </option>
+                                            <option<%if(user.getSex()==0){%> selected<%}%>>女</option>
+                                            <option<%if(user.getSex()==1){%> selected<%}%>>男</option>
+                                            <option<%if(user.getSex()==2){%> selected<%}%>>未知</option>
                                         </select>
                                     </p>
                                 </td>
@@ -154,18 +111,16 @@
                                     <p><em>年级:</em>
                                         <select class="text-style" id="grade-select" disabled="true"
                                                 style="background-color: transparent">
-                                            <%if (user.showGrade().equals("未知")) {%>
-                                            <option><%=user.showGrade()%>
-                                            </option>
-                                            <%}%>
-                                            <option><%=grade_1%>
-                                            </option>
-                                            <option><%=grade_2%>
-                                            </option>
-                                            <option><%=grade_3%>
-                                            </option>
-                                            <option><%=grade_4%>
-                                            </option>
+                                            <option<%if(user.getGrade()==0){%> selected<%}%>>未知</option>
+                                            <option<%if(user.getGrade()==1){%> selected<%}%>>大一</option>
+                                            <option<%if(user.getGrade()==2){%> selected<%}%>>大二</option>
+                                            <option<%if(user.getGrade()==3){%> selected<%}%>>大三</option>
+                                            <option<%if(user.getGrade()==4){%> selected<%}%>>大四</option>
+                                            <option<%if(user.getGrade()==5){%> selected<%}%>>研一</option>
+                                            <option<%if(user.getGrade()==6){%> selected<%}%>>研二</option>
+                                            <option<%if(user.getGrade()==7){%> selected<%}%>>研三</option>
+                                            <option<%if(user.getGrade()==8){%> selected<%}%>>博一</option>
+                                            <option<%if(user.getGrade()==9){%> selected<%}%>>博二</option>
                                         </select>
                                     </p>
                                 </td>
@@ -183,13 +138,13 @@
                                         <em>个人简介:</em>
                                         <textarea class="text-style" id="desc-input"
                                                   style="vertical-align:top;resize:none;" rows="3" cols="50"
-                                                  readonly="readonly"><%=user.getDescription()%></textarea>
+                                                  disabled="true"><%=user.getDescription()%></textarea>
                                     </p>
                                 </td>
                             </tr>
                         </table>
-                        <div class="fb-btn"><input type="button" value="编辑" onclick="changeState()"></div>
-                        <div class="fb-btn"><input type="button" value="确认修改"></div>
+                        <div class="fb-btn"><input type="button" id="isEdit" value="编辑" onclick="changeState()"></div>
+                        <div class="fb-btn"><input type="button" value="确认修改" onclick="changeInfo()"></div>
                     </div>
                 </div>
             </form>
@@ -269,8 +224,8 @@
             <div class="container-fluid">
                 <div class="col-md-6">
                     <div class="left-content">
-                        <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a>
-                        <p>用户名：评论.....</p>
+                        <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a><br>
+                        <p style="float: left">用户名：评论.....</p><p style="float: right">日期：xx-xx-xx</p>
                     </div>
                 </div>
             </div>
@@ -316,8 +271,6 @@
 
 
 <script type="text/javascript">
-
-
     //修改密码
     function passwordChange() {
         var oldPass = document.getElementById("oldPass").value;

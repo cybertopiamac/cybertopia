@@ -7,4 +7,5 @@ public interface IUserService {
 
     void insertUser(User user);
 
+    int updateUserInfo(User user);
 }

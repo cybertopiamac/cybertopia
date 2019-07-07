@@ -5,9 +5,12 @@ import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Question;
 import com.macteam.cybertopia.entity.Answer;
 import com.macteam.cybertopia.entity.User;
+import com.macteam.cybertopia.pojo.AnswerInfo;
 import com.macteam.cybertopia.pojo.QuestionTitle;
 import com.macteam.cybertopia.service.IQuestionService;
 import com.macteam.cybertopia.service.IQuestionService;
+import com.macteam.cybertopia.service.IUserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,15 @@ public class QuestionController {
     private IQuestionService questionService;
 
     @Autowired
+    private IUserService userService;
+
+    @Autowired
     private IUserDao userDao;
+
+    @RequestMapping("/all.do")
+    public String articleList(){
+        return "questionList";
+    }
 
     @RequestMapping("/list.do")
     public String questionListPage(Model model, int pageIndex){
@@ -52,6 +63,12 @@ public class QuestionController {
             //分开查询文章和作者
             model.addAttribute("question",question);
             model.addAttribute("author_name",author.getNickname());
+            User user = userService.getCurrentUser(request);
+            int userStatus = 0;
+            if(user != null){
+                userStatus = 1;
+            }
+            model.addAttribute("userStatus",userStatus);
         }
         return "questionDetail";
     }
@@ -93,7 +110,7 @@ public class QuestionController {
     @RequestMapping(value = "/answer.do", method = RequestMethod.POST)
     @ResponseBody
     public int questionAnswer(HttpServletRequest request, Answer answer){
-        User user = userLoginController.getCurrentUser(request);
+        User user = userService.getCurrentUser(request);
         if (user != null) {
             answer.setUserId(user.getId());
             answer.setDate(new Date(System.currentTimeMillis()));
@@ -101,5 +118,12 @@ public class QuestionController {
         }else{
             return 0;
         }
+    }
+
+    @RequestMapping(value = "/comment.do", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AnswerInfo> questionAnswer(HttpServletRequest request, @Param("questionId") int questionId){
+        List<AnswerInfo> answers= questionService.getAnswerByQuestionId(questionId);
+        return answers;
     }
 }

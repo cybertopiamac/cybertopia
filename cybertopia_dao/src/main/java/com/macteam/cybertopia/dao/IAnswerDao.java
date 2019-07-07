@@ -1,6 +1,7 @@
 package com.macteam.cybertopia.dao;
 
 import com.macteam.cybertopia.entity.Answer;
+import com.macteam.cybertopia.pojo.AnswerInfo;
 
 import java.util.List;
 
@@ -9,6 +10,6 @@ public interface IAnswerDao {
 
     List<Answer> getAnswerByUserId(int userId);
 
-    List<Answer> getAnswerByQuestionId(int questionId);
+    List<AnswerInfo> getAnswerByQuestionId(int questionId);
 }
 

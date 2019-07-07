@@ -6,6 +6,9 @@ import com.macteam.cybertopia.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements IUserService {
     @Autowired
@@ -29,5 +32,20 @@ public class UserServiceImpl implements IUserService {
 
     public int updateUserInfo(User user) {
         return userDao.updateUserInfo(user);
+
+    public User getCurrentUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Object userId = session.getAttribute("user");
+        if(userId != null){
+
+            //应对直接放user的“设计”
+            if(userId instanceof User)
+                return (User)userId;
+
+            User user = userDao.getUserById((Integer)userId);
+            return user;
+        }
+        else
+            return null;
     }
 }

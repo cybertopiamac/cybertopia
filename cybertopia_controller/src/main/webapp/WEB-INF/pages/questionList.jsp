@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>文章列表</title>
+    <title>问题列表</title>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/public.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/jquery.bxslider.css"/>
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/style.css"/>
@@ -105,11 +105,11 @@
             <span class="loader-ellips__dot"></span>
             <span class="loader-ellips__dot"></span>
         </div>
-        <p class="scroller-status__message infinite-scroll-last" style="text-align: center">没有文章了</p>
-        <p class="scroller-status__message infinite-scroll-error" style="text-align: center">文章列表加载错误</p>
+        <p class="scroller-status__message infinite-scroll-last" style="text-align: center">没有问题了</p>
+        <p class="scroller-status__message infinite-scroll-error" style="text-align: center">问题列表加载错误</p>
     </div>
     <p class="pagination">
-        <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=0">Next page</a>
+        <a class="pagination__next" href="<%=basePath%>question/list.do?pageIndex=0">Next page</a>
     </p>
     <script>
         var elem = document.querySelector('.article-feed');

@@ -10,6 +10,7 @@ import com.macteam.cybertopia.pojo.CommentInfo;
 import com.macteam.cybertopia.service.IArticleService;
 import com.macteam.cybertopia.service.IUserService;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,7 @@ public class ArticleController {
     @Autowired
     private IUserDao userDao;
 
-    @RequestMapping("/all.do")
+    @RequestMapping(value = "/all.do",method = RequestMethod.GET)
     public String articleList(){
         return "articleList";
     }
@@ -51,6 +52,29 @@ public class ArticleController {
         model.addAttribute("pageIndex", pageIndex);
         return "articleListItem";
     }
+
+    // todo: 只支持英文搜索，可改进用js编码后的url
+    @RequestMapping(value = "/search.do", method = RequestMethod.POST)
+    public String articleSearchList(Model model, @Param("keyword") String keyword ){
+        model.addAttribute("keyword",keyword);
+        return "articleList";
+    }
+
+    @RequestMapping(value = "/search.do", method = RequestMethod.GET)
+    public String articleSearchListItem(Model model, String keyword, int pageIndex){
+        int default_pack_size = 10;
+        System.out.println("kkkkey"+keyword);
+        List<ArticleTitle> article_titles = articleService.getArticleListByKeywordRange(
+                keyword,pageIndex*default_pack_size, default_pack_size);
+        System.out.println(article_titles);
+        model.addAttribute("article_titles",article_titles);
+        boolean haveNext = article_titles.size() == default_pack_size;
+        model.addAttribute("haveNext",haveNext);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("keyword",keyword);
+        return "articleListItem";
+    }
+
 
     @RequestMapping("/detail.do")
     public String articleDetail(HttpServletRequest request, Model model, int articleId){
@@ -149,4 +173,5 @@ public class ArticleController {
         List<CommentInfo> comments= articleService.getCommentByArticleId(articleId);
         return comments;
     }
+
 }

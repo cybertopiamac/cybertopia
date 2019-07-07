@@ -29,6 +29,34 @@
 
     <script src="<%=basePath%>js/main_js/jquery1.11.3.min.js"></script>
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#input_key").focus(setDefault('#input_key'));
+        });
+
+        function isSearch(){
+            //获取输入内容
+            var input=$('#input_key').val();
+            if (input == "" && $.trim(input).length == 0) {
+                $('#input_key').css('color', 'red').val("搜索内容不能为空");
+                return false;
+            }
+            else{
+                console.log(input);
+                return true;
+            }
+        }
+        function setDefault(input_id) {
+            return function () {
+                var color = $(input_id).css('color');
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    $(input_id).css('color', '#000').val("");
+                }
+            };
+        }
+    </script>
 </head>
 
 <body>
@@ -113,7 +141,24 @@
 <!--文章列表-->
 
 <div class="article-list">
+
     <div class="article-feed">
+
+        <!--search button-->
+        <div style="text-align:right;margin:5px;">
+           <form method="post" action="<%=basePath%>article/search.do" onsubmit="return isSearch()">
+
+            <input type="text" name="keyword" id="input_key" placeholder="按关键字搜索"
+                   onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   style="background-color:#FFF;border-radius:25px;width:50%;height:30px;margin:0px;padding:20px;border:1px solid #CCC;outline:none;font-size:20px;" >
+            <button type="submit" id="search_article_button"  style="background-color: #66CCCC;color:#FFF;font-size:20px;border:1px solid #66CCCC;padding:5px;border-radius:25px">搜索文章</button>
+
+           </form>
+        </div>
+        <!---->
+
     </div>
     <div class="scroller-status">
         <div class="loader-ellips infinite-scroll-request">
@@ -126,7 +171,12 @@
         <p class="scroller-status__message infinite-scroll-error" style="text-align: center">文章列表加载错误</p>
     </div>
     <p class="pagination">
-        <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=0">Next page</a>
+        <c:if test="${not empty keyword}">
+            <a class="pagination__next" href="<%=basePath%>/article/search.do?keyword=${keyword}&pageIndex=0">下一页</a>
+        </c:if>
+        <c:if test="${empty keyword}">
+            <a class="pagination__next" href="<%=basePath%>/article/list.do?pageIndex=0">下一页</a>
+        </c:if>
     </p>
     <script>
         var elem = document.querySelector('.article-feed');

@@ -25,7 +25,12 @@
 </div>
 <c:if test="${haveNext == true}">
     <p class="pagination">
-        <a class="pagination__next" href="<%=basePath%>question/list.do?pageIndex=${pageIndex+1}">下一页</a>
+        <c:if test="${not empty keyword}">
+            <a class="pagination__next" href="<%=basePath%>/question/search.do?keyword=${keyword}&pageIndex=${pageIndex+1}">下一页</a>
+        </c:if>
+        <c:if test="${empty keyword}">
+            <a class="pagination__next" href="<%=basePath%>/question/list.do?pageIndex=${pageIndex+1}">下一页</a>
+        </c:if>
     </p>
 </c:if>
 </body>

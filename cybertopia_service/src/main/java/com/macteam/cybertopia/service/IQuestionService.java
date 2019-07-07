@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IQuestionService {
     List<QuestionTitle> getQuestionListByRange(int skip, int limit);
+    List<QuestionTitle> getQuestionListByKeywordRange(String keyword, int skip, int limit);
     //    List<Question> getQuestionListByKeyword(String keyword);
     Question getQuestionById(int id);
     int deleteQuestionById(int id);

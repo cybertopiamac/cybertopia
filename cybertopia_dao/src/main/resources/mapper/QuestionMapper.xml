@@ -21,4 +21,9 @@
         set date=#{date},title=#{title},content=#{content},authorId=#{authorId},browseNum=#{browseNum}
         where id = #{id}
     </update>
+    <select id="getQuestionListByKeywordRange" resultType="com.macteam.cybertopia.pojo.QuestionTitle">
+        select question.id,date,title, nickname as authorName,browseNum from question, user
+        where question.authorId = user.id and question.title like CONCAT('%',#{keyword},'%')
+        order by date desc limit #{skip}, #{limit}
+    </select>
 </mapper>

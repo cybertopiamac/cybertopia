@@ -59,4 +59,7 @@ public class ArticleServiceImpl implements IArticleService {
     public int deleteArticleCollection(int userId, int articleId){
         return collectionDao.deleteArticleCollection(userId,articleId);
     }
+    public List<ArticleTitle> getArticleListByKeywordRange(String keyword, int skip, int limit){
+        return articleDao.getArticleListByKeywordRange(keyword,skip,limit);
+    }
 }

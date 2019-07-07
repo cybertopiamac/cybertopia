@@ -18,6 +18,6 @@
     </select>
 
     <select id="getArticleCollectionByUserId" parameterType="int" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
-        select * from articlecollect inner join article on articlecollect.`articleId`=article.`id` where userid = #{id}
+        select articlecollect.`articleId` as id , article.`date`,article.`title`, article.`browseNum`  from articlecollect inner join article on articlecollect.`articleId`=article.`id` where userid = #{id}
     </select>
 </mapper>

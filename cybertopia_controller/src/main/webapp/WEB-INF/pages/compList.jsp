@@ -6,7 +6,8 @@
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
-    String toDetailBase = basePath+"main/compDetail.do?id=";
+    String toDetailBase = basePath+"comp/compDetail.do?id=";
+
 %>
 
 <html lang="en" class="no-js">
@@ -309,10 +310,10 @@
                             <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum-1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum-1].id}.png"/></a></div>
                             <div class="homeCamCont">
                                 <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum-1].id}">${comps[pageNum-1].name}</a></h3>
-                                <h4>2019-${comps[pageNum].date}</h4>
+                                <h4>2019-${comps[pageNum-1].date}</h4>
                                 <div class="line"></div>
                                 <p class="multi-line">
-                                        ${comps[pageNum].description.substring(0,50)}${'...'}
+                                        ${comps[pageNum-1].description.substring(0,50)}${'...'}
                                 </p>
                                 <a class="more" href="<%=toDetailBase%>${comps[pageNum-1].id}">MORE+</a>
                             </div>

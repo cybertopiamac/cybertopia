@@ -149,6 +149,7 @@
     font-size: 85%;
     line-height: 1.45;
     border-radius: 3px;
+    background-color: rgba(0,0,0,0.04);
 }
 .markdown pre code {
     max-width: initial;
@@ -161,6 +162,7 @@
     white-space: pre;
     border: 0;
     border-radius: 3px;
+    /*background-color: rgba(0,0,0,0.04);*/
     background-color: transparent;
 }
 .markdown pre code:before,

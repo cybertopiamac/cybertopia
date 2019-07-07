@@ -75,36 +75,35 @@ public class QuestionController {
 
     @RequestMapping("/write.do")
     public String questionWrite(HttpServletRequest request){
-//        User user = userLoginController.getCurrentUser(request);
-//        if(user != null)
-//            return "questionWrite";
-//        else
-//            return "login";
+        User user = userService.getCurrentUser(request);
+        if(user != null)
+            return "questionWrite";
+        else
+            return "login";
 
         // 测试用代码
-        return "questionWrite";
+//        return "questionWrite";
     }
 
     @RequestMapping(value = "/post.do", method= RequestMethod.POST)
     @ResponseBody
     public int questionPost(HttpServletRequest request, @RequestBody Question question){
-//        User user = userLoginController.getCurrentUser(request);
-//        if(user != null) {
-//            question.setAuthorId(user.getId());
+        User user = userService.getCurrentUser(request);
+        if(user != null) {
+            question.setAuthorId(user.getId());
 //            question.setAuthorId(1);
-//            question.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//            questionService.insertQuestion(question);
-//            return "redirect:/question/all.do";
-//        }
-//        else
-//        return "login";
+            question.setDate(new Date(System.currentTimeMillis()));
+            int result = questionService.insertQuestion(question);
+            return result;
+        }
+        return 0;
 
         // 测试用代码
-        question.setAuthorId(1);
-        question.setDate(new Date(System.currentTimeMillis()));
-        int result = questionService.insertQuestion(question);
-        System.out.println(question.toString());
-        return result;
+//        question.setAuthorId(1);
+//        question.setDate(new Date(System.currentTimeMillis()));
+//        int result = questionService.insertQuestion(question);
+//        System.out.println(question.toString());
+//        return result;
     }
 
     @RequestMapping(value = "/answer.do", method = RequestMethod.POST)

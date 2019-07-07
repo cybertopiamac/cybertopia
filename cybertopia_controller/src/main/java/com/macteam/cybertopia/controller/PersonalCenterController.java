@@ -6,6 +6,7 @@ import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.CommentSimplify;
 import com.macteam.cybertopia.service.IPersonalCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class PersonalCenterController {
 
         return "null";
     }
-
+    //整合文章和竞赛收藏的类
     class TwoList{
         public int isArticlesEmpty;
         public int isCompetionEmpty;
@@ -49,17 +50,17 @@ public class PersonalCenterController {
             competitions = competition;
         }
     }
-
+    //收藏的文章
     public List<ArticleTitle> getAticleCollect(int id){
         List<ArticleTitle> articles = personalCenterService.getArticleCollectById(id);
         return articles;
     }
-
+    //收藏的竞赛
     public List<Competition> getCompetitionCollect(int id){
         List<Competition> competitions = personalCenterService.getCompetitionById(id);
         return competitions;
     }
-
+    //得到文章和竞赛收藏
     @RequestMapping(value ="/myLike")//获取收藏
     @ResponseBody
     public TwoList myLike(@RequestParam("id") int id){
@@ -74,23 +75,24 @@ public class PersonalCenterController {
             competitionStatus = 0;
         }
         TwoList result = new TwoList(articleStatus,competitionStatus, article_titles, competitions);
-        System.out.println(JSON.toJSONString(result));
+//        System.out.println(JSON.toJSONString(result));
         return result;
     }
 
 
-    @RequestMapping(value ="/articleHistory")//获取发表的文章
+    @RequestMapping("/articleHistory")//获取发表的文章
     @ResponseBody
     public String getArticlePublish(@RequestParam("id") int id){
         List<ArticleTitle> articles = personalCenterService.getArticlePublishById(id);
         return JSON.toJSONString(articles);
     }
 
-
+    //历史评论
     @RequestMapping("/commentHistory")
     @ResponseBody
     public String getCommentHistory(@RequestParam("id") int id){
-        List<Comment> comments = personalCenterService.getCommentHistoryById(id);
+        List<CommentSimplify> comments = personalCenterService.getCommentHistoryById(id);
+//        System.out.println(JSON.toJSONString(comments));
         return JSON.toJSONString(comments);
     }
 

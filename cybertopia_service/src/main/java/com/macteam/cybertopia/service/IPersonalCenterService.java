@@ -1,9 +1,9 @@
 package com.macteam.cybertopia.service;
 
-import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.CommentSimplify;
 
 import java.util.List;
 
@@ -19,5 +19,5 @@ public interface IPersonalCenterService {
 
     List<ArticleTitle> getArticlePublishById(int id);
 
-    List<Comment> getCommentHistoryById(int id);
+    List<CommentSimplify> getCommentHistoryById(int id);
 }

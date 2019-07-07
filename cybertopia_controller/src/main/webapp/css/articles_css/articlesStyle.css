@@ -101,6 +101,7 @@ body{
     color:#CCC;
 }
 .like_click .star{
+    vertical-align: middle;
     color:rgb(255,0,0);
     font-size:25px;
     cursor: pointer;
@@ -214,6 +215,7 @@ textarea{
 .comment_detail{
     border-bottom:1px solid #CCC;
     background-color: #FFFF;
+    padding: 5px;
 
 }
 .comment_detail h3{

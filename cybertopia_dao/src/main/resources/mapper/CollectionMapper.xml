@@ -6,11 +6,11 @@
     </insert>
 
     <select id="getArticleCollectStatus" resultType="int">
-        select count(*) from articlecollect where userId = #{userId}, articleId = #{articleId}
+        select count(*) from articlecollect where userId = #{userId} and articleId = #{articleId}
     </select>
 
     <delete id="deleteArticleCollection">
-        delete from articlecollect where userId = #{userId}, articleId = #{articleId}
+        delete from articlecollect where userId = #{userId} and articleId = #{articleId}
     </delete>
 
     <select id="getCompetitionCollectionByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition">

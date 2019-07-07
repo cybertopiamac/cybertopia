@@ -35,47 +35,60 @@
 
             function checkLikeStatus(){
                 //获得当前文章的收藏状态
-              var collectionStatus=${collctionStatus};
+                var collectionStatus=${collctionStatus};
 
-              //alert(collectionStatus);
                 //已收藏，设置颜色
-              if(collectionStatus>0){
-                 $("#like_star").css("color",'red');
-              }
-
+                if(collectionStatus > 0){
+                    // $("#likebutt").toggleClass("like_click");
+                    $("#likebutt").attr("class","like_click");
+                }
             }
             checkLikeStatus();
 
 
+            $("#likebutt").click(function(){
 
-            $(".like").click(function(){
-                $(this).toggleClass("like_click");
+                // 检查用户登录状态
+                checkUserStatus();
 
-                //获得点击后的颜色
-                var color=$('#like_star').css('color');
-                //alert(color);
                 //点击收藏
-                if (color == 'rgb(255, 0, 0)' || color == 'red') {
-                    //传入文章id和用户id,写入文章收藏表
-                    like_article();
-                    alert("已收藏");
-                }
-                //取消了收藏
-                else{
+                if (this.className == "like_click") {
                     //删除已传入的文章
                     delete_like();
-                    alert("已取消收藏");
+                    // $(this).toggleClass("like");
+                    $(this).attr("class","like");
+                    //取消了收藏
                 }
-
-
-
+                else{
+                    //传入文章id和用户id,写入文章收藏表
+                    like_article();
+                    // $(this).toggleClass("like_click");
+                    $(this).attr("class","like_click");
+                }
             });
 
+            function setDefault(input_id) {
+                return function () {
+                    var color = $(input_id).css('color');
+                    if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                        $(input_id).css('color', '#000').val("");
+                    }
+                };
+            }
             //评论框
             $("#comment_textarea").focus(setDefault('#comment_textarea'));
             //
         });
        //
+
+        function checkUserStatus() {
+            if (${userStatus} == 0 ) {
+                window.location = "<%=basePath%>user/toLogin.do";
+                // console.log("无用户");
+                return;
+            }
+        }
+
         function send_like(playload) {
             $.ajax({
                 type: "POST",
@@ -115,7 +128,7 @@
         //处理评论
 
         function comment(){
-
+            checkUserStatus();
             var check_blank = true;
             var comment_content=$("#comment_textarea").val();
            //评论为空
@@ -130,8 +143,7 @@
                 if (r == true) {
                     //传入评论content
                     //向评论表写入数据
-                    //post_comment();
-                    //
+                    post_comment();
                     alert("发表成功！");
                     $('#comment_textarea').val("");
                     return true;
@@ -145,21 +157,9 @@
 
         }
 
-
-
-        function setDefault(input_id) {
-            return function () {
-                var color = $(input_id).css('color');
-                if (color == 'rgb(255, 0, 0)' || color == 'red') {
-                    $(input_id).css('color', '#000').val("");
-                }
-            };
-        }
-
-
         function post_comment() {
             var comment = {
-                "articleId":$(article.id),
+                "articleId":${article.id},
                 "content":$("#comment_textarea").val()
             };
             $.ajax({
@@ -177,8 +177,8 @@
             });
         }
 
-        function getAllComment(){
-            /*$(".all_comment_button").attr("disabled",true);//不可点击按钮*/
+        function get_all_comment(){
+            $(".all_comment_button").attr("disabled",true);//不可点击按钮
               var content={
                   "articleId":${article.id}
               };
@@ -189,13 +189,14 @@
                   data: content,
                   success: function (data) {
                       console.log(data);
-                      if(true){
+                      if(data.length > 0){
 
                           //执行显示所有评论的函数
-                          show_all_comment_full();
+                          show_all_comment_full(data);
                       }
                       else{
                           //评论区显示空
+                          console.log("kkkkkk empty")
                           show_all_comment_empty();
                       }
 
@@ -203,29 +204,41 @@
                   error: function() {
                       console.log("like error");
                   }
-
-
               });
         }
 
-        function show_all_comment_full() {
-            //动态添加div,每条评论占一个div
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        //动态添加div,每条评论占一个div
+        function insertComment(comment) {
+            var brother=$("#comments");
+            var div_content=$("<div class='comment_detail'></div>");
+            var comment_data=$("<h3>"+comment.userName+"</h3>" +
+                "<p class='content_p'>"+comment.content+"</p>" +
+                "<p class='time_p'>发表于&nbsp;<span>"+formatDate(comment.date)+"</span></p>");
+            div_content.html(comment_data);
+
+            //插入节点
+            brother.append(div_content);
+        }
+
+        function show_all_comment_full(data) {
             //显示评论区
 
-
-            var brother=$("#comment_title");
-
-            //测试添加数据
-              <c:forEach var="item" begin="1" end="5">
-                 //创建节点
-                var div_content=$("<div class='comment_detail'></div>");
-                var data=$("<h3>用户昵称</h3><p class='content_p'>评论内容</p><p class='time_p'>发表于&nbsp;<span>时间</span></p>");
-                div_content.html(data);
-
-                //插入节点
-                brother.after(div_content);
-                brother=div_content;
-            </c:forEach>
+            //添加数据
+            data.forEach(function (elem) {
+                insertComment(elem);
+            });
 
             $(".article_comment").show();
 
@@ -235,10 +248,8 @@
             //动态添加div,每条评论占一个div
             //显示评论区
 
-
-            var div_content=$("<div class='comment_detail'></div>");
-            $(".comment_detail").html("暂无评论...");
-            $("#comment-title").after($(".comment_detail"));
+            var div_content=$("<div class='comment_detail' style='text-align: center'>暂无评论...</div>");
+            $("#comments").append(div_content);
 
             /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
 
@@ -247,15 +258,13 @@
         }
 
 
-        function hiddenAllComment(){
+        function hidden_all_comment(){
            //隐藏评论区
 
-            /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
+            $(".all_comment_button").attr("disabled",false);//可点击按钮
+            $("#comments").empty();
             $(".article_comment").hide();
         }
-
-
-
 
 
     </script>
@@ -343,10 +352,10 @@
     <div class="comment_bar">
         <span class="comment_bar_item">
             <!--<button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>&nbsp;|-->
-        <button type="button" class="all_comment_button" onclick="getAllComment()"><span class="write_comment">&#9786;</span>显示所有评论</button>&nbsp;&nbsp;|
+        <button type="button" class="all_comment_button" onclick="get_all_comment()"><span class="write_comment">&#9786;</span>显示所有评论</button>&nbsp;&nbsp;|
 
-            <button type="button" class="hidden_comment_button" onclick="hiddenAllComment()"><span class="write_comment">&#9785;</span>隐藏所有评论</button>&nbsp;&nbsp;|
-            <button type="button" class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>
+            <button type="button" class="hidden_comment_button" onclick="hidden_all_comment()"><span class="write_comment">&#9785;</span>隐藏所有评论</button>&nbsp;&nbsp;|
+            <button type="button" id="likebutt" class="like"><span class="star" >&#9733;</span>收藏&nbsp;</button>
         </span>
     </div>
 
@@ -365,10 +374,11 @@
 
      <div class="article_comment">
 
-        <div id="comment_title" style="background-color:#669999;color:#FFF;font-size:16px;height:40px;line-height: 40px">
+         <div id="comment_title" style="background-color:#669999;color:#FFF;font-size:16px;height:40px;line-height: 40px">
              <span style="vertical-align: middle;height:40px;padding:5px;">所有评论</span>
          </div>
 
+         <div id="comments"></div>
         <!-- <div class="comment_detail">
              <h3>用户名</h3>
              <p class="content_p">评论内容评论内容</p>

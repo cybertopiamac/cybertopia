@@ -8,6 +8,7 @@ import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
 import com.macteam.cybertopia.pojo.CommentInfo;
 import com.macteam.cybertopia.service.IArticleService;
+import com.macteam.cybertopia.service.IUserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class ArticleController {
 
     @Autowired
     private UserLoginController userLoginController;
+
+    @Autowired
+    private IUserService userService;
 
     @Autowired
     private IUserDao userDao;
@@ -60,12 +64,15 @@ public class ArticleController {
             model.addAttribute("author_name",author.getNickname());
 
             // 查询是否已经收藏，0为未收藏，大于0为已收藏
-            User user = userLoginController.getCurrentUser(request);
+            User user = userService.getCurrentUser(request);
             int collctionStatus = 0;
+            int userStatus = 0;
             if(user != null){
                 collctionStatus = articleService.getArticleCollectStatus(user.getId(),article.getId());
+                userStatus = 1;
             }
             model.addAttribute("collctionStatus",collctionStatus);
+            model.addAttribute("userStatus",userStatus);
         }
         return "articleDetail";
     }
@@ -110,7 +117,7 @@ public class ArticleController {
     public int articleLikeHandler(HttpServletRequest request,
                                   @RequestParam("articleId") int articleId,
                                   @RequestParam("action") String action){
-        User user = userLoginController.getCurrentUser(request);
+        User user = userService.getCurrentUser(request);
         // action分两种情况，set收藏，unset取消收藏
         if(user != null) {
             if (action.equals("set")) {
@@ -124,8 +131,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/comment.do", method = RequestMethod.POST)
     @ResponseBody
-    public int articleComment(HttpServletRequest request, Comment comment){
-        User user = userLoginController.getCurrentUser(request);
+    public int articleComment(HttpServletRequest request, @RequestBody Comment comment){
+        User user = userService.getCurrentUser(request);
         if (user != null) {
             comment.setUserId(user.getId());
             comment.setDate(new Date(System.currentTimeMillis()));

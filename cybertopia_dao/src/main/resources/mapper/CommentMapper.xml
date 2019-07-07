@@ -11,7 +11,7 @@
     </insert>
 
     <select id="getCommentByArticleId" resultType="com.macteam.cybertopia.pojo.CommentInfo">
-        select comment.id, comment.comment, comment.date, comment.articleId, user.nickname as userName
+        select comment.id, comment.content, comment.date, comment.articleId, user.nickname as userName
         from comment, user
         where comment.userId = user.id and comment.articleId = #{articleId}
     </select>

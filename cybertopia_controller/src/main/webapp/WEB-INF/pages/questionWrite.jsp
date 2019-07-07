@@ -100,12 +100,12 @@
                 url: "<%=basePath%>question/post.do",
                 data: JSON.stringify(article), // Note it is important
                 success: function (data) {
-                    console.log(data);
+                    /*console.log(data);*/
                    alert("发表成功！");
                     window.location = "<%=basePath%>question/all.do";
                 },
                 error: function() {
-                    console.log("post error");
+                    /*console.log("post error");*/
                     alert("发表失败！");
                 }
             });

@@ -73,7 +73,7 @@
                     //传入评论content
                     //向评论表写入数据
                     post_comment();
-                    alert("发表成功！");
+                    /*alert("发表成功！");*/
                     $('#comment_textarea').val("");
                     return true;
                 } else {
@@ -98,10 +98,11 @@
                 url: "<%=basePath%>/question/answer.do",
                 data: JSON.stringify(answer), // Note it is important
                 success: function (data) {
-                    console.log(data);
+                    /*console.log(data);*/
+                    alert("发表成功！");
                 },
                 error: function() {
-                    console.log("post error")
+                    /*console.log("post error")*/
                 }
             });
         }
@@ -124,13 +125,13 @@
                       }
                       else{
                           //评论区显示空
-                          console.log("kkkkkk empty")
+                          /*console.log("kkkkkk empty")*/
                           show_all_comment_empty();
                       }
 
                   },
                   error: function() {
-                      console.log("like error");
+                     /* console.log("like error");*/
                   }
               });
         }

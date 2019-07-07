@@ -5,9 +5,11 @@ import com.macteam.cybertopia.dao.IUserDao;
 import com.macteam.cybertopia.entity.Question;
 import com.macteam.cybertopia.entity.Answer;
 import com.macteam.cybertopia.entity.User;
+import com.macteam.cybertopia.pojo.AnswerInfo;
 import com.macteam.cybertopia.pojo.QuestionTitle;
 import com.macteam.cybertopia.service.IQuestionService;
 import com.macteam.cybertopia.service.IQuestionService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,11 @@ public class QuestionController {
 
     @Autowired
     private IUserDao userDao;
+
+    @RequestMapping("/all.do")
+    public String articleList(){
+        return "questionList";
+    }
 
     @RequestMapping("/list.do")
     public String questionListPage(Model model, int pageIndex){
@@ -101,5 +108,12 @@ public class QuestionController {
         }else{
             return 0;
         }
+    }
+
+    @RequestMapping(value = "/comment.do", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AnswerInfo> questionAnswer(HttpServletRequest request, @Param("questionId") int questionId){
+        List<AnswerInfo> answers= questionService.getAnswerByQuestionId(questionId);
+        return answers;
     }
 }

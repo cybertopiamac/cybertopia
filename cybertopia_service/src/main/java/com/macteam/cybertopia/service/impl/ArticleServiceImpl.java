@@ -6,6 +6,7 @@ import com.macteam.cybertopia.dao.ICommentDao;
 import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.CommentInfo;
 import com.macteam.cybertopia.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class ArticleServiceImpl implements IArticleService {
     public int insertComment(Comment comment){
         return commentDao.insertComment(comment);
     }
-    public List<Comment> getCommentByArticleId(int articleId){
+    public List<CommentInfo> getCommentByArticleId(int articleId){
         return commentDao.getCommentByArticleId(articleId);
     }
 

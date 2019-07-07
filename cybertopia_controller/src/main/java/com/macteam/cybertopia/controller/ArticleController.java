@@ -6,7 +6,9 @@ import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.CommentInfo;
 import com.macteam.cybertopia.service.IArticleService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -131,5 +133,12 @@ public class ArticleController {
         }else{
             return 0;
         }
+    }
+
+    @RequestMapping(value = "/comment.do", method = RequestMethod.GET)
+    @ResponseBody
+    public List<CommentInfo> articleComment(HttpServletRequest request, @Param("articleId") int articleId){
+        List<CommentInfo> comments= articleService.getCommentByArticleId(articleId);
+        return comments;
     }
 }

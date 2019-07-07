@@ -6,7 +6,7 @@ public class Answer {
     private int id;
     private String content;
     private Date date;
-    private int articleId;
+    private int questionId;
     private int userId;
 
     public int getId() {
@@ -34,11 +34,11 @@ public class Answer {
     }
 
     public int getArticleId() {
-        return articleId;
+        return questionId;
     }
 
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
+    public void setArticleId(int questionId) {
+        this.questionId = questionId;
     }
 
     public int getUserId() {
@@ -55,7 +55,7 @@ public class Answer {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", date=" + date +
-                ", articleId=" + articleId +
+                ", questionId=" + questionId +
                 ", userId=" + userId +
                 '}';
     }

@@ -241,7 +241,7 @@
                 insertComment(elem);
             });
 
-            $(".article_comment").show();
+            $(".article_comment").show(400);
 
         }
 
@@ -254,7 +254,7 @@
 
             /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
 
-            $(".article_comment").show();
+            $(".article_comment").show(400);
 
         }
 
@@ -264,7 +264,7 @@
 
             $(".all_comment_button").attr("disabled",false);//可点击按钮
             $("#comments").empty();
-            $(".article_comment").hide();
+            $(".article_comment").hide(400);
         }
 
 

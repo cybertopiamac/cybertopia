@@ -19,4 +19,5 @@ public interface IArticleService {
     int insertArticleCollection(int userId, int articleId);
     int getArticleCollectStatus(int userId, int articleId);
     int deleteArticleCollection(int userId, int articleId);
+    List<ArticleTitle> getArticleListByKeywordRange(String keyword, int skip, int limit);
 }

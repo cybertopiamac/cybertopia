@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en" class="no-js">
     <%
     String path = request.getContextPath();
@@ -111,11 +112,8 @@
             send_like(dislike_article);
         }
 
-        function showCommentDiv(){
-             $("#publish_comment_div").show();
-        }
-        //
         //处理评论
+
         function comment(){
 
             var check_blank = true;
@@ -133,6 +131,7 @@
                     //传入评论content
                     //向评论表写入数据
                     //post_comment();
+                    //
                     alert("发表成功！");
                     $('#comment_textarea').val("");
                     return true;
@@ -145,6 +144,7 @@
             return false;
 
         }
+
 
 
         function setDefault(input_id) {
@@ -176,6 +176,85 @@
                 }
             });
         }
+
+        function getAllComment(){
+            /*$(".all_comment_button").attr("disabled",true);//不可点击按钮*/
+              var content={
+                  "articleId":${article.id}
+              };
+              $.ajax({
+                  type:"get",
+                  dataType:'json',
+                  url: "<%=basePath%>/article/comment.do",
+                  data: content,
+                  success: function (data) {
+                      console.log(data);
+                      if(true){
+
+                          //执行显示所有评论的函数
+                          show_all_comment_full();
+                      }
+                      else{
+                          //评论区显示空
+                          show_all_comment_empty();
+                      }
+
+                  },
+                  error: function() {
+                      console.log("like error");
+                  }
+
+
+              });
+        }
+
+        function show_all_comment_full() {
+            //动态添加div,每条评论占一个div
+            //显示评论区
+
+
+            var brother=$("#comment_title");
+
+            //测试添加数据
+              <c:forEach var="item" begin="1" end="5">
+                 //创建节点
+                var div_content=$("<div class='comment_detail'></div>");
+                var data=$("<h3>用户昵称</h3><p class='content_p'>评论内容</p><p class='time_p'>发表于&nbsp;<span>时间</span></p>");
+                div_content.html(data);
+
+                //插入节点
+                brother.after(div_content);
+                brother=div_content;
+            </c:forEach>
+
+            $(".article_comment").show();
+
+        }
+
+        function show_all_comment_empty() {
+            //动态添加div,每条评论占一个div
+            //显示评论区
+
+
+            var div_content=$("<div class='comment_detail'></div>");
+            $(".comment_detail").html("暂无评论...");
+            $("#comment-title").after($(".comment_detail"));
+
+            /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
+
+            $(".article_comment").show();
+
+        }
+
+
+        function hiddenAllComment(){
+           //隐藏评论区
+
+            /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
+            $(".article_comment").hide();
+        }
+
+
 
 
 
@@ -260,35 +339,43 @@
     <div class="article_content markdown">
         ${article.content}
     </div>
+
     <div class="comment_bar">
-        <p class="comment_bar_p">
-            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>&nbsp;|
-            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>
-        </p>
+        <span class="comment_bar_item">
+            <!--<button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>&nbsp;|-->
+        <button type="button" class="all_comment_button" onclick="getAllComment()"><span class="write_comment">&#9786;</span>显示所有评论</button>&nbsp;&nbsp;|
+
+            <button type="button" class="hidden_comment_button" onclick="hiddenAllComment()"><span class="write_comment">&#9785;</span>隐藏所有评论</button>&nbsp;&nbsp;|
+            <button type="button" class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>
+        </span>
     </div>
+
     <!--评论框-->
-    <div  id="publish_comment_div" style="display: none">
+    <div  id="publish_comment_div">
     <div class="article_content">
         <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
     </div>
     <div class="publish_bar">
-        <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
+        <button type="button" class="publish_comment_button" onclick="comment()">发表评论</button>
     </div>
     </div>
     <!---->
 
     <!--显示所有评论-->
-    <!--
-     <div class="all_comment" style="margin:30px;padding:0px">
-         <div style="background-color:#CCC;font-size:16px;height:40px;line-height: 40px">
-             <span style="vertical-align: middle;height:40px;">所有评论</span>
-         </div>
-         <div class="comment_detail">
 
+     <div class="article_comment">
 
+        <div id="comment_title" style="background-color:#669999;color:#FFF;font-size:16px;height:40px;line-height: 40px">
+             <span style="vertical-align: middle;height:40px;padding:5px;">所有评论</span>
          </div>
 
-     </div>-->
+        <!-- <div class="comment_detail">
+             <h3>用户名</h3>
+             <p class="content_p">评论内容评论内容</p>
+             <p class="time_p" >发表于&nbsp;<span>2019-7-7</span></p>
+         </div>-->
+
+     </div>
     <!---->
 </div>
 </body>

@@ -70,18 +70,21 @@ body{
 
 .comment_bar{
     margin:10px 10px 10px 10px;
-    background-color: #FFF;
+    /*background-color: #FFF;*/
     /*box-shadow: 0px 0px 10px #CCC;*/
     word-wrap: break-word;
     padding:0.5em;
-    width:17%;
+    padding-right:0px;
+    /*width:40%;*/
     vertical-align: middle;
-    float:right;
+    /*float:right;*/
     text-align: right;
 }
-.comment_bar_p {
+.comment_bar_item {
     text-align: right;
-    margin-right:5px;
+    margin-right:0px;
+    background-color: #FFF;
+    padding:1em 5px 1em 1em;
 }
 .comment_bar_p button{
     margin:2px;
@@ -200,4 +203,31 @@ textarea{
     width:100px;
     height:100%;
 }
+/*all_comments*/
+
+.article_comment{
+    clear:both;
+    margin:5px 10px;
+    display:none;
+
+}
+.comment_detail{
+    border-bottom:1px solid #CCC;
+    background-color: #FFFF;
+
+}
+.comment_detail h3{
+    margin:0px 5px 5px 5px;
+    padding:5px;
+}
+.content_p{
+    margin:5px;
+    padding:5px;
+}
+.time_p{
+    text-align:right;
+    margin:2px 20px 2px auto;
+    padding:5px;color:#999;
+}
+
 

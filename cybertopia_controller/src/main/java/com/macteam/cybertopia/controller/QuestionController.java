@@ -36,7 +36,7 @@ public class QuestionController {
     @Autowired
     private IUserDao userDao;
 
-    @RequestMapping("/all.do")
+    @RequestMapping(value = "/all.do",method = RequestMethod.GET)
     public String articleList(){
         return "questionList";
     }
@@ -50,6 +50,25 @@ public class QuestionController {
         boolean haveNext = question_titles.size() == default_pack_size;
         model.addAttribute("haveNext",haveNext);
         model.addAttribute("pageIndex", pageIndex);
+        return "questionListItem";
+    }
+
+    @RequestMapping(value = "/search.do", method = RequestMethod.POST)
+    public String questionSearchList(Model model, @Param("keyword") String keyword ){
+        model.addAttribute("keyword",keyword);
+        return "questionList";
+    }
+
+    @RequestMapping(value = "/search.do", method = RequestMethod.GET)
+    public String questionSearchListItem(Model model, String keyword, int pageIndex){
+        int default_pack_size = 10;
+        List<QuestionTitle> question_titles = questionService.getQuestionListByKeywordRange(
+                keyword,pageIndex*default_pack_size, default_pack_size);
+        model.addAttribute("question_titles",question_titles);
+        boolean haveNext = question_titles.size() == default_pack_size;
+        model.addAttribute("haveNext",haveNext);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("keyword",keyword);
         return "questionListItem";
     }
 
@@ -113,7 +132,6 @@ public class QuestionController {
         if (user != null) {
             answer.setUserId(user.getId());
             answer.setDate(new Date(System.currentTimeMillis()));
-            System.out.println(answer);
             return questionService.insertAnswer(answer);
         }else{
             return 0;

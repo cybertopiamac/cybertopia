@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IArticleDao {
     List<ArticleTitle> getArticleListByRange(@Param("skip") int skip, @Param("limit") int limit);
+    List<ArticleTitle> getArticleListByKeywordRange(@Param("keyword") String keyword, @Param("skip") int skip, @Param("limit") int limit);
 //    List<Article> getArticleListByKeyword(String keyword);
     Article getArticleById(int id);
     int deleteArticleById(int id);

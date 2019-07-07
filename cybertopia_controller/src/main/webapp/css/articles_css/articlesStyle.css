@@ -2,12 +2,6 @@ body{
     background-color:#ECF0F1;
 }
 
-@media (max-width: 600px) {
-    .article-feed{
-        margin-left:2%;
-        margin-right:2%;
-    }
-}
 .article-feed {
     /*width:80%;*/
     /*margin:30% 15% auto 15%;*/
@@ -215,7 +209,7 @@ textarea{
 
 .article_comment{
     clear:both;
-    margin:5px 10px;
+    margin:10px 10px;
     display:none;
 
 }
@@ -239,4 +233,16 @@ textarea{
     padding:5px;color:#999;
 }
 
+@media (max-width: 800px) {
+    .article-feed{
+        margin-left:2%;
+        margin-right:2%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .article-feed{
+        margin-top:70px;
+    }
+}
 

@@ -58,7 +58,6 @@
                     //传入title和content
                     //向文章表写入数据
                     post_article();
-                    alert("发表成功！");
                     return true;
                 } else {
                     //不提交表单申请
@@ -101,10 +100,13 @@
                 url: "<%=basePath%>/article/post.do",
                 data: JSON.stringify(article), // Note it is important
                 success: function (data) {
-                    console.log(data);
+                    /*console.log(data);*/
+                    alert("发表成功！");
+                    window.location = "<%=basePath%>article/all.do";
                 },
                 error: function() {
-                    console.log("post error")
+                    /*console.log("post error");*/
+                    alert("发表失败！");
                 }
             });
         }

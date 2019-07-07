@@ -9,6 +9,8 @@
         where article.authorId = user.id
         order by date desc limit #{skip}, #{limit}
     </select>
+
+
     <select id="getArticleById" resultType="Article" parameterType="int">
         select * from article where id = #{id}
     </select>
@@ -25,5 +27,11 @@
     <select id="getArticleTitleByAuthorId" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
         select article.id,date,title, nickname as authorName,browseNum from article, user
         where article.authorId = user.id and article.authorId = #{authorId}
+    </select>
+
+    <select id="getArticleListByKeywordRange" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
+        select article.id,date,title, nickname as authorName,browseNum from article, user
+        where article.authorId = user.id and article.title like CONCAT('%',#{keyword},'%')
+        order by date desc limit #{skip}, #{limit}
     </select>
 </mapper>

@@ -73,7 +73,7 @@
                     //传入评论content
                     //向评论表写入数据
                     post_comment();
-                    alert("发表成功！");
+                    /*alert("发表成功！");*/
                     $('#comment_textarea').val("");
                     return true;
                 } else {
@@ -98,10 +98,11 @@
                 url: "<%=basePath%>/question/answer.do",
                 data: JSON.stringify(answer), // Note it is important
                 success: function (data) {
-                    console.log(data);
+                    /*console.log(data);*/
+                    alert("发表成功！");
                 },
                 error: function() {
-                    console.log("post error")
+                    /*console.log("post error")*/
                 }
             });
         }
@@ -124,13 +125,13 @@
                       }
                       else{
                           //评论区显示空
-                          console.log("kkkkkk empty")
+                          /*console.log("kkkkkk empty")*/
                           show_all_comment_empty();
                       }
 
                   },
                   error: function() {
-                      console.log("like error");
+                     /* console.log("like error");*/
                   }
               });
         }
@@ -279,17 +280,6 @@
         ${question.content}
     </div>
 
-    <!--评论框-->
-    <div  id="publish_comment_div">
-    <div class="article_content" style="margin-top: 10px">
-        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入答案..." ></textarea>
-    </div>
-    <div class="publish_bar">
-        <button type="button" class="publish_comment_button" onclick="comment()">发表回答</button>
-    </div>
-    </div>
-    <!---->
-
     <!--显示所有评论-->
 
      <div class="article_comment">
@@ -298,6 +288,17 @@
          </div>
          <div id="comments"></div>
      </div>
+    <!---->
+
+    <!--评论框-->
+    <div  id="publish_comment_div">
+        <div class="article_content" style="margin-top: 10px">
+            <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入答案..." ></textarea>
+        </div>
+        <div class="publish_bar">
+            <button type="button" class="publish_comment_button" onclick="comment()">发表回答</button>
+        </div>
+    </div>
     <!---->
 </div>
 

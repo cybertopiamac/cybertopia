@@ -114,7 +114,7 @@
             <%--<fmt:formatDate value="${comp.date}" pattern="yyyy-MM-dd" />--%>
         </div>
         <div class="comp_link comp_subtitle">
-            竞赛官网：<a href="${comp.link}">${comp.link}</a>
+            竞赛官网：<a href="${comp.link}" target="_blank">${comp.link}</a>
         </div>
     </div>
 </div>

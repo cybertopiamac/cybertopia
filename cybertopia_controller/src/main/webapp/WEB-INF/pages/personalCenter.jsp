@@ -71,7 +71,7 @@
 <body>
 <%--back--%>
 <div class="backToIndex">
-    <a href="<%=basePath%>/user/main.do">
+    <a href="<%=basePath%>/main/index.do">
         <img src="<%=basePath%>/images/personalCenter_images/prev.png">返回</a>
 </div>
 <%--back--%>

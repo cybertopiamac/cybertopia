@@ -181,8 +181,8 @@
                 <li>
                     <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">问题反馈</a>
-                        <a href="">版本信息</a>
+                        <a href="${pageContext.request.contextPath}/user/tofeedback.do">问题反馈</a>
+                        <a href="${pageContext.request.contextPath}/user/tomodeinformation.do">版本信息</a>
                     </div>
                 </li>
             </ul>
@@ -258,7 +258,7 @@
                         </div><!-- .list-select-category end -->
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <input type="text" value="" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
+                        <input type="text" value="${keywords}" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
                     </div><!-- .form-group end -->
                     <div class="form-group">
                         <button type="submit" class="form-control" onclick="getcompetition()">Go</button>

@@ -53,4 +53,14 @@ public class UserLoginController {
     }
 
 
+    @RequestMapping("/tofeedback.do")
+    public String tofeedback() {
+        return "feedback";
+    }
+    @RequestMapping("/tomodeinformation.do")
+    public String tomodeinformation() {
+        return "modeinformation";
+    }
+
+
 }

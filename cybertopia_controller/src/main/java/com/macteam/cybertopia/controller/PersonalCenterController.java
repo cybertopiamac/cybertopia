@@ -75,7 +75,7 @@ public class PersonalCenterController {
             competitionStatus = 0;
         }
         TwoList result = new TwoList(articleStatus,competitionStatus, article_titles, competitions);
-        System.out.println(JSON.toJSONString(result));
+//        System.out.println(JSON.toJSONString(result));
         return result;
     }
 

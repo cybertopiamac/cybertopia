@@ -224,8 +224,8 @@
     <div class="slide" id="4">
         <div class="content second-content">
             <div class="container-fluid">
-                <div class="col-md-6">
-                    <div class="left-content">
+                <div class="col-md-6" id="commentdiv">
+                    <div class="left-content" >
                         <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a><br>
                         <p style="float: left">用户名：评论.....</p><p style="float: right">日期：xx-xx-xx</p>
                     </div>
@@ -386,13 +386,13 @@
                         console.log("article is empty")
                         $("#articlecollectdiv").html("<h2>还没有收藏文章喔</h2>");
                     } else {
-                        var HtmlString = "";
+                        var HtmlString = "<div style=\"float: top;position: fixed;\">" +
+                            "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
+                            "文章" +
+                            "</h2>" +
+                            "</div>";
                         for (var i in data.articles) {
                             HtmlString = HtmlString +
-                                "<div style=\"float: top;position: fixed;\">" +
-                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
-                                "</h2>" +
-                                "</div>" +
                                 "<div class=\"left-content\">" +
                                 "<h2>" +
                                 data.articles[i].title +
@@ -417,13 +417,13 @@
                         console.log("competition is empty")
                         $("#competitioncollectdiv").html("<h2>还没有收藏竞赛喔</h2>");
                     } else {
-                        var HtmlString = "";
+                        var HtmlString = "<div style=\"float: top;position: fixed;\">" +
+                            "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
+                            "竞赛"+
+                            "</h2>" +
+                            "</div>";;
                         for (var i in data.competitions) {
                             HtmlString = HtmlString +
-                                "<div style=\"float: top;position: fixed;\">" +
-                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
-                                "</h2>" +
-                                "</div>" +
                                 "<div class=\"left-content\">" +
                                 "<h2>" +
                                 data.competitions[i].name +
@@ -472,19 +472,25 @@
                         var htmlString = "";
                         for(var i in list){
                             htmlString = htmlString+
+                            "<div class=\"left-content\" >"+
                             "<a href=\"<%=basePath%>personalCenter/toArticleDetails.do\"><h3>"+
                             list[i].title+
-                            "</h3></a>"+
-                            "<p>"+
+                            "</h3></a><br>"+
+                            "<p style=\"float: left\">"+
                             "我："+
                             list[i].content+
-                            "</p>";
+                            "</p><p style=\"float: right\">" +
+                            "日期：" +
+                            list[i].date +
+                            "</p>"+
+                            "</div>";
+                            console.log(htmlString)
                         }
                         $("#commentdiv").html(htmlString);
                     }
                 },
                 error:function(){
-                    $("").html('<h2>出错啦.</h2>');
+                    $("#commentdiv").html('<h2>出错啦.</h2>');
                     alert("error");
                 }
             }

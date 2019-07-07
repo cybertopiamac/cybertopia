@@ -2,7 +2,6 @@ package com.macteam.cybertopia.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.macteam.cybertopia.dao.IUserDao;
-import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
@@ -11,13 +10,7 @@ import com.macteam.cybertopia.service.IPersonalCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 import java.util.List;
 
 @Controller
@@ -39,9 +32,13 @@ public class PersonalCenterController {
     }
 
     class TwoList{
+        public int isArticlesEmpty;
+        public int isCompetionEmpty;
         public List<ArticleTitle> articles;
         public List<Competition> competitions;
-        TwoList(List<ArticleTitle> article, List<Competition> competition){
+        TwoList(int articleStatus, int competionStatus, List<ArticleTitle> article, List<Competition> competition){
+            isArticlesEmpty = articleStatus;
+            isCompetionEmpty = competionStatus;
             articles = article;
             competitions = competition;
         }
@@ -59,12 +56,20 @@ public class PersonalCenterController {
 
     @RequestMapping(value ="/myLike")//获取收藏
     @ResponseBody
-    public String myLike(@RequestParam("id") int id){
+    public TwoList myLike(@RequestParam("id") int id){
         List<ArticleTitle> article_titles = getAticleCollect(id);
         List<Competition> competitions = getCompetitionCollect(id);
-        TwoList result = new TwoList(article_titles, competitions);
+        int articleStatus = 1;
+        int competitionStatus = 1;
+        if(!article_titles.isEmpty()){
+           articleStatus = 0;
+        }
+        if(!competitions.isEmpty()){
+            competitionStatus = 0;
+        }
+        TwoList result = new TwoList(articleStatus,competitionStatus, article_titles, competitions);
         System.out.println(JSON.toJSONString(result));
-        return JSON.toJSONString(result);
+        return result;
     }
 
 
@@ -83,48 +88,7 @@ public class PersonalCenterController {
         return JSON.toJSONString(comments);
     }
 
-    @RequestMapping("/file.do")
-    public String ini(){
-        return "file";
-    }
-    @RequestMapping("/upLoad.do")
-    public String upLoad(HttpServletRequest request,@RequestParam("file") MultipartFile dropzFile) {
 
-        System.out.println("开始");
-
-        //获取该文件的名字
-        String fileName = dropzFile.getOriginalFilename();
-        //获取服务器的绝对路径
-        String filePath = request.getSession().getServletContext().getRealPath("/upload");
-        //切割文件的后缀，获取文件的类型
-        String fileSuffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-        System.out.println(filePath);
-        //创建文件对象，把服务器的路径放进去
-        File file = new File(filePath);
-        //判断路径是否存在，不在创建
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        //拼接文件名  使用uuid防重名和文件的后缀，
-        file = new File(filePath, UUID.randomUUID() + fileSuffix);
-        if(!file.exists()){
-            try {
-                //创建文件
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            //开始搬运文件
-            dropzFile.transferTo(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "index";
-
-    }
 
     @RequestMapping(value ="/changePassword")
     @ResponseBody

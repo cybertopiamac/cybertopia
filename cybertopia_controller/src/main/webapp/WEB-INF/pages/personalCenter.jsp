@@ -225,26 +225,23 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-6"
-                                         style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%">
+                                         style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%" id="articlecollectdiv">
                                         <div style="float: top;position: fixed;">
                                             <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">
                                                 文章</h2>
                                         </div>
 
                                         <div class="left-content">
-                                            <c:forEach items="articles" var="article">
-                                                <h2>${article.getTitle()}</h2>
-                                                <p>内容</p>
+                                                <h2>标题</h2>
+                                                <p>昵称</p>
                                                 <div class="main-btn">
                                                     <input type="button"
-                                                           onclick="window.location='<%=basePath%>article/detail.do'"
+                                                           onclick="window.location='<%=basePath%>article/detail.do?='"
                                                            value="查看详情">
                                                 </div>
-                                            </c:forEach>
-
                                         </div>
                                     </div>
-                                    <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
+                                    <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%"id="competitioncollectdiv">
                                         <div style="float:top;position: fixed">
                                             <h2 style="height:26px;width:50px;background-color: rgba(0, 0, 0,0.75);border-bottom: none">
                                                 竞赛</h2>
@@ -355,7 +352,7 @@
                 async: true,
                 data: userid,
                 success: function (data) {
-                    console.log(data)
+                    // console.log(data)
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
                     var div3 = "<div class=\"main-btn\">";
@@ -382,6 +379,7 @@
                                 list[i].title +
                                 h22 +
                                 p +
+                                "作者："+
                                 list[i].authorName +
                                 p2 +
                                 div3 +
@@ -403,7 +401,7 @@
                     $("#div1").html(articleListHtml);
                 },
                 error: function () {
-                    $("div1").html('网络可能出了一点小差...');
+                    $("#div1").html('网络可能出了一点小差...');
                     alert("error");
                 }
             }
@@ -420,7 +418,7 @@
         };
         $.ajax(
             {
-                url: 'articleLike.do',
+                url: 'myLike.do',
                 type: 'GET',
                 datatype: "json",
                 async: true,
@@ -428,8 +426,71 @@
 
                 success: function (data) {
                     console.log(data);
+
+                    if(data.isArticlesEmpty == 1){
+                        console.log("article is empty")
+                        $("#articlecollectdiv").html("<h2>还没有收藏文章喔</h2>");
+                    }
+                    else{
+                        var HtmlString = "";
+                        for(var i in data.articles) {
+                            HtmlString = HtmlString+
+                                "<div style=\"float: top;position: fixed;\">"+
+                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">"+
+                                "</h2>"+
+                                "</div>" +
+                                "<div class=\"left-content\">"+
+                                "<h2>"+
+                                    data.articles[i].title+
+                                "</h2>"+
+                                "<p> 热度："+
+                                    data.articles[i].browseNum+
+                                "</p>"+
+                                "<div class=\"main-btn\">"+
+                                "<input type=\"button\"" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?="+
+                                    data.articles[i].id+
+                                "'\"value=\"查看详情\">"+
+                                "</div>"+
+                                "</div>";
+                                console.log("onclick=\"window.location='<%=basePath%>article/detail.do?="+
+                                    data.articles[i].id+
+                                    "'\"value=\"查看详情\">");
+                        }
+                        $("#articlecollectdiv").html(HtmlString);
+                    }
+                    if(data.isCompetionEmpty == 1){
+                        console.log("competition is empty")
+                        $("#articlecollectdiv").html("<h2>还没有收藏竞赛喔</h2>");
+                    }
+                    else {
+                        var HtmlString = "";
+                        for (var i in data.competitions) {
+                            HtmlString = HtmlString +
+                                "<div style=\"float: top;position: fixed;\">" +
+                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
+                                "</h2>" +
+                                "</div>" +
+                                "<div class=\"left-content\">" +
+                                "<h2>" +
+                                data.competitions[i].name +
+                                "</h2>" +
+                                "<p> 热度：" +
+                                data.competitions[i].type +
+                                "</p>" +
+                                "<div class=\"main-btn\">" +
+                                "<input type=\"button\"" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?='" +
+                                data.competitions[i].id +
+                                "\"value=\"查看详情\">" +
+                                "</div>" +
+                                "</div>";
+                        }
+                        $("#competitioncollectdiv").html(HtmlString);
+                    }
                 },
                 error: function () {
+                    $("#competitioncollectdiv").html('网络可能出了一点小差...');
                     alert("error");
                 }
             }

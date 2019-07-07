@@ -32,15 +32,11 @@
     </insert>
 
     <update id="updateUserInfo" parameterType="User">
-        update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}
+        update `user` set nickname = #{nickname}, sex=#{sex}, school=#{school}, major=#{major}, grade=#{grade}, email=#{email}, phone=#{phone}, description=#{desc}, picture=#{picture}
     </update>
 
     <update id="updateUserPassword">
         update `user` set password = #{password} where id = #{id}
-    </update>
-
-    <update id="updateUserDesc">
-        update `user` set description = #{desc}
     </update>
 
 </mapper>

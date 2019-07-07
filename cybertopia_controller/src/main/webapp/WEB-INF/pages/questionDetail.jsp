@@ -280,17 +280,6 @@
         ${question.content}
     </div>
 
-    <!--评论框-->
-    <div  id="publish_comment_div">
-    <div class="article_content" style="margin-top: 10px">
-        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入答案..." ></textarea>
-    </div>
-    <div class="publish_bar">
-        <button type="button" class="publish_comment_button" onclick="comment()">发表回答</button>
-    </div>
-    </div>
-    <!---->
-
     <!--显示所有评论-->
 
      <div class="article_comment">
@@ -299,6 +288,17 @@
          </div>
          <div id="comments"></div>
      </div>
+    <!---->
+
+    <!--评论框-->
+    <div  id="publish_comment_div">
+        <div class="article_content" style="margin-top: 10px">
+            <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入答案..." ></textarea>
+        </div>
+        <div class="publish_bar">
+            <button type="button" class="publish_comment_button" onclick="comment()">发表回答</button>
+        </div>
+    </div>
     <!---->
 </div>
 

@@ -71,7 +71,7 @@
 <body>
 <%--back--%>
 <div class="backToIndex">
-    <a href="<%=basePath%>/user/main.do">
+    <a href="<%=basePath%>/main/index.do">
         <img src="<%=basePath%>/images/personalCenter_images/prev.png">返回</a>
 </div>
 <%--back--%>
@@ -102,7 +102,7 @@
         <li><a href="#2" onclick="getArticleHistory()"><i class="fa fa-pencil"></i> <em>我的文章</em></a></li>
         <li><a href="#3" onclick="getArticleCollect()"><i class="fa fa-heart"></i> <em>我的收藏</em></a></li>
         <li><a href="#4" id="pinlun"><i class="fa fa-comment"></i> <em>我的评论</em></a></li>
-        <li><a href="#5"><i class="fa fa-key"></i> <em>修改密码</em></a> </li>
+        <li><a href="#5"><i class="fa fa-key"></i> <em>修改密码</em></a></li>
     </ul>
 </nav>
 
@@ -206,7 +206,8 @@
                         <div class="main-btn">
                             <a style="color: #FFFFFF">发表日期：xx-xx-xx</a>&ensp;&ensp;&ensp;
                             <a style="color: #FFFFFF">浏览量：xxx</a>
-                            <input type="button" style="margin-left: 20px" onclick="window.location='<%=basePath%>/article//detail.do?articleId='" value="更多">
+                            <input type="button" style="margin-left: 20px"
+                                   onclick="window.location='<%=basePath%>/article//detail.do?articleId='" value="更多">
                         </div>
                     </div>
                 </div>
@@ -224,24 +225,23 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-6"
-                                         style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%">
+                                         style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%" id="articlecollectdiv">
                                         <div style="float: top;position: fixed;">
                                             <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">
                                                 文章</h2>
                                         </div>
 
-                                        <div class="left-content" >
-                                            <c:forEach items="articles" var="article">
-                                                <h2>${article.getTitle()}</h2>
-                                                <p>内容</p>
+                                        <div class="left-content">
+                                                <h2>标题</h2>
+                                                <p>昵称</p>
                                                 <div class="main-btn">
-                                                    <input type="button" onclick="window.location='<%=basePath%>article/detail.do'" value="查看详情">
+                                                    <input type="button"
+                                                           onclick="window.location='<%=basePath%>article/detail.do?='"
+                                                           value="查看详情">
                                                 </div>
-                                            </c:forEach>
-
                                         </div>
                                     </div>
-                                    <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%">
+                                    <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%"id="competitioncollectdiv">
                                         <div style="float:top;position: fixed">
                                             <h2 style="height:26px;width:50px;background-color: rgba(0, 0, 0,0.75);border-bottom: none">
                                                 竞赛</h2>
@@ -250,7 +250,8 @@
                                             <h2>标题</h2>
                                             <p>内容</p>
                                             <div class="main-btn">
-                                                <input type="button" onclick="window.location='<%=basePath%>竞赛详情页'" value="查看详情">
+                                                <input type="button" onclick="window.location='<%=basePath%>竞赛详情页'"
+                                                       value="查看详情">
                                             </div>
                                         </div>
                                     </div>
@@ -330,7 +331,7 @@
         else if (newPass != againPass) {
             alert("新密码两次输入不一致");
         } else {
-            getPassMsg(oldPass,newPass);
+            getPassMsg(oldPass, newPass);
         }
         passwordReset();
     }
@@ -351,6 +352,7 @@
                 async: true,
                 data: userid,
                 success: function (data) {
+                    // console.log(data)
                     var articleListHtml = "";
                     var div = "<div class=\"left-content\">";
                     var div3 = "<div class=\"main-btn\">";
@@ -364,9 +366,10 @@
                     var browse = "浏览量：";
                     var a3 = "</a>";
 
-                    var button = "<input type=\"button\" style=\"margin-left: 20px\"\n onclick=\"window.location='<%=basePath%>article/detail.do'\" value=\"更多\">\n";
+                    var button = "<input type=\"button\" style=\"margin-left: 20px\"\n onclick=\"window.location='<%=basePath%>article/detail.do?articleId=";
+                    var button2 = "'\" value=\"更多\">\n";
                     var div2 = "</div>";
-                    if (!data) {
+                    if (data=="[]") {
                         articleListHtml = div + h2 + "你还没有发表文章喔！" + h22 + div2;
                     } else {
                         var list = eval(data);
@@ -376,7 +379,8 @@
                                 list[i].title +
                                 h22 +
                                 p +
-                                list[i].content +
+                                "作者："+
+                                list[i].authorName +
                                 p2 +
                                 div3 +
                                 a +
@@ -388,6 +392,8 @@
                                 list[i].browseNum +
                                 a3 +
                                 button +
+                                list[i].id +
+                                button2 +
                                 div2 +
                                 div2;
                         }
@@ -395,6 +401,7 @@
                     $("#div1").html(articleListHtml);
                 },
                 error: function () {
+                    $("#div1").html('网络可能出了一点小差...');
                     alert("error");
                 }
             }
@@ -411,7 +418,7 @@
         };
         $.ajax(
             {
-                url: 'articleLike.do',
+                url: 'myLike.do',
                 type: 'GET',
                 datatype: "json",
                 async: true,
@@ -419,8 +426,71 @@
 
                 success: function (data) {
                     console.log(data);
+
+                    if(data.isArticlesEmpty == 1){
+                        console.log("article is empty")
+                        $("#articlecollectdiv").html("<h2>还没有收藏文章喔</h2>");
+                    }
+                    else{
+                        var HtmlString = "";
+                        for(var i in data.articles) {
+                            HtmlString = HtmlString+
+                                "<div style=\"float: top;position: fixed;\">"+
+                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">"+
+                                "</h2>"+
+                                "</div>" +
+                                "<div class=\"left-content\">"+
+                                "<h2>"+
+                                    data.articles[i].title+
+                                "</h2>"+
+                                "<p> 热度："+
+                                    data.articles[i].browseNum+
+                                "</p>"+
+                                "<div class=\"main-btn\">"+
+                                "<input type=\"button\"" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?="+
+                                    data.articles[i].id+
+                                "'\"value=\"查看详情\">"+
+                                "</div>"+
+                                "</div>";
+                                console.log("onclick=\"window.location='<%=basePath%>article/detail.do?="+
+                                    data.articles[i].id+
+                                    "'\"value=\"查看详情\">");
+                        }
+                        $("#articlecollectdiv").html(HtmlString);
+                    }
+                    if(data.isCompetionEmpty == 1){
+                        console.log("competition is empty")
+                        $("#articlecollectdiv").html("<h2>还没有收藏竞赛喔</h2>");
+                    }
+                    else {
+                        var HtmlString = "";
+                        for (var i in data.competitions) {
+                            HtmlString = HtmlString +
+                                "<div style=\"float: top;position: fixed;\">" +
+                                "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
+                                "</h2>" +
+                                "</div>" +
+                                "<div class=\"left-content\">" +
+                                "<h2>" +
+                                data.competitions[i].name +
+                                "</h2>" +
+                                "<p> 热度：" +
+                                data.competitions[i].type +
+                                "</p>" +
+                                "<div class=\"main-btn\">" +
+                                "<input type=\"button\"" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?='" +
+                                data.competitions[i].id +
+                                "\"value=\"查看详情\">" +
+                                "</div>" +
+                                "</div>";
+                        }
+                        $("#competitioncollectdiv").html(HtmlString);
+                    }
                 },
                 error: function () {
+                    $("#competitioncollectdiv").html('网络可能出了一点小差...');
                     alert("error");
                 }
             }

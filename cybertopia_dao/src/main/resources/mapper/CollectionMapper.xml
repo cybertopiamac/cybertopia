@@ -14,10 +14,10 @@
     </delete>
 
     <select id="getCompetitionCollectionByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Competition">
-        select * from competitioncollect inner join competition on competitioncollect.competitionId = competition.id where userId = #{id}
+        select `competitionId`,`name`,`type` from competitioncollect inner join competition on competitioncollect.competitionId = competition.id where userId = #{id}
     </select>
 
-    <select id="getArticleCollectionByUserId" parameterType="int" resultType="com.macteam.cybertopia.entity.Article">
+    <select id="getArticleCollectionByUserId" parameterType="int" resultType="com.macteam.cybertopia.pojo.ArticleTitle">
         select * from articlecollect inner join article on articlecollect.`articleId`=article.`id` where userid = #{id}
     </select>
 </mapper>

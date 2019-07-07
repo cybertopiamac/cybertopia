@@ -16,5 +16,4 @@ public interface IUserDao {
 
     int updateUserInfo(User user);
     int updateUserPassword(@Param("id") int id,@Param("password")String password);
-    int updateUserDesc(int id, @Param("desc") String desc);
 }

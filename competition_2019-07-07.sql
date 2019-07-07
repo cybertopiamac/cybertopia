@@ -7,7 +7,7 @@
 #
 # Host: 120.78.81.214 (MySQL 5.6.14)
 # Database: competition
-# Generation Time: 2019-07-05 00:22:13 +0000
+# Generation Time: 2019-07-07 00:57:44 +0000
 # ************************************************************
 
 
@@ -20,6 +20,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
+# Dump of table answer
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `answer`;
+
+CREATE TABLE `answer` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `questionId` int(11) unsigned NOT NULL,
+  `userId` int(10) unsigned NOT NULL,
+  `content` text,
+  `date` date DEFAULT '2019-07-05',
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`),
+  KEY `questionId` (`questionId`),
+  CONSTRAINT `answer_ibfk_3` FOREIGN KEY (`questionId`) REFERENCES `question` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `answer_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table article
 # ------------------------------------------------------------
 
@@ -27,9 +47,9 @@ DROP TABLE IF EXISTS `article`;
 
 CREATE TABLE `article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `date` date DEFAULT NULL,
-  `title` varchar(20) NOT NULL,
-  `content` varchar(500) DEFAULT '',
+  `date` date DEFAULT '2019-07-05',
+  `title` text NOT NULL,
+  `content` text,
   `authorId` int(10) unsigned NOT NULL,
   `browseNum` int(10) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -42,7 +62,19 @@ LOCK TABLES `article` WRITE;
 
 INSERT INTO `article` (`id`, `date`, `title`, `content`, `authorId`, `browseNum`)
 VALUES
-	(1,NULL,'如何水一篇文章','这样水',1,0);
+	(1,NULL,'如何水一篇文章','这样水',1,1),
+	(2,NULL,'寻找id为2的小姐姐','可以认识一下吗？',1,2),
+	(3,'2019-07-06','我是阿尔法','<h1 id=\"创世纪\">创世纪</h1>\n<h2 id=\"其一\">其一</h2>\n<p>要有vim\n于是就有了vim</p>\n<h2 id=\"其二\">其二</h2>\n<p>要有python\n于是就有了python</p>\n<h2 id=\"其三\">其三</h2>\n<p>要有表格\n于是就有了表格</p>\n<table>\n<thead>\n<tr>\n<th>按键</th>\n<th>用途</th>\n</tr>\n</thead>\n<tbody><tr>\n<td>^[h</td>\n<td>查看正在编辑的命令的帮助</td>\n</tr>\n<tr>\n<td>^x^e</td>\n<td>调用<code>$EDITOR</code>指定的编辑器编辑当前命令</td>\n</tr>\n</tbody></table>\n<h2 id=\"其五\">其五</h2>\n<p>要有顺序\n于是就有了顺序</p>\n<ol>\n<li>第三，不得颠倒顺序</li>\n<li>第二，不得跳过根本</li>\n<li>第五，不得没有始终</li>\n</ol>\n<h2 id=\"其五-1\">其五</h2>\n<p>要有艺术\n于是就有了艺术</p>',1,33),
+	(4,'2019-07-06','是昔在、今在、以后永在的全能者','<p>我一看见，就仆倒在他脚前，像死了一样。</p>\n<p>他用右手按着我说：“不要惧怕。我是首先的，我是末后的， 18 又是那存活的；</p>\n<p>我曾死过，现在又活了，直活到永永远远，并且拿着死亡和阴间的钥匙。</p>\n<p> 19 所以你要把所看见的和现在的事，并将来必成的事，都写出来。 </p>\n<p>20 论到你所看见在我右手中的七星和七个金灯台的奥秘，那七星就是七个教会的使者，七灯台就是七个教会。</p>\n',1,9),
+	(5,'2019-07-06','看哪，他驾云降临，众目要看见他','<p>我约翰，就是你们的弟兄，和你们在耶稣的患难、国度、忍耐里一同有份，\n为神的道并为给耶稣作的见证，曾在那名叫拔摩的海岛上。</p>\n<p>当主日，我被圣灵感动，听见在我后面有大声音如吹号说： “你所看见的当写在书上，\n达于以弗所、士每拿、别迦摩、推雅推喇、撒狄、非拉铁非、老底嘉那七个教会。</p>\n',1,3),
+	(6,'2019-07-06','图床测试','<h2 id=\"美丽的图\">美丽的图</h2>\n<p>取自fsn-hf剧场版截图\n<img src=\"https://i.loli.net/2019/06/30/5d18878f6919820038.jpg\" alt=\"好看的图\"></p>\n<p>waifu2x修改过的47194878_p0\n<img src=\"https://i.loli.net/2019/07/02/5d1a32556fcbe62447.png\" alt=\"47194878_p0_changed_waifu2x_art_noise1_scale_tta_1.png\"></p>\n<p>同样waifu2x修改过，46905476_p0\n<img src=\"https://i.loli.net/2019/07/03/5d1c4f1526bf366738.png\" alt=\"46905476_p0_waifu2x.png\"></p>\n',1,6),
+	(7,'2019-07-06','Django部署 Part3','<h2 id=\"pip安装的uwsgi无法使用本地安装的高版本sqlite3\">pip安装的uWSGI无法使用本地安装的高版本sqlite3</h2>\n<p>参考前两段，本打算使用pip安装uWSGI，但是此时Django无法通过sqlite3版本验证，其使用的仍是系统的低版本sqlite3。</p>\n<p>我尝试使用在uWSGI的ini配置文件中加入环境变量配置，但是Django使用的依旧是低版本sqlite3。\n故无奈继续切换回系统包管理器安装uWSGI。</p>\n<p>以下为我使用的配置项，修改之后或许能起作用，现在已经用系统版本的uWSGI成功部署，就暂时不修改验证。</p>\n<pre><code class=\"language-ini\">## 或许缺少了PATH，没做验证\nenv = env=LD_LIBRARY_PATH=/path/to/my/home/local/lib</code></pre>\n',1,13),
+	(8,'2019-07-06','uWSGI无法解析`--module`参数','<p>具体报错为<code>uwsgi: unrecognized option &#39;--module&#39;</code>，此错误与CentOS7的包分割有关。\n默认安装的uWSGI不包含python插件。</p>\n<p>解决方法按照<a href=\"https://stackoverflow.com/a/35718679\">stackoverflow中某回答</a>的提示，安装uwsgi-plugin-python36包。\n除此之外，还要在uWSGI的启动参数中添加<code>--plugin=python36</code>, 或者在ini配置文件中加入<code>plugin = python36</code>。</p>\n',1,0),
+	(9,'2019-07-06','sqlite3版本过低','<p>写下本文的时候，CentOS7的官方sqlite3的版本为3.7.17，低于Django要求的最低版本3.8.3。\n我本人倾向于只使用包管理工具管理系统范围的软件，但是相比于Arch Linux，我对CentOS7的包管理系统不是很熟悉，也就没自己打包。</p>\n<p>到<a href=\"https://www.sqlite.org/download.html\">官网</a>下载新版的autoconf版源码包，按照下面的安装使用autoconf的软件的普通步骤即可安装到指定目录。\n我选择直接安装到<code>~/local/</code>目录，不干扰系统文件。</p>\n<pre><code class=\"language-bash\">## VERSION=你下载的版本号\ntar xvfz sqlite-autoconf-$VERSION.tar.gz\ncd sqlite-autoconf-$VERSION\n./configure --prefix=$HOME/local\nmake\nmake install</code></pre>\n<p>还需要增加或修改环境变量：</p>\n<ul>\n<li><p>使用<code>export PATH=$HOME/local/bin:$PATH</code>直接配置当前shell或者写入<code>.bashrc</code>或者<code>.zshrc</code>中以固化设定。</p>\n</li>\n<li><p>对<code>LD_LIBRARY_PATH</code>也是是如法炮制，使用<code>export LD_LIBRARY_PATH=&quot;$HOME/local/lib&quot;</code>。</p>\n</li>\n<li><p>原理参考动态连接器<code>ld.so</code>。</p>\n</li>\n</ul>\n<p>此方法对使用yum安装的uWSGI有效，对直接使用python运行Django有效，直接进入python导入sqlite3也可验证版本。\n<strong>但是对使用<code>pip install uwsgi</code>安装的uWSGI无效</strong>。</p>\n',1,0),
+	(10,'2019-07-06','pip安装的uWSGI无法使用本地安装的高版本sqlite3','<p>参考前两段，本打算使用pip安装uWSGI，但是此时Django无法通过sqlite3版本验证，其使用的仍是系统的低版本sqlite3。</p>\n<p>我尝试使用在uWSGI的ini配置文件中加入环境变量配置，但是Django使用的依旧是低版本sqlite3。\n故无奈继续切换回系统包管理器安装uWSGI。</p>\n<p>以下为我使用的配置项，修改之后或许能起作用，现在已经用系统版本的uWSGI成功部署，就暂时不修改验证。</p>\n<pre><code class=\"language-ini\">## 或许缺少了PATH，没做验证\nenv = env=LD_LIBRARY_PATH=/path/to/my/home/local/lib</code></pre>\n',1,0),
+	(11,'2019-07-06','Centos7安装的nginx版本（不优雅）配置方法','<p>本文撰写时，nginx版本为1.12.2，使用开头提供的方法无法配置nginx。\n故将原文中的配置文件段嵌入到<code>/etc/nginx/nginx.conf</code>中。</p>\n<p>原文中的unix socket链接写法有错误，应该使用<code>unix:/path/to/socket.sock</code>,unix后面只需一个<code>/</code>。\n（注意：我未按原文链接写法做验证，但是可以在一个stackoverflow的回答中找到参考）</p>\n',1,2),
+	(12,'2019-07-06','unix socket文件权限及文件属主设置问题','<p>在启动uWSGI的时候出现<code>chown(): Operation not permitted</code>错误，经检查此处有两个设置错误：</p>\n<ol>\n<li><p>之前使用一个修改用户属组的命令错误，误将nginx用户加入我的用户组，而非将我的用户加入nginx组。\n我不怎么用修改用户的命令，直接<code>vipw</code>、<code>vigr</code>挺方便的。</p>\n</li>\n<li><p>socket文件所在目录权限与属主设置错误。将<code>/run/uwsgi</code>目录的权限设置为<code>770</code>，属主设为<code>USER:nginx</code>即可解决问题。</p>\n</li>\n</ol>\n<p>具体有关的设置参考如下部分配置项：</p>\n<pre><code class=\"language-ini\">username = USER\nuid = %(username)\ngid = nginx\nsocket          = /run/uwsgi/owlsome.sock\npidfile         =/run/uwsgi/uwsgi.pid\nchown-socket = %(username):nginx\nchmod-socket = 664</code></pre>\n',1,0),
+	(13,'2019-07-06','圆锥曲线','<h1 id=\"one\">one</h1>\n<p>圆锥曲线在约公元前200年时就已被命名和研究了，其发现者为古希腊的数学家阿波罗尼奥斯，那时阿波罗尼阿斯对它们的性质已做了系统性的研究。</p>\n<h1 id=\"more\">more</h1>\n<p>圆锥曲线应用最广泛的定义为（椭圆，抛物线，双曲线的统一定义）</p>\n',1,0);
 
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -75,33 +107,6 @@ VALUES
 UNLOCK TABLES;
 
 
-# Dump of table articlepublish
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `articlepublish`;
-
-CREATE TABLE `articlepublish` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `articleId` int(10) unsigned NOT NULL,
-  `userId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `articleId` (`articleId`),
-  KEY `userId` (`userId`),
-  CONSTRAINT `articlepublish_ibfk_1` FOREIGN KEY (`articleId`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `articlepublish_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `articlepublish` WRITE;
-/*!40000 ALTER TABLE `articlepublish` DISABLE KEYS */;
-
-INSERT INTO `articlepublish` (`id`, `articleId`, `userId`)
-VALUES
-	(1,1,1);
-
-/*!40000 ALTER TABLE `articlepublish` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 # Dump of table comment
 # ------------------------------------------------------------
 
@@ -109,9 +114,9 @@ DROP TABLE IF EXISTS `comment`;
 
 CREATE TABLE `comment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `content` varchar(200) DEFAULT NULL,
+  `content` text,
   `articleId` int(10) unsigned NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` date DEFAULT '2019-07-05',
   `userId` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `articleId` (`articleId`),
@@ -120,6 +125,18 @@ CREATE TABLE `comment` (
   CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+
+INSERT INTO `comment` (`id`, `content`, `articleId`, `date`, `userId`)
+VALUES
+	(1,'哇，写的好',1,NULL,1),
+	(2,'我觉得不错',1,NULL,2),
+	(3,'真的水',1,NULL,1),
+	(4,'不可以，拒绝你',2,NULL,2);
+
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table competition
@@ -129,18 +146,18 @@ DROP TABLE IF EXISTS `competition`;
 
 CREATE TABLE `competition` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(128) DEFAULT '',
-  `name` varchar(256) DEFAULT '',
+  `type` text,
+  `name` text,
   `date` varchar(50) DEFAULT '',
   `link` varchar(100) DEFAULT '',
-  `desc` varchar(500) DEFAULT '',
+  `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `competition` WRITE;
 /*!40000 ALTER TABLE `competition` DISABLE KEYS */;
 
-INSERT INTO `competition` (`id`, `type`, `name`, `date`, `link`, `desc`)
+INSERT INTO `competition` (`id`, `type`, `name`, `date`, `link`, `description`)
 VALUES
 	(1,'计算机与互联网','全国大学生办公软件高级应用大赛（Word、Excel、Powerpoint）','8','http://www.cnccac.com/case2.php','为贯彻习近平主席在十九大报告中关于“推动互联网、大数据、人工智能和实体经济深度融合”以及“善于运用互联网技术和信息化手段开展工作”等讲话精神，引导高校在校生学习掌握计算机与互联网知识，提高计算机的技能应用，中国软件行业协会培训中心将于2018年6月至12月举办全国大学生计算机技能应用大赛。大赛旨在增强广大在校大学生的IT应用技能，对于进一步落实学校培养应用型人才的目标要求，培育创新创业人才、促进产学研相结合有着重要意义。全国大学生办公软件高级应用大赛（Word、Excel、Powerpoint）为本次比赛专项赛之一。'),
 	(2,'计算机与互联网','全国大学生C语言设计大赛','8','http://www.cnccac.com/case3.php','为贯彻习近平主席在十九大报告中关于“推动互联网、大数据、人工智能和实体经济深度融合”以及“善于运用互联网技术和信息化手段开展工作”等讲话精神，引导高校在校生学习掌握计算机与互联网知识，提高计算机的技能应用，中国软件行业协会培训中心将于2018年6月至12月举办全国大学生计算机技能应用大赛。大赛旨在增强广大在校大学生的IT应用技能，对于进一步落实学校培养应用型人才的目标要求，培育创新创业人才、促进产学研相结合有着重要意义。全国大学生C语言设计大赛为本次比赛专项赛之一。'),
@@ -291,6 +308,34 @@ CREATE TABLE `competitioncollect` (
   CONSTRAINT `competitioncollect_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `competitioncollect` WRITE;
+/*!40000 ALTER TABLE `competitioncollect` DISABLE KEYS */;
+
+INSERT INTO `competitioncollect` (`id`, `competitionId`, `userId`)
+VALUES
+	(1,1,1);
+
+/*!40000 ALTER TABLE `competitioncollect` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table question
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `question`;
+
+CREATE TABLE `question` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `authorId` int(10) unsigned NOT NULL,
+  `title` text NOT NULL,
+  `content` text,
+  `date` date DEFAULT '2019-07-05',
+  `browseNum` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `authorId` (`authorId`),
+  CONSTRAINT `question_ibfk_1` FOREIGN KEY (`authorId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table user
@@ -301,26 +346,29 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(500) NOT NULL DEFAULT '',
   `role` tinyint(1) NOT NULL DEFAULT '1',
   `nickname` varchar(20) NOT NULL,
   `sex` tinyint(1) DEFAULT '2',
-  `school` varchar(12) DEFAULT NULL,
-  `major` varchar(20) DEFAULT NULL,
+  `school` varchar(12) DEFAULT '未填写学校',
+  `major` varchar(20) DEFAULT '未填写专业',
   `grade` tinyint(1) DEFAULT '0',
-  `email` varchar(30) DEFAULT NULL,
-  `picture` varchar(30) DEFAULT NULL,
-  `desc` varchar(100) DEFAULT '未添加个人简介',
-  `phone` varchar(11) DEFAULT NULL,
+  `email` varchar(30) DEFAULT '未填写邮箱',
+  `picture` varchar(30) DEFAULT 'ironman.png',
+  `description` text,
+  `phone` varchar(11) DEFAULT '未填写联系方式',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
-INSERT INTO `user` (`id`, `username`, `password`, `role`, `nickname`, `sex`, `school`, `major`, `grade`, `email`, `picture`, `desc`, `phone`)
+INSERT INTO `user` (`id`, `username`, `password`, `role`, `nickname`, `sex`, `school`, `major`, `grade`, `email`, `picture`, `description`, `phone`)
 VALUES
-	(1,'jack','123',0,'我叫小居居',1,'宁波大学','艺术与设计',0,NULL,NULL,'未添加个人简介',NULL);
+	(1,'jack','*23AE809DDACAF96AF0FD78ED04B6A265E05AA257',0,'我叫小居居',1,'宁波大学','艺术与设计',0,'123@qqq.com','ironman.png','未添加个人简介','123123123'),
+	(2,'rose','*5F6E71BF7C725D6604BC75AA0260D2D8E43F40EE',1,'小姐姐爱吃糖',2,'湖南大学','工商管理',0,'8888888@qq.com','ironman.png','我最美','88888888'),
+	(5,'kkk','*23AE809DDACAF96AF0FD78ED04B6A265E05AA257',1,'test0',1,'WHUT','computer',1,'zzj2222@gmail.com','ironman.png','kkkkkk','138888888'),
+	(11,'a','*23AE809DDACAF96AF0FD78ED04B6A265E05AA257',1,'路人甲',0,'清华大学','核物理',5,'kkkppp@qq.com','ironman.png','喜欢唱、跳、rap、篮球','138999999');
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;

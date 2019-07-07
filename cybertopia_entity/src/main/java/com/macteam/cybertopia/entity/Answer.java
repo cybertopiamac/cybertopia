@@ -2,11 +2,11 @@ package com.macteam.cybertopia.entity;
 
 import java.util.Date;
 
-public class Comment {
+public class Answer {
     private int id;
     private String content;
     private Date date;
-    private int articleId;
+    private int questionId;
     private int userId;
 
     public int getId() {
@@ -34,11 +34,11 @@ public class Comment {
     }
 
     public int getArticleId() {
-        return articleId;
+        return questionId;
     }
 
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
+    public void setArticleId(int questionId) {
+        this.questionId = questionId;
     }
 
     public int getUserId() {
@@ -51,12 +51,13 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Answer{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", date='" + date + '\'' +
-                ", articleId=" + articleId +
-                ", userId='" + userId + '\'' +
+                ", date=" + date +
+                ", questionId=" + questionId +
+                ", userId=" + userId +
                 '}';
     }
 }
+

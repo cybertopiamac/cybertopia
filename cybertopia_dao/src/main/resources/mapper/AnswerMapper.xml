@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.macteam.cybertopia.dao.IAnswerDao" >
+    <select id="getAnswerByUserId" resultType="Answer">
+        select * from answer where userId = #{userId}
+    </select>
+
+    <insert id="insertAnswer" parameterType="Answer">
+        insert into answer(content, questionId, date, userId)
+        values(#{content}, #{questionId}, #{date}, #{userId})
+    </insert>
+
+    <select id="getAnswerByQuestionId" resultType="Answer">
+        select * from answer where questionId = #{questionId}
+    </select>
+</mapper>

@@ -63,10 +63,8 @@ public class ArticleController {
     @RequestMapping(value = "/search.do", method = RequestMethod.GET)
     public String articleSearchListItem(Model model, String keyword, int pageIndex){
         int default_pack_size = 10;
-        System.out.println("kkkkey"+keyword);
         List<ArticleTitle> article_titles = articleService.getArticleListByKeywordRange(
                 keyword,pageIndex*default_pack_size, default_pack_size);
-        System.out.println(article_titles);
         model.addAttribute("article_titles",article_titles);
         boolean haveNext = article_titles.size() == default_pack_size;
         model.addAttribute("haveNext",haveNext);

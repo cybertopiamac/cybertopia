@@ -62,10 +62,8 @@ public class QuestionController {
     @RequestMapping(value = "/search.do", method = RequestMethod.GET)
     public String questionSearchListItem(Model model, String keyword, int pageIndex){
         int default_pack_size = 10;
-        System.out.println("kkkkey"+keyword);
         List<QuestionTitle> question_titles = questionService.getQuestionListByKeywordRange(
                 keyword,pageIndex*default_pack_size, default_pack_size);
-        System.out.println(question_titles);
         model.addAttribute("question_titles",question_titles);
         boolean haveNext = question_titles.size() == default_pack_size;
         model.addAttribute("haveNext",haveNext);
@@ -134,7 +132,6 @@ public class QuestionController {
         if (user != null) {
             answer.setUserId(user.getId());
             answer.setDate(new Date(System.currentTimeMillis()));
-            System.out.println(answer);
             return questionService.insertAnswer(answer);
         }else{
             return 0;

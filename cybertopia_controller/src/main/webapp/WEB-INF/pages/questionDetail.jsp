@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en" class="no-js">
     <%
     String path = request.getContextPath();
@@ -30,78 +32,32 @@
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".like").click(function(){
 
-                $(this).toggleClass("like_click");
-
-                //获得点击后的颜色
-                var color=$('#like_star').css('color');
-                //alert(color);
-                //点击收藏
-                if (color == 'rgb(255, 0, 0)' || color == 'red') {
-                    //传入文章id和用户id,写入文章收藏表
-                    //like_article()
-                    alert("已收藏");
-                }
-                //取消了收藏
-                else{
-                    //删除已传入的文章
-                    //delete_like();
-                    alert("已取消收藏");
-                }
-
-
-
-            });
-
+            function setDefault(input_id) {
+                return function () {
+                    var color = $(input_id).css('color');
+                    if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                        $(input_id).css('color', '#000').val("");
+                    }
+                };
+            }
             //评论框
             $("#comment_textarea").focus(setDefault('#comment_textarea'));
-            //
+            get_all_comment();
         });
-       //
-        function send_like(playload) {
-            $.ajax({
-                type: "POST",
-                // contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                url: "<%=basePath%>/article/like.do",
-                data: playload,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function() {
-                    console.log("like error")
-                }
-            });
+
+        function checkUserStatus() {
+            if (${userStatus} == 0 ) {
+                window.location = "<%=basePath%>user/toLogin.do";
+                // console.log("无用户");
+                return;
+            }
         }
 
-        //收藏文章
-        function like_article(){
-
-            var like_article = {
-                "articleId":${article.id},
-                "action":"set"
-            };
-            send_like(like_article);
-        }
-
-        //取消收藏
-        function delete_like(){
-
-            var dislike_article = {
-                "articleId":${article.id},
-                "action":"unset"
-            };
-            send_like(dislike_article);
-        }
-
-        function showCommentDiv(){
-             $("#publish_comment_div").show();
-        }
-        //
         //处理评论
-        function comment(){
 
+        function comment(){
+            checkUserStatus();
             var check_blank = true;
             var comment_content=$("#comment_textarea").val();
            //评论为空
@@ -116,7 +72,7 @@
                 if (r == true) {
                     //传入评论content
                     //向评论表写入数据
-                    //post_comment();
+                    post_comment();
                     alert("发表成功！");
                     $('#comment_textarea').val("");
                     return true;
@@ -130,28 +86,17 @@
 
         }
 
-
-        function setDefault(input_id) {
-            return function () {
-                var color = $(input_id).css('color');
-                if (color == 'rgb(255, 0, 0)' || color == 'red') {
-                    $(input_id).css('color', '#000').val("");
-                }
-            };
-        }
-
-
         function post_comment() {
-            var comment = {
-                "articleId":$(article.id),
+            var answer = {
+                "questionId":${question.id},
                 "content":$("#comment_textarea").val()
             };
             $.ajax({
                 type: "POST",
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
-                url: "<%=basePath%>/article/comment.do",
-                data: JSON.stringify(comment), // Note it is important
+                url: "<%=basePath%>/question/answer.do",
+                data: JSON.stringify(answer), // Note it is important
                 success: function (data) {
                     console.log(data);
                 },
@@ -161,7 +106,82 @@
             });
         }
 
+        function get_all_comment(){
+              var content={
+                  "questionId":${question.id}
+              };
+              $.ajax({
+                  type:"get",
+                  dataType:'json',
+                  url: "<%=basePath%>/question/answer.do",
+                  data: content,
+                  success: function (data) {
+                      console.log(data);
+                      if(data.length > 0){
 
+                          //执行显示所有评论的函数
+                          show_all_comment_full(data);
+                      }
+                      else{
+                          //评论区显示空
+                          console.log("kkkkkk empty")
+                          show_all_comment_empty();
+                      }
+
+                  },
+                  error: function() {
+                      console.log("like error");
+                  }
+              });
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
+        //动态添加div,每条评论占一个div
+        function insertComment(comment) {
+            var brother=$("#comments");
+            var div_content=$("<div class='comment_detail'></div>");
+            var comment_data=$("<h3>"+comment.userName+"</h3>" +
+                "<p class='content_p'>"+comment.content+"</p>" +
+                "<p class='time_p'>回答于&nbsp;<span>"+formatDate(comment.date)+"</span></p>");
+            div_content.html(comment_data);
+
+            //插入节点
+            brother.append(div_content);
+        }
+
+        function show_all_comment_full(data) {
+            //显示评论区
+
+            //添加数据
+            data.forEach(function (elem) {
+                insertComment(elem);
+            });
+
+            $(".article_comment").show();
+        }
+
+        function show_all_comment_empty() {
+            //动态添加div,每条评论占一个div
+            //显示评论区
+
+            var div_content=$("<div class='comment_detail' style='text-align: center'>暂无回答...</div>");
+            $("#comments").append(div_content);
+
+            /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
+
+            $(".article_comment").show();
+        }
 
     </script>
 </head>
@@ -172,11 +192,11 @@
     <div class="wrap clearfloat">
         <div class="nav">
             <ul class="clearfloat">
-                <li class="active">
-                    <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>
-                </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/main/index.do">首页</a></h2>
+                </li>
+                <li class="active">
+                    <h2><a href="${pageContext.request.contextPath}/article/all.do";>竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
@@ -190,11 +210,22 @@
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">登录</a>
-                        <a href="">个人信息查看</a>
-                    </div>
+                    <c:choose>
+                        <c:when test="${user!=null}">
+                            <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">注销</a>
+                                <a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                        <c:when test="${user==null}">
+                            <h2><a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </li>
                 <li>
                     <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
@@ -244,21 +275,26 @@
     <div class="article_content markdown">
         ${question.content}
     </div>
-    <div class="comment_bar">
-        <p class="comment_bar_p">
-            <button class="like"><span class="star" id="like_star">&#9733;</span>收藏&nbsp;</button>|
-            <button onclick="showCommentDiv()"><span class="write_comment">&#9997;</span>发表评论</button>
-        </p>
-    </div>
+
     <!--评论框-->
-    <div  id="publish_comment_div" style="display: none">
-    <div class="article_content">
-        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入评论..." ></textarea>
+    <div  id="publish_comment_div">
+    <div class="article_content" style="margin-top: 10px">
+        <textarea id="comment_textarea" style="width:100%;height:100px;overflow: auto;" placeholder="在此输入答案..." ></textarea>
     </div>
     <div class="publish_bar">
-        <button type="button" class="publish_comment_button" onclick="comment()">确认发表</button>
+        <button type="button" class="publish_comment_button" onclick="comment()">发表回答</button>
     </div>
-    </div>：
+    </div>
+    <!---->
+
+    <!--显示所有评论-->
+
+     <div class="article_comment">
+         <div id="comment_title" style="background-color:#669999;color:#FFF;font-size:16px;height:40px;line-height: 40px">
+             <span style="vertical-align: middle;height:40px;padding:5px;">所有答案</span>
+         </div>
+         <div id="comments"></div>
+     </div>
     <!---->
 </div>
 </body>

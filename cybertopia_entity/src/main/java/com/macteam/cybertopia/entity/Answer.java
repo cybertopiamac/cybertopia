@@ -33,11 +33,11 @@ public class Answer {
         this.date = date;
     }
 
-    public int getArticleId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setArticleId(int questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 

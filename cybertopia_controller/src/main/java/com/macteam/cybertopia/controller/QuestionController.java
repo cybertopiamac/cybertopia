@@ -109,18 +109,19 @@ public class QuestionController {
 
     @RequestMapping(value = "/answer.do", method = RequestMethod.POST)
     @ResponseBody
-    public int questionAnswer(HttpServletRequest request, Answer answer){
+    public int questionAnswer(HttpServletRequest request, @RequestBody Answer answer){
         User user = userService.getCurrentUser(request);
         if (user != null) {
             answer.setUserId(user.getId());
             answer.setDate(new Date(System.currentTimeMillis()));
+            System.out.println(answer);
             return questionService.insertAnswer(answer);
         }else{
             return 0;
         }
     }
 
-    @RequestMapping(value = "/comment.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/answer.do", method = RequestMethod.GET)
     @ResponseBody
     public List<AnswerInfo> questionAnswer(HttpServletRequest request, @Param("questionId") int questionId){
         List<AnswerInfo> answers= questionService.getAnswerByQuestionId(questionId);

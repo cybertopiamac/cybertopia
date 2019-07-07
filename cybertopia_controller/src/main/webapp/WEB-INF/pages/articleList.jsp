@@ -41,7 +41,7 @@
                     <h2><a href="${pageContext.request.contextPath}/main/index.do">首页</a></h2>
                 </li>
                 <li class="active">
-                    <h2><a href="${pageContext.request.contextPath}/article/all.do";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>

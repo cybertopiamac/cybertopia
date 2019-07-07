@@ -129,7 +129,7 @@
 
         function getcompetition() {
             var form = document.forms[0];
-            form.action = "${pageContext.request.contextPath}/main/index.do";
+            form.action = "${pageContext.request.contextPath}/comp/compList.do";
             form.method = "post";
             form.submit();
         }
@@ -143,10 +143,10 @@
     <div class="wrap clearfloat">
         <div class="nav">
             <ul class="clearfloat">
-                <li class="active">
+                <li>
                     <h2><a href="${pageContext.request.contextPath}/main/index.do">首页</a></h2>
                 </li>
-                <li>
+                <li class="active">
                     <h2><a href="${pageContext.request.contextPath}/comp/compList.do">竞赛</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="${pageContext.request.contextPath}/comp/compList.do">热门竞赛</a>
@@ -216,62 +216,11 @@
 </div>
 <!--top-->
 
-<!--banner-->
-<div class="banner" id="banner">
-    <ul class="sliderBanner">
-        <li>
-            <a href="http://zhaopin.chinasoftinc.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner2.img.jpg"/></a>
-        </li>
-        <li>
-            <a href="https://job.bytedance.com/campus/position" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner.img.jpg"/></a>
-        </li>
-        <li>
-            <a href="https://job.alibaba.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner1.img.jpg"/></a>
-        </li>
-        <li>
-            <a href="http://puyi.52jingsai.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
-        </li>
-    </ul>
-</div>
-<!--/banner-->
 
 <div class="homeBox homeIdear"  align="center">
     <div class="wrap">
         <div class="homeTitle">
-            <!--搜索栏-->
-            <div class="search-products" id="search">
-                <form id="form-search-products" class="form-inline">
-                    <div class="form-group">
-                        <div class="list-select-category">
-                            <select name="selectedType" id="selectedType">
-                                <option  selected="selected" value="">所有种类</option>
-                                <option value="计算机与互联网">计算机与互联网</option>
-                                <option value="创业大赛">创业大赛</option>
-                                <option value="营销策划">营销策划</option>
-                                <option value="金融比赛">金融比赛</option>
-                                <option value="广告创意">广告创意</option>
-                                <option value="设计大赛">设计大赛</option>
-                                <option value="文学演讲">文学演讲</option>
-                                <option value="播音主持">播音主持</option>
-                                <option value="动漫书画">动漫书画</option>
-                                <option value="影视摄影">影视摄影</option>
-                                <option value="学科学术">学科学术</option>
-                                <option value="科技大赛">科技大赛</option>
-                                <option value="公益大赛">公益大赛</option>
-                            </select>
-                        </div><!-- .list-select-category end -->
-                    </div><!-- .form-group end -->
-                    <div class="form-group">
-                        <input type="text" value="${keywords}" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
-                    </div><!-- .form-group end -->
-                    <div class="form-group">
-                        <button type="submit" class="form-control" onclick="getcompetition()">Go</button>
-                    </div><!-- .form-group end -->
-                </form><!-- #form-search-products end -->
-            </div><!-- .search-products end -->
-
-
-            <h2>热门竞赛</h2>
+            <h2 id="hot">热门竞赛</h2>
             <h3><span>The hottest spot</span></h3>
             <div class="line"></div>
         </div>
@@ -309,7 +258,41 @@
     </div>
 </div>
 
+<!--搜索栏-->
+<div class="search-products" id="search">
+    <form id="form-search-products" class="form-inline">
+        <div class="form-group">
+            <div class="list-select-category">
+                <select name="selectedType" id="selectedType">
+                    <option  selected="selected" value="">所有种类</option>
+                    <option value="计算机与互联网">计算机与互联网</option>
+                    <option value="创业大赛">创业大赛</option>
+                    <option value="营销策划">营销策划</option>
+                    <option value="金融比赛">金融比赛</option>
+                    <option value="广告创意">广告创意</option>
+                    <option value="设计大赛">设计大赛</option>
+                    <option value="文学演讲">文学演讲</option>
+                    <option value="播音主持">播音主持</option>
+                    <option value="动漫书画">动漫书画</option>
+                    <option value="影视摄影">影视摄影</option>
+                    <option value="学科学术">学科学术</option>
+                    <option value="科技大赛">科技大赛</option>
+                    <option value="公益大赛">公益大赛</option>
+                </select>
+            </div><!-- .list-select-category end -->
+        </div><!-- .form-group end -->
+        <div class="form-group">
+            <input type="text" value="${keywords}" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
+        </div><!-- .form-group end -->
+        <div class="form-group">
+            <button type="submit" class="form-control" onclick="getcompetition()">Go</button>
+        </div><!-- .form-group end -->
+    </form><!-- #form-search-products end -->
+</div>
+<!-- .search-products end -->
 
+<div class="homeBox homeJoin">
+    <div class="wrap">
         <div class="homeTitle">
             <h2>竞赛库</h2>
             <h3><span>Competition Treasury</span></h3>
@@ -317,10 +300,10 @@
         </div>
 
         <div class="homeCamWrap">
-<%--            <c:set var="i" value="${-1}" scope="session"/>--%>
-            <c:forEach begin="1" end="2" var="pageNum" step="3">
+            <%--            <c:set var="i" value="${-1}" scope="session"/>--%>
+            <c:forEach begin="1" end="${12}" var="pageNum" step="3">
                 <ul class="homeCamList clearfloat">
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                        <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
                     <c:if test="${(pageInfo.pageNum-1)*12+pageNum<=pageInfo.total}">
                         <li>
                             <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id-1}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id-1}.png"/></a></div>
@@ -335,7 +318,7 @@
                             </div>
                         </li>
                     </c:if>
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                        <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
                     <c:if test="${(pageInfo.pageNum-1)*12+pageNum+1<=pageInfo.total}">
                         <li>
                             <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id}.png"/></a></div>
@@ -350,7 +333,7 @@
                             </div>
                         </li>
                     </c:if>
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                        <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
                     <c:if test="${(pageInfo.pageNum-1)*12+pageNum+2<=pageInfo.total}">
                         <li>
                             <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id+1}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id+1}.png"/></a></div>
@@ -361,18 +344,89 @@
                                 <p class="multi-line">
                                         ${comps[pageNum+1].description.substring(0,50)}${'...'}
                                 </p>
-                                <a class="more" href="<%=basePath%>main/compDetail.do?id=${comps[pageNum].id+1}">MORE+</a>
+                                <a class="more" href="<%=basePath%>comp/compDetail.do?id=${comps[pageNum].id+1}">MORE+</a>
                             </div>
                         </li>
                     </c:if>
                 </ul>
             </c:forEach>
+
+            <div class="demo" style="min-height: 100px;">
+                <div class="container">
+                    <div class="row pad-15">
+                        <div class="col-md-12">
+                            <nav class="pagination-outer" aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <c:if test="${pageInfo.pageNum>=2}">
+                                        <c:if test="${pageInfo.pageNum-4>=1}">
+                                            <li class="page-item">
+                                                <a onclick="nextPage(${pageInfo.pageNum-3})" class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${pageInfo.pageNum-4<1}">
+                                            <li class="page-item">
+                                                <a onclick="nextPage(1)" class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </c:if>
+
+                                    <c:if test="${pageInfo.pageNum>=3}">
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum-2})">${pageInfo.pageNum-2}</a></li>
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum-1})">${pageInfo.pageNum-1}</a></li>
+                                    </c:if>
+                                    <c:if test="${pageInfo.pageNum==2}">
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(1)">1</a></li>
+                                    </c:if>
+
+                                    <li class="page-item active"><a class="page-link" onclick="nextPage(${pageInfo.pageNum})">${pageInfo.pageNum}</a></li>
+
+                                    <c:if test="${pageInfo.pageNum<=pageInfo.pages-2}">
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum+1})" >${pageInfo.pageNum+1}</a></li>
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum+2})">${pageInfo.pageNum+2}</a></li>
+                                    </c:if>
+                                    <c:if test="${pageInfo.pageNum==pageInfo.lastPage-1}">
+                                        <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.lastPage})">${pageInfo.lastPage}</a></li>
+                                    </c:if>
+
+
+                                    <c:if test="${pageInfo.pageNum<=pageInfo.lastPage-1}">
+                                        <c:if test="${pageInfo.pageNum<=pageInfo.pages-4}">
+                                            <li class="page-item">
+                                                <a onclick="nextPage(${pageInfo.pageNum+3})" class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${pageInfo.pageNum>pageInfo.pages-4}">
+                                            <li class="page-item">
+                                                <a onclick="nextPage(${pageInfo.lastPage})" class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </c:if>
+                                    </c:if>
+                                    <%--                            </c:forEach>--%>
+
+                                </ul>
+
+
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
+
 </div>
 
 
-<%--footer--%>
+
 <div class="homeLink">
     <div class="wrap">
         <div class="homeTitle">
@@ -397,7 +451,6 @@
         </div>
     </div>
 </div>
-<%--end of footer--%>
 
 
 
@@ -423,7 +476,8 @@
     function nextPage(pageN){
         var tmp_selectedType="${selectedType}";
         var tmp_keywords="${keywords}";
-        var url= "${pageContext.request.contextPath}/main/index.do?page="+pageN+"&selectedType="+encodeURI(encodeURI(tmp_selectedType))+"&keywords="+encodeURI(encodeURI(tmp_keywords))+"#search";
+        var url= "${pageContext.request.contextPath}/comp/compList.do?page="+pageN+"&selectedType="+encodeURI(encodeURI(tmp_selectedType))+"&keywords="+encodeURI(encodeURI(tmp_keywords))+"#search";
+
 
         window.location.href =url;
     }

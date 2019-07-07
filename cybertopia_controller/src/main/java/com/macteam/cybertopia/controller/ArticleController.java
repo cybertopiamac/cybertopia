@@ -79,36 +79,37 @@ public class ArticleController {
 
     @RequestMapping("/write.do")
     public String articleWrite(HttpServletRequest request){
-//        User user = userLoginController.getCurrentUser(request);
-//        if(user != null)
-//            return "articleWrite";
-//        else
-//            return "login";
+        User user = userService.getCurrentUser(request);
+        if(user != null)
+            return "articleWrite";
+        else
+            return "login";
 
         // 测试用代码
-        return "articleWrite";
+//        return "articleWrite";
     }
 
     @RequestMapping(value = "/post.do", method= RequestMethod.POST)
     @ResponseBody
     public int articlePost(HttpServletRequest request, @RequestBody Article article){
-//        User user = userLoginController.getCurrentUser(request);
-//        if(user != null) {
-//            article.setAuthorId(user.getId());
+        User user = userService.getCurrentUser(request);
+        if(user != null) {
+            article.setAuthorId(user.getId());
 //            article.setAuthorId(1);
-//            article.setDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//            articleService.insertArticle(article);
-//            return "redirect:/article/all.do";
-//        }
+            article.setDate(new Date(System.currentTimeMillis()));
+            int result = articleService.insertArticle(article);
+            return result;
+        }
+        return 0;
 //        else
 //        return "login";
 
         // 测试用代码
-        article.setAuthorId(1);
-        article.setDate(new Date(System.currentTimeMillis()));
-        int result = articleService.insertArticle(article);
-        System.out.println(article.toString());
-        return result;
+//        article.setAuthorId(1);
+//        article.setDate(new Date(System.currentTimeMillis()));
+//        int result = articleService.insertArticle(article);
+//        System.out.println(article.toString());
+//        return result;
     }
 
 

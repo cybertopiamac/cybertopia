@@ -6,18 +6,18 @@
     String basePath = request.getScheme() + "://"
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
-    String toDetailBase = basePath+"main/compDetail.do?id=";
+    String toCompDetailBase = basePath+"comp/compDetail.do?id=";
 %>
 
 <html lang="en" class="no-js">
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/main.css"/>
 
     <!--以下三个用于搜索栏css-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/others/style-en.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/others/css-assets.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>
-
 
     <link rel="stylesheet" href="bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -129,7 +129,7 @@
 
         function getcompetition() {
             var form = document.forms[0];
-            form.action = "${pageContext.request.contextPath}/main/index.do";
+            form.action = "${pageContext.request.contextPath}/comp/compList.do";
             form.method = "post";
             form.submit();
         }
@@ -269,103 +269,149 @@
                     </div><!-- .form-group end -->
                 </form><!-- #form-search-products end -->
             </div><!-- .search-products end -->
-
-
-            <h2>热门竞赛</h2>
-            <h3><span>The hottest spot</span></h3>
-            <div class="line"></div>
-        </div>
-        <div class="homeIdearWrap">
-            <ul class="slideHomeIdear clearfloat">
-                <li>
-                    <h3>中国大学生计算机设计大赛</h3>
-                    <div class="line"></div>
-                    <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img1.jpg"/></div>
-                    <p>
-                        大赛是创新创业人才培养计算机教育实践平台的具体举措，目的是提高大学生综合素质，具体落实、进一步推动高校本科面向21世纪的计算机教学的知识体系、课程体系、教学内容和教学……
-                    </p>
-                    <a href="http://jsjds.ruc.edu.cn" target="_blank">进入官网</a>
-                </li>
-                <li>
-                    <h3>华为软件精英挑战赛</h3>
-                    <div class="line"></div>
-                    <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img2.jpg"/></div>
-                    <p>
-                        华为软件精英挑战赛是华为公司面向在校大学生举办的大型软件竞赛，从2015年至今已成功举办四届。在软件精英挑战赛的舞台上，我们相信您可以充分展示软件设计与编程的能力、享受……
-                    </p>
-                    <a href="https://codecraft.huawei.com" target="_blank">进入官网</a>
-                </li>
-                <li>
-                    <h3>全国并行应用挑战赛</h3>
-                    <div class="line"></div>
-                    <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img3.jpg"/></div>
-                    <p>
-                        竞赛定位于中国的戈登贝尔奖，并于2014年开办“竞赛集训营”——为参赛者助跑，为从业者加速，共享平台，共赢未来。从第一届到第七届，PAC始终坚持初心，为寻找行业最佳应用、培养……
-                    </p>
-                    <a href="http://www.pac-hpc.com" target="_blank">进入官网</a>
-                </li>
-            </ul>
         </div>
     </div>
-</div>
+
+    <div class="homeTitle">
+        <h2>热门竞赛</h2>
+        <h3><span>Popular</span></h3>
+        <div class="line"></div>
+    </div>
+    <div class="homeIdearWrap">
+        <ul class="slideHomeIdear clearfloat">
+            <li>
+                <h3>中国大学生计算机设计大赛</h3>
+                <div class="line"></div>
+                <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img1.jpg"/></div>
+                <p>
+                    大赛是创新创业人才培养计算机教育实践平台的具体举措，目的是提高大学生综合素质，具体落实、进一步推动高校本科面向21世纪的计算机教学的知识体系、课程体系、教学内容和教学……
+                </p>
+                <a href="http://jsjds.ruc.edu.cn" target="_blank">进入官网</a>
+            </li>
+            <li>
+                <h3>华为软件精英挑战赛</h3>
+                <div class="line"></div>
+                <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img2.jpg"/></div>
+                <p>
+                    华为软件精英挑战赛是华为公司面向在校大学生举办的大型软件竞赛，从2015年至今已成功举办四届。在软件精英挑战赛的舞台上，我们相信您可以充分展示软件设计与编程的能力、享受……
+                </p>
+                <a href="https://codecraft.huawei.com" target="_blank">进入官网</a>
+            </li>
+            <li>
+                <h3>全国并行应用挑战赛</h3>
+                <div class="line"></div>
+                <div class="pic"><img src="${pageContext.request.contextPath}/temp/home.idear.img3.jpg"/></div>
+                <p>
+                    竞赛定位于中国的戈登贝尔奖，并于2014年开办“竞赛集训营”——为参赛者助跑，为从业者加速，共享平台，共赢未来。从第一届到第七届，PAC始终坚持初心，为寻找行业最佳应用、培养……
+                </p>
+                <a href="http://www.pac-hpc.com" target="_blank">进入官网</a>
+            </li>
+        </ul>
+    </div>
 
 
-        <div class="homeTitle">
-            <h2>竞赛库</h2>
-            <h3><span>Competition Treasury</span></h3>
-            <div class="line"></div>
+    <div class="homeTitle">
+        <h2>竞赛库</h2>
+        <h3><span>Treasury</span></h3>
+        <div class="line"></div>
+    </div>
+    <div class="homeCamWrap" style="width: 90%; margin: 0 auto;">
+    <%--            <c:set var="i" value="${-1}" scope="session"/>--%>
+        <c:forEach begin="1" end="2" var="pageNum" step="3">
+            <ul class="homeCamList clearfloat">
+    <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                <c:if test="${(pageInfo.pageNum-1)*12+pageNum<=pageInfo.total}">
+                    <li>
+                        <div class="pic"><a href="<%=toCompDetailBase%>${comps[pageNum-1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum-1].id}.png"/></a></div>
+                        <div class="homeCamCont">
+                            <h3 class="single-line"><a href="<%=toCompDetailBase%>${comps[pageNum-1].id}">${comps[pageNum-1].name}</a></h3>
+                            <h4>2019-${comps[pageNum-1].date}</h4>
+                            <div class="line"></div>
+                            <p class="multi-line">
+                                    ${comps[pageNum-1].description.substring(0,50)}${'...'}
+                            </p>
+                            <a class="more" href="<%=toCompDetailBase%>${comps[pageNum-1].id}">MORE+</a>
+                        </div>
+                    </li>
+                </c:if>
+    <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                <c:if test="${(pageInfo.pageNum-1)*12+pageNum+1<=pageInfo.total}">
+                    <li>
+                        <div class="pic"><a href="<%=toCompDetailBase%>${comps[pageNum].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id}.png"/></a></div>
+                        <div class="homeCamCont">
+                            <h3 class="single-line"><a href="<%=toCompDetailBase%>${comps[pageNum].id}"${pageContext.request.contextPath}">${comps[pageNum].name}</a></h3>
+                            <h4>2019-${comps[pageNum].date}</h4>
+                            <div class="line"></div>
+                            <p class="multi-line">
+                                    ${comps[pageNum].description.substring(0,50)}${'...'}
+                            </p>
+                            <a class="more" href="<%=toCompDetailBase%>${comps[pageNum].id}">MORE+</a>
+                        </div>
+                    </li>
+                </c:if>
+    <%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
+                <c:if test="${(pageInfo.pageNum-1)*12+pageNum+2<=pageInfo.total}">
+                    <li>
+                        <div class="pic"><a href="<%=toCompDetailBase%>${comps[pageNum+1].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum+1].id}.png"/></a></div>
+                        <div class="homeCamCont">
+                            <h3 class="single-line"><a href="<%=toCompDetailBase%>${comps[pageNum+1].id}">${comps[pageNum+1].name}</a></h3>
+                            <h4>2019-${comps[pageNum+1].date}</h4>
+                            <div class="line"></div>
+                            <p class="multi-line">
+                                    ${comps[pageNum+1].description.substring(0,50)}${'...'}
+                            </p>
+                            <a class="more" href="<%=toCompDetailBase%>${comps[pageNum+1].id}">MORE+</a>
+                        </div>
+                    </li>
+                </c:if>
+            </ul>
+        </c:forEach>
+    </div>
+
+
+    <div class="homeTitle">
+        <h2>竞赛文章</h2>
+        <h3><span>Articles</span></h3>
+        <div class="line"></div>
+    </div>
+    <div>
+        <div class="article_titles">
+            <c:forEach var="article_title" begin="1" end="3" items="${article_titles}" varStatus="status">
+                <div class="article_title">
+                    <a href="<%=basePath%>/article/detail.do?articleId=${article_title.id}">
+                        <h1>${article_title.title}</h1>
+                        <p>
+                            <span>${article_title.authorName}</span>
+                            <span class="pub_time">${article_title.date}</span>
+                            <span class="read_number">浏览量:
+                                <span>${article_title.browseNum}</span>
+                            </span>
+                        </p>
+                    </a>
+                </div>
+            </c:forEach>
         </div>
+    </div>
 
-        <div class="homeCamWrap">
-<%--            <c:set var="i" value="${-1}" scope="session"/>--%>
-            <c:forEach begin="1" end="2" var="pageNum" step="3">
-                <ul class="homeCamList clearfloat">
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
-                    <c:if test="${(pageInfo.pageNum-1)*12+pageNum<=pageInfo.total}">
-                        <li>
-                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id-1}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id-1}.png"/></a></div>
-                            <div class="homeCamCont">
-                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum].id-1}">${comps[pageNum-1].name}</a></h3>
-                                <h4>2019-${comps[pageNum-1].date}</h4>
-                                <div class="line"></div>
-                                <p class="multi-line">
-                                        ${comps[pageNum-1].description.substring(0,50)}${'...'}
-                                </p>
-                                <a class="more" href="<%=toDetailBase%>${comps[pageNum].id-1}">MORE+</a>
-                            </div>
-                        </li>
-                    </c:if>
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
-                    <c:if test="${(pageInfo.pageNum-1)*12+pageNum+1<=pageInfo.total}">
-                        <li>
-                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id}.png"/></a></div>
-                            <div class="homeCamCont">
-                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum].id}"${pageContext.request.contextPath}">${comps[pageNum].name}</a></h3>
-                                <h4>2019-${comps[pageNum].date}</h4>
-                                <div class="line"></div>
-                                <p class="multi-line">
-                                        ${comps[pageNum].description.substring(0,50)}${'...'}
-                                </p>
-                                <a class="more" href="<%=toDetailBase%>${comps[pageNum].id}">MORE+</a>
-                            </div>
-                        </li>
-                    </c:if>
-<%--                    <c:set var="i" value="${i+1}" scope="session"/>--%>
-                    <c:if test="${(pageInfo.pageNum-1)*12+pageNum+2<=pageInfo.total}">
-                        <li>
-                            <div class="pic"><a href="<%=toDetailBase%>${comps[pageNum].id+1}"><img src="${pageContext.request.contextPath}/images/competition_images/${comps[pageNum].id+1}.png"/></a></div>
-                            <div class="homeCamCont">
-                                <h3 class="single-line"><a href="<%=toDetailBase%>${comps[pageNum].id+1}">${comps[pageNum+1].name}</a></h3>
-                                <h4>2019-${comps[pageNum+1].date}</h4>
-                                <div class="line"></div>
-                                <p class="multi-line">
-                                        ${comps[pageNum+1].description.substring(0,50)}${'...'}
-                                </p>
-                                <a class="more" href="<%=basePath%>main/compDetail.do?id=${comps[pageNum].id+1}">MORE+</a>
-                            </div>
-                        </li>
-                    </c:if>
-                </ul>
+    <div class="homeTitle">
+        <h2>竞赛问答</h2>
+        <h3><span>Questions</span></h3>
+        <div class="line"></div>
+    </div>
+    <div>
+        <div class="article_titles">
+            <c:forEach var="question_title" begin="1" end="3" items="${question_titles}" varStatus="status">
+                <div class="article_title">
+                    <a href="<%=basePath%>question/detail.do?questionId=${question_title.id}">
+                        <h1>${question_title.title}</h1>
+                        <p><span>${question_title.authorName}</span>
+                            <span class="pub_time">${question_title.date}</span>
+                            <span class="read_number">
+                            浏览量:<span>${question_title.browseNum}</span>
+                        </span>
+                        </p>
+                    </a>
+                </div>
             </c:forEach>
         </div>
     </div>

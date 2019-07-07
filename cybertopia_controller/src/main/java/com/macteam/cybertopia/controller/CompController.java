@@ -47,23 +47,20 @@ public class CompController {
             model.addAttribute("comps", comps);
             model.addAttribute("selectedType",selectedType);
             model.addAttribute("keywords",keywords);
-            return "compList";
-//            return "redirect:/comp/compList#search";
-
+//            return "compList.do#search";
+//            return "redirect:/compList#search";
+            return "redirect:/compList.do#search";
         }
         else{
             List<Competition> comps = compService.getCompetitionsBySearch(page, size, t_keywords, t_selectedType);
             PageInfo pageInfo = new PageInfo(comps);
             model.addAttribute("pageInfo", pageInfo);
 
-
             model.addAttribute("comps", comps);
+            System.err.println(comps);
             model.addAttribute("selectedType",t_selectedType);
             model.addAttribute("keywords",t_keywords);
             return "compList";
-//            return "redirect:comp/compList#search";
-//            return "redirect:/comp/compList.do#search";
-
         }
     }
 

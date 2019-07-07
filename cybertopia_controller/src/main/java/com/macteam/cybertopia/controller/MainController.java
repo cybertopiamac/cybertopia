@@ -3,7 +3,11 @@ package com.macteam.cybertopia.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.macteam.cybertopia.entity.Competition;
+import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.QuestionTitle;
+import com.macteam.cybertopia.service.impl.ArticleServiceImpl;
 import com.macteam.cybertopia.service.impl.CompServiceImpl;
+import com.macteam.cybertopia.service.impl.QuestionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,56 +25,47 @@ import java.util.List;
 public class MainController {
     @Autowired
     private CompServiceImpl compService;
+    @Autowired
+    private ArticleServiceImpl articleService;
+    @Autowired
+    private QuestionServiceImpl questionService;
 
     @RequestMapping("/index.do")
-    public String init(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "12") int size,@RequestParam(defaultValue = "") String selectedType, @RequestParam(defaultValue = "") String keywords) {
+    public String init(Model model,
+                       @RequestParam(defaultValue = "1") int page,
+                       @RequestParam(defaultValue = "12") int size,
+                       @RequestParam(defaultValue = "") String selectedType,
+                       @RequestParam(defaultValue = "") String keywords) {
 
-        String t_selectedType=null;
-        String t_keywords=null;
-        //中文转码
-        try {
-            t_keywords=URLDecoder.decode(keywords,"UTF-8");
-            t_selectedType=URLDecoder.decode(selectedType,"UTF-8");
+        // 获取比赛列表
+        List<Competition> comps = compService.getCompetitions(page, size);
+        PageInfo pageInfo = new PageInfo(comps);
+        model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("comps", comps);
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        System.out.println(t_keywords);
-        System.out.println(t_selectedType);
+        // 获取文章列表
+        List<ArticleTitle> article_titles =
+                articleService.getArticleListByRange(4, 4);
+        model.addAttribute("article_titles",article_titles);
 
-        if(selectedType==""&&keywords==""){
-            List<Competition> comps = compService.getCompetitions(page, size);
+        // 获取问题列表
+        List<QuestionTitle> question_titles =
+                questionService.getQuestionListByRange(4, 4);
+        model.addAttribute("question_titles",question_titles);
 
-            PageInfo pageInfo = new PageInfo(comps);
-            model.addAttribute("pageInfo", pageInfo);
-
-            model.addAttribute("comps", comps);
-            model.addAttribute("selectedType",selectedType);
-            model.addAttribute("keywords",keywords);
-            return "index";
-        }
-        else{
-            List<Competition> comps = compService.getCompetitionsBySearch(page, size, t_keywords, t_selectedType);
-            PageInfo pageInfo = new PageInfo(comps);
-            model.addAttribute("pageInfo", pageInfo);
-
-
-            model.addAttribute("comps", comps);
-            model.addAttribute("selectedType",t_selectedType);
-            model.addAttribute("keywords",t_keywords);
-            return "index";
-        }
+        return "index";
     }
 
 
+//    @RequestMapping("/compDetail.do")
+//    public String articleDetail(HttpServletRequest request, Model model, int id) {
+//        Competition competition = compService.getCompetitionById(id);
+//
+//        // 查询该竞赛是否收藏
+//
+//        model.addAttribute("comp", competition);
+//        return "compDetail";
+//    }
 
-    @RequestMapping("/compDetail.do")
-    public String articleDetail(HttpServletRequest request, Model model, int id) {
-        Competition competition = compService.getCompetitionById(id);
 
-        // 查询该竞赛是否收藏
-
-        model.addAttribute("comp", competition);
-        return "compDetail";
-    }
 }

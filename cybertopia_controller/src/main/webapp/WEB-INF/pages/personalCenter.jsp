@@ -402,11 +402,14 @@
                                 "</p>" +
                                 "<div class=\"main-btn\">" +
                                 "<input type=\"button\"" +
-                                "onclick=\"window.location='<%=basePath%>article/detail.do?articleId=" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?=" +
                                 data.articles[i].id +
                                 "'\"value=\"查看详情\">" +
                                 "</div>" +
                                 "</div>";
+                            console.log("onclick=\"window.location='<%=basePath%>article/detail.do?=" +
+                                data.articles[i].id +
+                                "'\"value=\"查看详情\">");
                         }
                         $("#articlecollectdiv").html(HtmlString);
                     }
@@ -430,9 +433,9 @@
                                 "</p>" +
                                 "<div class=\"main-btn\">" +
                                 "<input type=\"button\"" +
-                                "onclick=\"window.location='<%=basePath%>main/compDetail.do?id=" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?='" +
                                 data.competitions[i].id +
-                                "'\"value=\"查看详情\">" +
+                                "\"value=\"查看详情\">" +
                                 "</div>" +
                                 "</div>";
                         }
@@ -470,9 +473,7 @@
                         for(var i in list){
                             htmlString = htmlString+
                             "<div class=\"left-content\" >"+
-                            "<a href=\"<%=basePath%>article/detail.do?articleId="+
-                                    list[i].articleId+
-                            "\"><h3>"+
+                            "<a href=\"<%=basePath%>personalCenter/toArticleDetails.do\"><h3>"+
                             list[i].title+
                             "</h3></a><br>"+
                             "<p style=\"float: left\">"+

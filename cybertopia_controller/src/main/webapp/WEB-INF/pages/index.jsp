@@ -149,13 +149,15 @@
                 <li>
                     <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/article/write.do">写文章</a>
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/question/all.do">好问</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/question/write.do">写问题</a>
                         <a href="">精选问题</a>
                         <a href="">热搜问题</a>
                     </div>
@@ -181,8 +183,8 @@
                 <li>
                     <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">问题反馈</a>
-                        <a href="">版本信息</a>
+                        <a href="${pageContext.request.contextPath}/user/tofeedback.do">问题反馈</a>
+                        <a href="${pageContext.request.contextPath}/user/tomodeinformation.do">技术支持404</a>
                     </div>
                 </li>
             </ul>
@@ -282,7 +284,7 @@
                         </div><!-- .list-select-category end -->
                     </div><!-- .form-group end -->
                     <div class="form-group">
-                        <input type="text" value="" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
+                        <input type="text" value="${keywords}" name="keywords" id="keywords" class="form-control" placeholder="全国高校智能交通创新与创业大赛" data-alt-placeholder="Search for ...">
                     </div><!-- .form-group end -->
                     <div class="form-group">
                         <button type="submit" class="form-control" onclick="getcompetition()">Go</button>

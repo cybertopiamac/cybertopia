@@ -155,16 +155,6 @@
         <div class="content second-content">
             <div class="container-fluid">
                 <div class="col-md-6" id="div1">
-                    <div class="left-content">
-                        <h2>文章标题</h2>
-                        <p>内容。。。。</p>
-                        <div class="main-btn">
-                            <a style="color: #FFFFFF">发表日期：xx-xx-xx</a>&ensp;&ensp;&ensp;
-                            <a style="color: #FFFFFF">浏览量：xxx</a>
-                            <input type="button" style="margin-left: 20px"
-                                   onclick="window.location='<%=basePath%>/article//detail.do?articleId='" value="更多">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -182,35 +172,9 @@
                                     <div class="col-md-6"
                                          style="border-right: 1px solid #ffffff;overflow:scroll;height: 100%"
                                          id="articlecollectdiv">
-                                        <div style="float: top;position: fixed;">
-                                            <h2 style="height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);">
-                                                文章</h2>
-                                        </div>
-
-                                        <div class="left-content">
-                                            <h2>标题</h2>
-                                            <p>昵称</p>
-                                            <div class="main-btn">
-                                                <input type="button"
-                                                       onclick="window.location='<%=basePath%>article/detail.do?='"
-                                                       value="查看详情">
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="col-md-6" style="padding-left: 5px;overflow:scroll;height: 100%"
                                          id="competitioncollectdiv">
-                                        <div style="float:top;position: fixed">
-                                            <h2 style="height:26px;width:50px;background-color: rgba(0, 0, 0,0.75);border-bottom: none">
-                                                竞赛</h2>
-                                        </div>
-                                        <div class="right-content">
-                                            <h2>标题</h2>
-                                            <p>内容</p>
-                                            <div class="main-btn">
-                                                <input type="button" onclick="window.location='<%=basePath%>竞赛详情页'"
-                                                       value="查看详情">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -225,10 +189,6 @@
         <div class="content second-content">
             <div class="container-fluid">
                 <div class="col-md-6" id="commentdiv">
-                    <div class="left-content" >
-                        <a href="<%=basePath%>personalCenter/toArticleDetails.do"><h3>文章</h3></a><br>
-                        <p style="float: left">用户名：评论.....</p><p style="float: right">日期：xx-xx-xx</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -386,6 +346,7 @@
                         console.log("article is empty")
                         $("#articlecollectdiv").html("<h2>还没有收藏文章喔</h2>");
                     } else {
+                        console.log(data)
                         var HtmlString = "<div style=\"float: top;position: fixed;\">" +
                             "<h2 style=\"height:26px;width:50px;border-bottom: none;background-color: rgba(0, 0, 0,0.75);\">" +
                             "文章" +
@@ -402,14 +363,11 @@
                                 "</p>" +
                                 "<div class=\"main-btn\">" +
                                 "<input type=\"button\"" +
-                                "onclick=\"window.location='<%=basePath%>article/detail.do?=" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?articleId=" +
                                 data.articles[i].id +
                                 "'\"value=\"查看详情\">" +
                                 "</div>" +
                                 "</div>";
-                            console.log("onclick=\"window.location='<%=basePath%>article/detail.do?=" +
-                                data.articles[i].id +
-                                "'\"value=\"查看详情\">");
                         }
                         $("#articlecollectdiv").html(HtmlString);
                     }
@@ -428,12 +386,12 @@
                                 "<h2>" +
                                 data.competitions[i].name +
                                 "</h2>" +
-                                "<p> 热度：" +
+                                "<p> 分类：" +
                                 data.competitions[i].type +
                                 "</p>" +
                                 "<div class=\"main-btn\">" +
                                 "<input type=\"button\"" +
-                                "onclick=\"window.location='<%=basePath%>article/detail.do?='" +
+                                "onclick=\"window.location='<%=basePath%>article/detail.do?id='" +
                                 data.competitions[i].id +
                                 "\"value=\"查看详情\">" +
                                 "</div>" +
@@ -473,7 +431,9 @@
                         for(var i in list){
                             htmlString = htmlString+
                             "<div class=\"left-content\" >"+
-                            "<a href=\"<%=basePath%>personalCenter/toArticleDetails.do\"><h3>"+
+                            "<a href=\"<%=basePath%>article/detail.do?articleId="+
+                                list[i].articleId+
+                                "\"><h3>"+
                             list[i].title+
                             "</h3></a><br>"+
                             "<p style=\"float: left\">"+

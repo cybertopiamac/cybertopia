@@ -5346,9 +5346,10 @@ table tbody td:first-child {
 /* Search Products */
 
 .search-products {
-  text-align:center;
+  text-align: center;
   display: flex;
   margin-left: 30px;
+  margin-bottom: 40px;
 }
 
 @media (max-width: 480px) {

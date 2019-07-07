@@ -26,6 +26,7 @@ i {font-style: normal;}
 #top .logo {float: left; height: 100%;}
 #top .logo img {max-width: 100%; max-height: 100%; vertical-align: middle;}
 #top .nav {float: left; margin: 30px 0 0 11%;}
+
 #top .nav ul {}
 #top .nav ul li {float: left; margin-left: 18px; position: relative;}
 #top .nav ul li:first-child {margin-left: 0;}
@@ -90,7 +91,7 @@ i {font-style: normal;}
 .bx-wrapper {margin: 0 auto 0; max-width: 100% !important;}
 .bx-wrapper .bx-pager {z-index: 22;}
 .bx-wrapper .bx-controls-direction a {z-index: 22;}
-.banner {width: 100%;}
+.banner {width: 100%; margin-top:90px;}
 .banner img {display: block; width: 100%;}
 .banner img.img2 {display: none;}
 .banner li {width: 100%; height: auto; position: relative; overflow: hidden; z-index: 22;}
@@ -119,13 +120,14 @@ i {font-style: normal;}
 
 .slideHomeIdear {}
 .homeIdearWrap {/*padding: 0 30px;*/}
-.slideHomeIdear li {float: left; width: 30.66%; margin-left: 4%; position: relative; /*margin: 0 36px;*/ }
+.slideHomeIdear li { float: left; width: 33.33%; padding: 15px; position: relative; border-radius: 5px/*margin: 0 36px;*/ }
 .slideHomeIdear li:first-child {margin-left: 0;}
 .slideHomeIdear li h3 {line-height: 30px; font-size: 18px; font-weight: 600; text-align: center;}
 .slideHomeIdear li .line {width: 24px; height: 2px; margin: 6px auto 0; background: #00CA9D;}
 .slideHomeIdear li .pic {margin-top: 20px;}
 .slideHomeIdear li p {height: 96px; margin-top: 12px; line-height: 24px; color: #999; overflow: hidden;}
-.slideHomeIdear li a {display: block; width: 94px; height: 34px; margin: 10px auto 0; line-height: 34px; font-size: 20px; text-align: center; color: #cccccc; background: #f1f1f1; border-radius: 17px;}
+.slideHomeIdear li a {display: block; width: 94px; height: 34px; margin: 10px auto 0; line-height: 34px; font-size: 14px; text-align: center; color: #cccccc; background: #f1f1f1; border-radius: 17px;}
+.slideHomeIdear li:hover {box-shadow:2px 2px 6px #000; transition: box-shadow 600ms; -moz-transition: box-shadow 600ms; /* Firefox 4 */ -webkit-transition: box-shadow 600ms; /* Safari 和 Chrome */ -o-transition: width 600ms; }
 .slideHomeIdear li:hover h3 {color: #00CA9D;}
 .slideHomeIdear li:hover a {color: #fff; background: #00CA9D;}
 .slideHomeIdear li:hover img {-webkit-transform: scale(1.1); -ms-transform: scale(1.1); -o-transform: scale(1.1); -moz-transform: scale(1.1); transform: scale(1.1);}

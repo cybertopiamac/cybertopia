@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main_css/style.css"/>
 
 
-
     <link rel="stylesheet" href="bootstrap.min.css">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -36,8 +35,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简洁的纯CSS3红色分页样式代码 </title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.6/css/bootstrap.min.css" /><!--CSS RESET-->
+    <%--<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.6/css/bootstrap.min.css" /><!--CSS RESET-->--%>
 
     <style>
         .pagination-outer {
@@ -57,7 +55,7 @@
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
-            line-height: 30px;
+            line-height: 200%;
             height: 45px;
             width: 45px;
             margin: 0 15px 0 0;
@@ -218,16 +216,16 @@
 <div class="banner" id="banner">
     <ul class="sliderBanner">
         <li>
-            <a href="http://zhaopin.chinasoftinc.com"><img src="${pageContext.request.contextPath}/temp/banner2.img.jpg"/></a>
+            <a href="http://zhaopin.chinasoftinc.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner2.img.jpg"/></a>
         </li>
         <li>
-            <a href="https://job.bytedance.com/campus/position"><img src="${pageContext.request.contextPath}/temp/banner.img.jpg"/></a>
+            <a href="https://job.bytedance.com/campus/position" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner.img.jpg"/></a>
         </li>
         <li>
-            <a href="https://job.alibaba.com"><img src="${pageContext.request.contextPath}/temp/banner1.img.jpg"/></a>
+            <a href="https://job.alibaba.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner1.img.jpg"/></a>
         </li>
         <li>
-            <a href="http://puyi.52jingsai.com"><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
+            <a href="http://puyi.52jingsai.com" target="_blank"><img src="${pageContext.request.contextPath}/temp/banner0.img.jpg"/></a>
         </li>
     </ul>
 </div>
@@ -485,7 +483,7 @@
                 </ul>
             </c:forEach>
 
-    <div class="demo" style="min-height: 300px;">
+    <div class="demo" style="min-height: 100px;">
         <div class="container">
             <div class="row pad-15">
                 <div class="col-md-12">

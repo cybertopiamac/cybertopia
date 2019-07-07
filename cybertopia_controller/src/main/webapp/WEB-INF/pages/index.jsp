@@ -188,20 +188,44 @@
             </ul>
         </div>
 
-        <div class="topRight clearfloat">
-            <div class="topLang">
-                <span class="topLangBtn"></span>
-                <a class="topLangEn" href="">English</a>
-                <a class="topLangCh" href="">China</a>
-            </div>
-            <div class="topSearch">
-                <span class="topSearchBtn"></span>
-                <div class="topSearchWrap clearfloat">
-                    <input type="text" name="" id="" value="请输入检索内容" placeholder=""/>
-                    <button></button>
-                </div>
-            </div>
+
+        <%--signin/userinfo--%>
+        <div class="topRight clearfloat" id="topRight">
+            <c:choose>
+                <c:when test="${user!=null}">
+                    <div class="userInfo">
+                        <a href="${pageContext.request.contextPath}/personalCenter/home.do">
+                            <img src="${pageContext.request.contextPath}/images/head_icon/${user.picture}"/>
+                            <span>${user.nickname}</span>
+                        </a>
+                        <div class="navDown">
+                            <a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a>
+                            <a href="${pageContext.request.contextPath}/user/toLogin.do">退出登陆</a>
+                        </div>
+                    </div>
+                </c:when>
+                <c:when test="${user==null}">
+                    <div class="signIn">
+                        <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                        <a href="${pageContext.request.contextPath}/newuser/toRegister.do">注册</a>
+                    </div>
+                </c:when>
+            </c:choose>
+            <%--<div class="topLang">--%>
+            <%--<span class="topLangBtn"></span>--%>
+            <%--<a class="topLangEn" href="">English</a>--%>
+            <%--<a class="topLangCh" href="">China</a>--%>
+            <%--</div>--%>
+            <%--<div class="topSearch">--%>
+            <%--<span class="topSearchBtn"></span>--%>
+            <%--<div class="topSearchWrap clearfloat">--%>
+            <%--<input type="text" name="" id="" value="请输入检索内容" placeholder=""/>--%>
+            <%--<button></button>--%>
+            <%--</div>--%>
+            <%--</div>--%>
         </div>
+        <%--end of signin/userinfo--%>
+
 
     </div>
     <div class="muen">

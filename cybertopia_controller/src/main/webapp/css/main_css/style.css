@@ -39,7 +39,22 @@ i {font-style: normal;}
 #top .navDown a {height: 50px; line-height: 50px; color: #4c4c4c; border-top: 1px solid #e5e5e5;}
 #top .navDown a:first-child {border-top: none;}
 #top .navDown a:hover {color: #fff; font-weight: 600; background: #00CA9D;}
-.topRight {float: right; height: 40px; line-height: 40px; color: #fff; margin-top: 24px;}
+
+
+
+#topRight {float: right; height: 100%; color: #fff; }
+#topRight * {color: white;}
+
+#topRight .userInfo {width: 160px; padding: 0 40px; height: 100%}
+#topRight .userInfo:hover { background: rgba(0, 0, 0, 0.1);}
+#topRight .userInfo a {display: block;}
+#topRight .userInfo  img {vertical-align:middle; width: 40px; height: 40px; border-radius: 50%}
+#topRight .userInfo .navDown {display: none; width: 160px; position: absolute; background: #fff; text-align: center; left: 90%; top: 90px; margin-left: -86px; /*margin-top: 32px;*/}
+#topRight .userInfo .navDown a {height: 50px; line-height: 50px; color: #4c4c4c; border-top: 1px solid #e5e5e5;}
+
+#topRight .signIn { float: left; }
+#topRight .signIn a { margin: 10px; padding:5px; font-size: 15px; color: white; border: 2px solid white; border-radius: 5px; }
+
 .topLang {float: left; width: 52px; padding-right: 20px; text-align: right; position: relative;}
 .topLang a {display: block; color: #fff;}
 .topLang .topLangBtn {position: absolute; width: 20px; height: 20px; background: url(../../images/main_images/ico.sj.png) no-repeat center; right: 0; top: 50%; margin-top: -10px;}
@@ -56,7 +71,7 @@ i {font-style: normal;}
 
 .navBtn {position: absolute;}
 
-.muen {display: none; position: absolute; width: 36px; height: 36px; box-sizing: border-box; padding: 10px 6px; background: #fff; border-radius: 6px; right: 3%; top: 50%; transform: translateY(-50%); z-index: 99;}
+.muen {display: none; position: absolute; width: 36px; height: 36px; box-sizing: border-box; padding: 10px 6px; background: #fff; border-radius: 6px; left: 3%; top: 50%; transform: translateY(-50%); z-index: 99;}
 .muen span {display: block; width: 100%; height: 3px; margin-top: 4px; background: #00CA9D; -moz-transition: all 0.3s ease-in;-webkit-transition: all 0.3s ease-in;-o-transition: all 0.3s ease-in;transition: all 0.3s ease-in;}
 .muen span:first-child {margin-top: 0;}
 .muen.on span.muenX {margin-top: 6px; -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg); transform: rotate(45deg);}
@@ -553,7 +568,7 @@ i {font-style: normal;}
 	#top.topHome {background: #00CA9D;}
 	#top {height: 58px; line-height: 58px; background: #00CA9D;}
 	#top .logo {width: 128px; position: relative; z-index: 99;}
-	.topRight {margin-top: 12px; height: 34px; line-height: 34px;}
+	.topRight { height: 34px; }
 	#top .nav {position: fixed;	width: 240px; height: 100%; margin: 0; left: -100%; top: 0; background: #00CA9D; z-index: 88; }
 	#top .nav ul {height: calc(100% - 60px); margin-top: 60px; padding-bottom: 30px; box-sizing: border-box; overflow: auto;}
 	#top .nav ul li {width: 100%; margin: 0;}
@@ -567,7 +582,12 @@ i {font-style: normal;}
 	#top .nav ul li.active h2 a,
 	#top .nav ul li h2.on a {color: #00CA9D; background: #fff;}
 	#top .nav ul li h2.on .navBtn {background: url(../../images/main_images/ico.btn.jt.r.a1.png) no-repeat center; background-size: 12px; -ms-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg);}
-	.topRight {margin-right: 6%;}
+	/*.topRight {margin-right: 6%;}*/
+
+	#topRight .userInfo  img {vertical-align:middle; width: 35px; height: 35px; border-radius: 50%}
+	.topRight .signIn { float: left; }
+	.topRight .signIn a { margin: 5px; padding:5px; font-size: 15px; color: white; border: 2px solid white; border-radius: 5px; }
+
 	.topLang {padding-right: 24px;}
 	.topLang .topLangBtn {width: 22px; height: 28px;margin-top: -14px;}
 	.topLang .topLangCh {top: 35px;}
@@ -665,7 +685,10 @@ i {font-style: normal;}
 }
 
 @media (max-width: 768px) {
-	.topRight {margin-right: 46px; position: relative; z-index: 99;}
+	.topRight {position: relative; z-index: 99;}
+	.topRight .signIn { float: left; }
+	.topRight .signIn a { margin: 5px; padding:5px; font-size: 15px; color: white; border: 2px solid white; border-radius: 5px; }
+
 	.topSearch {margin-left: 4px;}
 	#top .logo {width: 116px;}
 	.topSearch {width: 28px;}

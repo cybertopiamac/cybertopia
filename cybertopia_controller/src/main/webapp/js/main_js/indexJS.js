@@ -30,10 +30,17 @@ $(function(){
 	
 	function navPc(){
 		$(".nav ul li").hover(function(){
+			console.log(this);
 			$(this).find(".navDown").stop().slideToggle();
-			
 		})
-		
+
+
+		$(".userInfo").hover(function(){
+			console.log($(this).find(".navDown"));
+			$(this).find(".navDown").stop().slideToggle();
+		})
+
+
 		$(".topLang").hover(function(){
 			$(this).find(".topLangCh").stop().fadeToggle();
 		})
@@ -45,7 +52,7 @@ $(function(){
 			$(this).parents("h2").toggleClass("on").siblings(".navDown").slideToggle();
 			$(this).parents("li").siblings("li").find("h2").removeClass("on").siblings(".navDown").slideUp();
 		})
-		
+
 		$(".topLang").click(function(){
 			$(".topLangCh").stop().fadeToggle();
 		})
@@ -121,7 +128,6 @@ $(function(){
 			$(this).find(".homeCourTxt").stop().fadeOut();
 			$(this).find(".homeCourTxt h3").stop().animate({"margin-top":'120px'});
 		})
-		
 	}
 	
 	

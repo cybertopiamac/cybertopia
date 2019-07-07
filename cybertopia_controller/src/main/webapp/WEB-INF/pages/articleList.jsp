@@ -40,7 +40,7 @@
             //获取输入内容
             var input=$('#input_key').val();
             if (input == "" && $.trim(input).length == 0) {
-                $('#input_key').css('color', 'red').val("检索内容不能为空");
+                $('#input_key').css('color', 'red').val("搜索内容不能为空");
                 return false;
             }
             else{

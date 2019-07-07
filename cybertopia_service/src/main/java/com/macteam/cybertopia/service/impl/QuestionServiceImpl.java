@@ -47,4 +47,7 @@ public class QuestionServiceImpl implements IQuestionService {
     public List<AnswerInfo> getAnswerByQuestionId(int questionId){
         return answerDao.getAnswerByQuestionId(questionId);
     }
+    public List<QuestionTitle> getQuestionListByKeywordRange(String keyword, int skip, int limit){
+        return questionDao.getQuestionListByKeywordRange(keyword,skip,limit);
+    }
 }

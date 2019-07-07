@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IQuestionDao {
     List<QuestionTitle> getQuestionListByRange(@Param("skip") int skip, @Param("limit") int limit);
+    List<QuestionTitle> getQuestionListByKeywordRange(@Param("keyword") String keyword, @Param("skip") int skip, @Param("limit") int limit);
     //    List<Question> getQuestionListByKeyword(String keyword);
     Question getQuestionById(int id);
     int deleteQuestionById(int id);

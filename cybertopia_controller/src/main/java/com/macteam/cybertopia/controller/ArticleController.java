@@ -53,6 +53,7 @@ public class ArticleController {
         return "articleListItem";
     }
 
+    // todo: 只支持英文搜索，可改进用js编码后的url
     @RequestMapping(value = "/search.do", method = RequestMethod.POST)
     public String articleSearchList(Model model, @Param("keyword") String keyword ){
         model.addAttribute("keyword",keyword);

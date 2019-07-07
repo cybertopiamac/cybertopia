@@ -52,6 +52,9 @@ public class ArticleController {
         return "articleListItem";
     }
 
+    //
+
+
     @RequestMapping("/detail.do")
     public String articleDetail(HttpServletRequest request, Model model, int articleId){
         Article article = articleService.getArticleById(articleId);

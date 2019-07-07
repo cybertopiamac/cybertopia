@@ -29,6 +29,75 @@
 
     <script src="<%=basePath%>js/main_js/jquery1.11.3.min.js"></script>
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#input_key").focus(setDefault('#input_key'));
+        });
+
+        function search_article(){
+            //获取输入内容
+            var input=$('#input_key').val();
+
+            console.log(input);
+
+            if (input == "" && $.trim(input).length == 0) {
+                $('#input_key').css('color', 'red').val("检索内容不能为空");
+            }
+
+            else{
+                //检索
+                search();
+            }
+        }
+
+        function setDefault(input_id) {
+            return function () {
+                var color = $(input_id).css('color');
+                if (color == 'rgb(255, 0, 0)' || color == 'red') {
+                    $(input_id).css('color', '#000').val("");
+                }
+            };
+        }
+
+        function search(){
+            //输入的关键字
+            var search_key={
+                "search_key":$('#input_key').val()
+            };
+            $.ajax({
+                type:"get",
+                dataType:'json',
+                url: "<%=basePath%>/article/search.do",
+                data: search_key,
+                success: function (data) {
+                    console.log(data);
+                    if(data.length > 0){
+
+                        //执行显示匹配的文章的函数
+                        show_all_article_full(data);
+                    }
+                    else{
+                        //无匹配的文章
+                        console.log("kkkkkk empty");
+                        show_all_article_empty();
+                    }
+
+                },
+                error: function() {
+                    console.log("like error");
+                }
+            });
+        }
+
+        function show_all_article_empty(){
+
+            var div_content=$("<div class='comment_detail' style='text-align: center'>没有匹配的文章...</div>");
+            //$(".article_title").append(div_content);
+        }
+
+    </script>
 </head>
 
 <body>
@@ -109,7 +178,21 @@
 <!--文章列表-->
 
 <div class="article-list">
+
     <div class="article-feed">
+
+        <!--search button-->
+        <div style="text-align:right;margin:5px;">
+
+            <input type="text" id="input_key" placeholder="按关键字搜索"
+                    onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   oncontextmenu = "value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
+                   style="background-color:#FFF;border-radius:25px;width:50%;height:30px;margin:0px;padding:20px;border:1px solid #CCC;outline:none;font-size:20px;" >
+            <button type="button" id="search_article_button" onclick="search_article()" style="background-color: #66CCCC;color:#FFF;font-size:20px;border:1px solid #66CCCC;padding:5px;border-radius:25px">检索文章</button>
+        </div>
+        <!---->
+
     </div>
     <div class="scroller-status">
         <div class="loader-ellips infinite-scroll-request">

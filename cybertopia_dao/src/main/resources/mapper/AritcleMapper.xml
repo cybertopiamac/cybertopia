@@ -9,6 +9,8 @@
         where article.authorId = user.id
         order by date desc limit #{skip}, #{limit}
     </select>
+
+
     <select id="getArticleById" resultType="Article" parameterType="int">
         select * from article where id = #{id}
     </select>

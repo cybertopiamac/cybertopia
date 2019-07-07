@@ -140,7 +140,7 @@ public class PersonalCenterController {
         String info_msg="";
         if(personalCenterService.updateUserInfo(user)>0){
             info_msg="修改成功";
-            if(!pic.equals(user.getPicture())){
+            if(!pic.equals(currentUser.getPicture())){
                 try {
                     String sourcePath=session.getServletContext().getRealPath("/");
                     File file=new File(sourcePath).getParentFile();
@@ -159,6 +159,7 @@ public class PersonalCenterController {
         else{
             info_msg="修改失败";
         }
+        System.out.println(pic);
         return JSON.toJSONString(info_msg);
     }
 

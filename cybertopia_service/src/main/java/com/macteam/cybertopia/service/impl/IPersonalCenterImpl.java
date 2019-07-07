@@ -5,10 +5,10 @@ import com.macteam.cybertopia.dao.IArticleDao;
 import com.macteam.cybertopia.dao.ICollectionDao;
 import com.macteam.cybertopia.dao.ICommentDao;
 import com.macteam.cybertopia.dao.IUserDao;
-import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
 import com.macteam.cybertopia.pojo.ArticleTitle;
+import com.macteam.cybertopia.pojo.CommentSimplify;
 import com.macteam.cybertopia.service.IPersonalCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,8 +76,8 @@ public class IPersonalCenterImpl implements IPersonalCenterService {
         return articles;
     }
 
-    public List<Comment> getCommentHistoryById(int id) {
-        List<Comment> comments = commentDao.getCommentByUserId(id);
-        return null;
+    public List<CommentSimplify> getCommentHistoryById(int id) {
+        List<CommentSimplify> comments = commentDao.getCommentByUserId(id);
+        return comments;
     }
 }

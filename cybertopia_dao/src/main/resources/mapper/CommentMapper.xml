@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.macteam.cybertopia.dao.ICommentDao" >
-    <select id="getCommentByUserId" resultType="Comment">
-        select * from comment where userId = #{userId}
+    <select id="getCommentByUserId" resultType="com.macteam.cybertopia.pojo.CommentSimplify">
+        select comment.`content`,comment.`articleId`,comment.`date`,article.title from comment inner join article on comment.articleId = article.id where userId = #{id}
     </select>
 
     <insert id="insertComment" parameterType="Comment">

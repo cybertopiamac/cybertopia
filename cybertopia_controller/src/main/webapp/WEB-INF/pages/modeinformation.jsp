@@ -38,7 +38,7 @@
 </head>
 <%--style="background-image:url(${pageContext.request.contextPath}/images/main_images/trumppresident111.png)"--%>
 <body style="background-image:url(${pageContext.request.contextPath}/images/main_images/trumppresident111.png)" >
-<h1 style="color:white ;font-size:20px;background-color:black">谭老师的照片集锦</h1>
+<h1 style="color:white ;font-size:20px;background-color:black">感谢&致敬谭老师</h1>
 <br>
 <center>
     <div id="bg">

@@ -1,0 +1,44 @@
+.comp_detail * {
+    margin: 15px;
+    color: #666666;
+    /*background-color:#ECF0F1;*/
+}
+
+.comp_detail {
+    margin: 75px auto;
+    width: 84%;
+}
+
+.comp_detail .comp_img {
+    overflow: hidden;
+}
+.comp_detail img {
+    width: 100%;
+}
+
+.comp_detail .comp_subtitle {
+    border-left: 5px solid #00DBC3;
+    padding-left: 5px;
+    font-size: 18px;
+}
+
+.comp_detail .comp_header .comp_title {
+    font-size: 28px;
+    color: black;
+}
+
+.comp_detail .comp_header .comp_tag {
+    width: fit-content;
+    padding: 2px;
+    border: 2px solid #00DBC3;
+    color: #00DBC3;
+    border-radius: 4px;
+}
+
+.comp_detail .comp_link a{
+    color: #00DBC3;
+}
+
+.comp_detail .comp_desc {
+    padding: 5px;
+}

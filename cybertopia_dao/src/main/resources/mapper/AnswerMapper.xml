@@ -10,7 +10,9 @@
         values(#{content}, #{questionId}, #{date}, #{userId})
     </insert>
 
-    <select id="getAnswerByQuestionId" resultType="Answer">
-        select * from answer where questionId = #{questionId}
+    <select id="getAnswerByQuestionId" resultType="com.macteam.cybertopia.pojo.AnswerInfo">
+        select answer.id, answer.content, answer.date, answer.questionId, user.nickname as userName
+        from answer, user
+        where answer.userId = user.id and answer.questionId = #{questionId}
     </select>
 </mapper>

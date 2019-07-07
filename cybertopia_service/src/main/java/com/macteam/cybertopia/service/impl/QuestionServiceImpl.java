@@ -5,6 +5,7 @@ import com.macteam.cybertopia.dao.ICollectionDao;
 import com.macteam.cybertopia.dao.IAnswerDao;
 import com.macteam.cybertopia.entity.Question;
 import com.macteam.cybertopia.entity.Answer;
+import com.macteam.cybertopia.pojo.AnswerInfo;
 import com.macteam.cybertopia.pojo.QuestionTitle;
 import com.macteam.cybertopia.service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class QuestionServiceImpl implements IQuestionService {
     public int insertAnswer(Answer answer){
         return answerDao.insertAnswer(answer);
     }
-    public List<Answer> getAnswerByQuestionId(int questionId){
+    public List<AnswerInfo> getAnswerByQuestionId(int questionId){
         return answerDao.getAnswerByQuestionId(questionId);
     }
 }

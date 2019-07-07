@@ -2,7 +2,6 @@ package com.macteam.cybertopia.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.macteam.cybertopia.dao.IUserDao;
-import com.macteam.cybertopia.entity.Article;
 import com.macteam.cybertopia.entity.Comment;
 import com.macteam.cybertopia.entity.Competition;
 import com.macteam.cybertopia.entity.User;
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.UUID;
 import java.util.List;
 
 @Controller
@@ -39,9 +38,13 @@ public class PersonalCenterController {
     }
 
     class TwoList{
+        public int isArticlesEmpty;
+        public int isCompetionEmpty;
         public List<ArticleTitle> articles;
         public List<Competition> competitions;
-        TwoList(List<ArticleTitle> article, List<Competition> competition){
+        TwoList(int articleStatus, int competionStatus, List<ArticleTitle> article, List<Competition> competition){
+            isArticlesEmpty = articleStatus;
+            isCompetionEmpty = competionStatus;
             articles = article;
             competitions = competition;
         }
@@ -59,12 +62,20 @@ public class PersonalCenterController {
 
     @RequestMapping(value ="/myLike")//获取收藏
     @ResponseBody
-    public String myLike(@RequestParam("id") int id){
+    public TwoList myLike(@RequestParam("id") int id){
         List<ArticleTitle> article_titles = getAticleCollect(id);
         List<Competition> competitions = getCompetitionCollect(id);
-        TwoList result = new TwoList(article_titles, competitions);
+        int articleStatus = 1;
+        int competitionStatus = 1;
+        if(!article_titles.isEmpty()){
+           articleStatus = 0;
+        }
+        if(!competitions.isEmpty()){
+            competitionStatus = 0;
+        }
+        TwoList result = new TwoList(articleStatus,competitionStatus, article_titles, competitions);
         System.out.println(JSON.toJSONString(result));
-        return JSON.toJSONString(result);
+        return result;
     }
 
 
@@ -83,48 +94,7 @@ public class PersonalCenterController {
         return JSON.toJSONString(comments);
     }
 
-    @RequestMapping("/file.do")
-    public String ini(){
-        return "file";
-    }
-    @RequestMapping("/upLoad.do")
-    public String upLoad(HttpServletRequest request,@RequestParam("file") MultipartFile dropzFile) {
 
-        System.out.println("开始");
-
-        //获取该文件的名字
-        String fileName = dropzFile.getOriginalFilename();
-        //获取服务器的绝对路径
-        String filePath = request.getSession().getServletContext().getRealPath("/upload");
-        //切割文件的后缀，获取文件的类型
-        String fileSuffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-        System.out.println(filePath);
-        //创建文件对象，把服务器的路径放进去
-        File file = new File(filePath);
-        //判断路径是否存在，不在创建
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        //拼接文件名  使用uuid防重名和文件的后缀，
-        file = new File(filePath, UUID.randomUUID() + fileSuffix);
-        if(!file.exists()){
-            try {
-                //创建文件
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            //开始搬运文件
-            dropzFile.transferTo(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "index";
-
-    }
 
     @RequestMapping(value ="/changePassword")
     @ResponseBody
@@ -149,9 +119,74 @@ public class PersonalCenterController {
         return JSON.toJSONString(pass_mag);
     }
 
-    @RequestMapping("/toArticleDetails.do")
-    public String toArticleDetails(){
-        return "redirect:/article/detail.do";
+    @RequestMapping(value = "/changeUserInfo")
+    @ResponseBody
+    public String getUserMsg(HttpSession session, @RequestParam(value="picture",required = false) MultipartFile picture, @RequestParam("sex") int sex,
+                             @RequestParam("school")String school, @RequestParam("major")String major,
+                             @RequestParam("grade")int grade, @RequestParam("description")String description,
+                             @RequestParam("phone")String phone, @RequestParam("email")String email){
+        User currentUser= (User) session.getAttribute("user");
+        String pic="";
+        if(picture==null){
+            pic=currentUser.getPicture();
+        }
+        else{
+            pic=picture.getOriginalFilename();
+        }
+        User user=new User(currentUser.getId(),currentUser.getUsername(),currentUser.getPassword(),
+                currentUser.getRole(),currentUser.getNickname(),sex,school,major,grade,email,description,
+                pic,phone);
 
+        String info_msg="";
+        if(personalCenterService.updateUserInfo(user)>0){
+            info_msg="修改成功";
+            if(!pic.equals(currentUser.getPicture())){
+                try {
+                    String sourcePath=session.getServletContext().getRealPath("/");
+                    File file=new File(sourcePath).getParentFile();
+                    String path=file.getParent()+"/src/main/webapp/images/head_icon/"+picture.getOriginalFilename();
+                    System.out.println(path);
+                    System.out.println(sourcePath+"images/head_icon/"+picture.getOriginalFilename());
+                    //picture.transferTo(new File(path));
+                    picture.transferTo(new File(sourcePath+"images/head_icon/"+picture.getOriginalFilename()));
+                    copyFile(sourcePath+"images/head_icon/"+picture.getOriginalFilename(),path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            session.setAttribute("user",user);
+        }
+        else{
+            info_msg="修改失败";
+        }
+        System.out.println(pic);
+        return JSON.toJSONString(info_msg);
     }
+
+    //图片放到head_icon
+    public void copyFile(String srcPathStr, String desPathStr) {
+        //1.获取源文件的名称
+        String newFileName = srcPathStr.substring(srcPathStr.lastIndexOf("\\")+1); //目标文件地址
+
+        try{
+            //2.创建输入输出流对象
+            FileInputStream fis = new FileInputStream(srcPathStr);
+            FileOutputStream fos = new FileOutputStream(desPathStr);
+
+            //创建搬运工具
+            byte datas[] = new byte[1024*8];
+            //创建长度
+            int len = 0;
+            //循环读取数据
+            while((len = fis.read(datas))!=-1){
+                fos.write(datas,0,len);
+            }
+            //3.释放资源
+            fis.close();
+            fis.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

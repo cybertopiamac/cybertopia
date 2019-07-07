@@ -66,12 +66,11 @@ public class MainController {
 
     @RequestMapping("/compDetail.do")
     public String articleDetail(HttpServletRequest request, Model model, int id) {
-        System.err.println("detail");
         Competition competition = compService.getCompetitionById(id);
-        System.err.println(competition);
 
         // 查询该竞赛是否收藏
 
+        model.addAttribute("comp", competition);
         return "compDetail";
     }
 }

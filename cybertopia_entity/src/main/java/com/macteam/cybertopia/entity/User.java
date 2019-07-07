@@ -14,6 +14,24 @@ public class User {
     private String description;
     private String picture;
     private String phone;
+    User(){}
+    public User(int id, String username, String password, int role,
+         String nickname, int sex, String school, String major,
+         int grade, String email, String description, String picture, String phone) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.nickname = nickname;
+        this.sex = sex;
+        this.school = school;
+        this.major = major;
+        this.grade = grade;
+        this.email = email;
+        this.description = description;
+        this.picture = picture;
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
@@ -67,10 +85,9 @@ public class User {
 
     public String showSex() {
         String sexString = "未知";
-        if (sex == 1){
+        if (sex == 1) {
             sexString = "男";
-        }
-        else if(sex == 0){
+        } else if (sex == 0) {
             sexString = "女";
         }
         return sexString;
@@ -107,44 +124,46 @@ public class User {
 
     public String showGrade() {
         String gradeString = "未知";
-        switch (grade){
-            case 1:{
+        switch (grade) {
+            case 1: {
                 gradeString = "大一";
                 break;
             }
-            case 2:{
+            case 2: {
                 gradeString = "大二";
                 break;
             }
-            case 3:{
+            case 3: {
                 gradeString = "大三";
                 break;
             }
-            case 4:{
+            case 4: {
                 gradeString = "大四";
                 break;
             }
-            case 5:{
+            case 5: {
                 gradeString = "研一";
                 break;
             }
-            case 6:{
+            case 6: {
                 gradeString = "研二";
                 break;
             }
-            case 7:{
+            case 7: {
                 gradeString = "研三";
                 break;
             }
-            case 8:{
+            case 8: {
                 gradeString = "博一";
                 break;
             }
-            case 9:{
+            case 9: {
                 gradeString = "博二";
                 break;
             }
-            default:{break;}
+            default: {
+                break;
+            }
         }
 
         return gradeString;
@@ -161,7 +180,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
 
     public String getPicture() {

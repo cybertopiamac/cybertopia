@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
@@ -129,7 +129,7 @@
 
         function getcompetition() {
             var form = document.forms[0];
-            form.action = "${pageContext.request.contextPath}/main/filterComp.do";
+            form.action = "${pageContext.request.contextPath}/main/index.do";
             form.method = "post";
             form.submit();
         }
@@ -489,57 +489,63 @@
                 <div class="col-md-12">
                     <nav class="pagination-outer" aria-label="Page navigation">
                         <ul class="pagination">
-                            <c:if test="${pageInfo.pageNum-4>=1}">
-                            <li class="page-item">
-                                <a href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum-3}" class="page-link" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            </c:if>
-                            <c:if test="${pageInfo.pageNum-4<1}">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/main/index.do?page=${1}" class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
+                            <c:if test="${pageInfo.pageNum>=2}">
+                                <c:if test="${pageInfo.pageNum-4>=1}">
+                                    <li class="page-item">
+                                        <a onclick="nextPage(${pageInfo.pageNum-3})" class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${pageInfo.pageNum-4<1}">
+                                    <li class="page-item">
+                                        <a onclick="nextPage(1)" class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
                             </c:if>
 
                             <c:if test="${pageInfo.pageNum>=3}">
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum-2}">${pageInfo.pageNum-2}</a></li>
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum-1}">${pageInfo.pageNum-1}</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum-2})">${pageInfo.pageNum-2}</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum-1})">${pageInfo.pageNum-1}</a></li>
                             </c:if>
                             <c:if test="${pageInfo.pageNum==2}">
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${1}">1</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(1)">1</a></li>
                             </c:if>
 
-                            <li class="page-item active"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum}">${pageInfo.pageNum}</a></li>
+                            <li class="page-item active"><a class="page-link" onclick="nextPage(${pageInfo.pageNum})">${pageInfo.pageNum}</a></li>
 
                             <c:if test="${pageInfo.pageNum<=pageInfo.pages-2}">
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum+1}">${pageInfo.pageNum+1}</a></li>
-                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum+2}">${pageInfo.pageNum+2}</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum+1})" >${pageInfo.pageNum+1}</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.pageNum+2})">${pageInfo.pageNum+2}</a></li>
                             </c:if>
                             <c:if test="${pageInfo.pageNum==pageInfo.lastPage-1}">
-                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.lastPage}">${pageInfo.lastPage}</a></li>
+                                <li class="page-item"><a class="page-link" onclick="nextPage(${pageInfo.lastPage})">${pageInfo.lastPage}</a></li>
                             </c:if>
 
 
-                            <c:if test="${pageInfo.pageNum<=pageInfo.pages-4}">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum+3}" class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
+                            <c:if test="${pageInfo.pageNum<=pageInfo.lastPage-1}">
+                                <c:if test="${pageInfo.pageNum<=pageInfo.pages-4}">
+                                    <li class="page-item">
+                                        <a onclick="nextPage(${pageInfo.pageNum+3})" class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${pageInfo.pageNum>pageInfo.pages-4}">
+                                    <li class="page-item">
+                                        <a onclick="nextPage(${pageInfo.lastPage})" class="page-link" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </c:if>
                             </c:if>
-                            <c:if test="${pageInfo.pageNum>pageInfo.pages-4}">
-                                <li class="page-item">
-                                    <a href="${pageContext.request.contextPath}/main/index.do?page=${pageInfo.lastPage}" class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </c:if>
-<%--                            </c:forEach>--%>
+                            <%--                            </c:forEach>--%>
 
                         </ul>
+
+
                     </nav>
                 </div>
             </div>
@@ -559,8 +565,9 @@
             <div class="line"></div>
         </div>
         <div class="homeLinkWrap">
-            <a href="http://www.chinasofti.com" target="_blank">中软国际</a><a href="http://www.github.com" target="_blank">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php" target="_blank">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn" target="_blank">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn" target="_blank">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php" target="_blank">全国大学生C语言设计大赛</a>
-            <a href="http://www.saikr.com" target="_blank">赛氪</a>
+            <a href="http://www.chinasofti.com" target="_blank">中软国际</a><a href="http://www.github.com" target="_blank">大型同性交友网站</a><a href="http://www.52jingsai.com/portal.php" target="_blank">我爱竞赛网</a> <a href="http://jsjds.ruc.edu.cn" target="_blank">中国大学生计算机设计大赛</a><a href="http://www.mcm.edu.cn" target="_blank">全国大学生数学建模竞赛</a><a href="http://www.cnccac.com/case3.php" target="_blank">全国大学生C语言设计大赛</a><a href="http://www.saikr.com" target="_blank">赛氪</a>
+            <br>
+            <a href="http://www.siemenscup-cimc.org.cn" target="_blank">“西门子杯”中国智能制造挑战赛</a><a href="http://univ.ciciec.com" target="_blank">全国大学生集成电路创新创业大赛</a><a href="http://www.dajiangsai.org" target="_blank">全国大学生“互联网+”创新大赛</a><a href="https://www.saikr.com/vse/37221" target="_blank">中国建设工程BIM大赛</a>
         </div>
     </div>
 </div>
@@ -582,5 +589,17 @@
         'pagerType': 'full',
 
     })
+</script>
+
+<script type="text/javascript">
+    //"${pageContext.request.contextPath}/main/index.do?page=${pageInfo.pageNum-3}&selectedType=${selectedType}&keywords=${keywords}"
+    function nextPage(pageN){
+        var tmp_selectedType="${selectedType}";
+        var tmp_keywords="${keywords}";
+        var url= "${pageContext.request.contextPath}/main/index.do?page="+pageN+"&selectedType="+encodeURI(encodeURI(tmp_selectedType))+"&keywords="+encodeURI(encodeURI(tmp_keywords));
+
+
+        window.location.href =url;
+    }
 </script>
 </html>

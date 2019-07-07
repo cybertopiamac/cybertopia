@@ -10,7 +10,9 @@
         values(#{content}, #{articleId}, #{date}, #{userId})
     </insert>
 
-    <select id="getCommentByArticleId" resultType="Comment">
-        select * from comment where articleId = #{articleId}
+    <select id="getCommentByArticleId" resultType="com.macteam.cybertopia.pojo.CommentInfo">
+        select comment.id, comment.content, comment.date, comment.articleId, user.nickname as userName
+        from comment, user
+        where comment.userId = user.id and comment.articleId = #{articleId}
     </select>
 </mapper>

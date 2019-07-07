@@ -10,7 +10,13 @@ import com.macteam.cybertopia.service.IPersonalCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -113,9 +119,74 @@ public class PersonalCenterController {
         return JSON.toJSONString(pass_mag);
     }
 
-    @RequestMapping("/toArticleDetails.do")
-    public String toArticleDetails(){
-        return "redirect:/article/detail.do";
+    @RequestMapping(value = "/changeUserInfo")
+    @ResponseBody
+    public String getUserMsg(HttpSession session, @RequestParam(value="picture",required = false) MultipartFile picture, @RequestParam("sex") int sex,
+                             @RequestParam("school")String school, @RequestParam("major")String major,
+                             @RequestParam("grade")int grade, @RequestParam("description")String description,
+                             @RequestParam("phone")String phone, @RequestParam("email")String email){
+        User currentUser= (User) session.getAttribute("user");
+        String pic="";
+        if(picture==null){
+            pic=currentUser.getPicture();
+        }
+        else{
+            pic=picture.getOriginalFilename();
+        }
+        User user=new User(currentUser.getId(),currentUser.getUsername(),currentUser.getPassword(),
+                currentUser.getRole(),currentUser.getNickname(),sex,school,major,grade,email,description,
+                pic,phone);
 
+        String info_msg="";
+        if(personalCenterService.updateUserInfo(user)>0){
+            info_msg="修改成功";
+            if(!pic.equals(currentUser.getPicture())){
+                try {
+                    String sourcePath=session.getServletContext().getRealPath("/");
+                    File file=new File(sourcePath).getParentFile();
+                    String path=file.getParent()+"/src/main/webapp/images/head_icon/"+picture.getOriginalFilename();
+                    System.out.println(path);
+                    System.out.println(sourcePath+"images/head_icon/"+picture.getOriginalFilename());
+                    //picture.transferTo(new File(path));
+                    picture.transferTo(new File(sourcePath+"images/head_icon/"+picture.getOriginalFilename()));
+                    copyFile(sourcePath+"images/head_icon/"+picture.getOriginalFilename(),path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            session.setAttribute("user",user);
+        }
+        else{
+            info_msg="修改失败";
+        }
+        System.out.println(pic);
+        return JSON.toJSONString(info_msg);
     }
+
+    //图片放到head_icon
+    public void copyFile(String srcPathStr, String desPathStr) {
+        //1.获取源文件的名称
+        String newFileName = srcPathStr.substring(srcPathStr.lastIndexOf("\\")+1); //目标文件地址
+
+        try{
+            //2.创建输入输出流对象
+            FileInputStream fis = new FileInputStream(srcPathStr);
+            FileOutputStream fos = new FileOutputStream(desPathStr);
+
+            //创建搬运工具
+            byte datas[] = new byte[1024*8];
+            //创建长度
+            int len = 0;
+            //循环读取数据
+            while((len = fis.read(datas))!=-1){
+                fos.write(datas,0,len);
+            }
+            //3.释放资源
+            fis.close();
+            fis.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

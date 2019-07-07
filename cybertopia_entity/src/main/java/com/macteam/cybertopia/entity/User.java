@@ -15,25 +15,23 @@ public class User {
     private String picture;
     private String phone;
     User(){}
-
-    User(int Id, String Username, String Password, int Role,
-         String Nickname, int Sex, String School, String Major,
-         int Grade, String Email, String Desc, String Picture, String Phone) {
-        id = Id;
-        username = Username;
-        password = Password;
-        role = Role;
-        nickname = Nickname;
-        sex = Sex;
-        school = School;
-        major = Major;
-        grade = Grade;
-        email = Email;
-        description = Desc;
-        picture = Picture;
-        phone = Phone;
+    public User(int id, String username, String password, int role,
+         String nickname, int sex, String school, String major,
+         int grade, String email, String description, String picture, String phone) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.nickname = nickname;
+        this.sex = sex;
+        this.school = school;
+        this.major = major;
+        this.grade = grade;
+        this.email = email;
+        this.description = description;
+        this.picture = picture;
+        this.phone = phone;
     }
-
 
     public int getId() {
         return id;

@@ -195,16 +195,18 @@
                 <li>
                     <h2><a href="${pageContext.request.contextPath}/main/index.do">首页</a></h2>
                 </li>
-                <li class="active">
-                    <h2><a href="${pageContext.request.contextPath}/article/all.do";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                <li>
+                    <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/article/write.do">写文章</a>
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
                     </div>
                 </li>
-                <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>
+                <li class="active">
+                    <h2><a href="${pageContext.request.contextPath}/question/all.do">好问</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/question/write.do">写问题</a>
                         <a href="">精选问题</a>
                         <a href="">热搜问题</a>
                     </div>
@@ -228,10 +230,10 @@
                     </c:choose>
                 </li>
                 <li>
-                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
+                    <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">常见问题</a>
-                        <a href="">在线视频</a>
+                        <a href="${pageContext.request.contextPath}/user/tofeedback.do">问题反馈</a>
+                        <a href="${pageContext.request.contextPath}/user/tomodeinformation.do">技术支持404</a>
                     </div>
                 </li>
             </ul>

@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="en" class="no-js">
 
     <%
@@ -116,35 +118,47 @@
     <div class="wrap clearfloat">
         <div class="nav">
             <ul class="clearfloat">
-                <li class="active">
+                <li>
                     <h2><a href="${pageContext.request.contextPath}/user/main.do">首页</a></h2>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写竞赛经验文章跳转界面";>竞赛经验文章</a><span class="navBtn"></span></h2>
+                    <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/article/write.do">写文章</a>
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
                     </div>
                 </li>
-                <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写好问界面">好问</a><span class="navBtn"></span></h2>
+                <li class="active">
+                    <h2><a href="${pageContext.request.contextPath}/question/all.do">好问</a><span class="navBtn"></span></h2>
                     <div class="navDown">
                         <a href="">精选问题</a>
                         <a href="">热搜问题</a>
                     </div>
                 </li>
                 <li>
-                    <h2><a href="${pageContext.request.contextPath}/这里写个人信息界面">个人信息</a><span class="navBtn"></span></h2>
-                    <div class="navDown">
-                        <a href="">登录</a>
-                        <a href="">个人信息查看</a>
-                    </div>
+                    <c:choose>
+                        <c:when test="${user!=null}">
+                            <h2><a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">注销</a>
+                                <a href="${pageContext.request.contextPath}/personalCenter/home.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                        <c:when test="${user==null}">
+                            <h2><a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息</a><span class="navBtn"></span></h2>
+                            <div class="navDown">
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">登录</a>
+                                <a href="${pageContext.request.contextPath}/user/toLogin.do">个人信息查看</a>
+                            </div>
+                        </c:when>
+                    </c:choose>
                 </li>
                 <li>
-                    <h2><a href="">加入我们</a><span class="navBtn"></span></h2>
+                    <h2><a href="">关于我们</a><span class="navBtn"></span></h2>
                     <div class="navDown">
-                        <a href="">常见问题</a>
-                        <a href="">在线视频</a>
+                        <a href="${pageContext.request.contextPath}/user/tofeedback.do">问题反馈</a>
+                        <a href="${pageContext.request.contextPath}/user/tomodeinformation.do">技术支持404</a>
                     </div>
                 </li>
             </ul>

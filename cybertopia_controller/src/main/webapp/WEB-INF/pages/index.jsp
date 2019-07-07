@@ -149,6 +149,7 @@
                 <li>
                     <h2><a href="${pageContext.request.contextPath}/article/all.do">竞赛经验文章</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/article/write.do">写文章</a>
                         <a href="">精选文章</a>
                         <a href="">教师经验</a>
                     </div>
@@ -156,6 +157,7 @@
                 <li>
                     <h2><a href="${pageContext.request.contextPath}/question/all.do">好问</a><span class="navBtn"></span></h2>
                     <div class="navDown">
+                        <a href="${pageContext.request.contextPath}/question/write.do">写问题</a>
                         <a href="">精选问题</a>
                         <a href="">热搜问题</a>
                     </div>

@@ -152,7 +152,7 @@
                        onpaste="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
                        oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9\u4E00-\u9FA5\.]/g,'')"
                        style="background-color:#FFF;border-radius:25px;width:50%;height:30px;margin:0px;padding:20px;border:1px solid #CCC;outline:none;font-size:20px;" >
-                <button type="submit" id="search_article_button"  style="background-color: #66CCCC;color:#FFF;font-size:20px;border:1px solid #66CCCC;padding:5px;border-radius:25px">搜索文章</button>
+                <button type="submit" id="search_article_button"  style="background-color: #66CCCC;color:#FFF;font-size:20px;border:1px solid #66CCCC;padding:5px;border-radius:25px">搜索提问</button>
 
             </form>
         </div>

@@ -134,6 +134,7 @@
             form.submit();
         }
 
+        console.log("hello, nice to meet u :)");
 
     </script>
 </head>

@@ -10,34 +10,69 @@
 %>
 
 
-<style>
-    .img-responsive {
-        display: inline-block;
-        height: auto;
-        max-width: 100%;
-    }
-</style>
+
 
 
 <head>
-
+    <script type="text/javascript">
+        var step = 1; // 移动的像素
+        var y = -1; // 垂直移动的方向，-1表示向上，1表示向下
+        var x = 1; // 水平移动的方向，-1表示向左，1表示向右
+        function myFloat()
+        {
+            var img = document.getElementById("myImg");
+// 获取图片和当前浏览器窗口上边距，由于img.style.top获取的值带px单位
+            var top = img.style.top.replace("px", "");
+// top = top - 100;
+// img.style.top = top + "px";
+// 获取图片和当前浏览器窗口左边距
+            var left = img.style.left.replace("px", "");
+// left = left - 100;
+// img.style.left = left + "px";
+// 上下移动
+            if(top <= 0)
+            {
+                y = 1;
+            }
+            if(top >= document.body.clientHeight)
+            {
+                y = -1;
+            }
+            top = (top*1) + (step * y);
+            img.style.top = top + "px";
+// 左右移动
+            if(left <= 0)
+            {
+                x = 1;
+            }
+// alert(img.clientWidth);
+            if(left >= (document.body.clientWidth - img.clientWidth))
+            {
+                x = -1;
+            }
+            left = (left*1) + (step * x);
+            img.style.left = left + "px";
+            setTimeout("myFloat()", 20);
+        }
+    </script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <title>谭老师的照片集锦</title>
     <style>
         #bg{
-            width:1200px;height:300px;
+            width:940px;height:300px;
         background：url(images/精品展示.jpg);
         }
         #sm{/*滚动对象样式*/
             overflow:hidden;/*隐藏Div中多余的内容，增加图片会一起滚动*/
-            width:1180px;height:280px;
+            width:920px;height:280px;
             margin:0 auto;
             padding-top:30px;
         }
     </style>
 </head>
-<%--style="background-image:url(${pageContext.request.contextPath}/images/main_images/trumppresident111.png)"--%>
-<body style="background-image:url(${pageContext.request.contextPath}/images/main_images/trumppresident111.png)" >
+<body onload="myFloat();"  style="background-image:url(${pageContext.request.contextPath}/images/main_images/trumppresident111.png)">
+<img id="myImg" src="${pageContext.request.contextPath}/images/main_images/advertisement.gif"
+     style="position: absolute; left: 500px; top: 400px; border: solid 1px black;" />
 <h1 style="color:white ;font-size:20px;background-color:black">感谢&致敬谭老师</h1>
 <br>
 <center>

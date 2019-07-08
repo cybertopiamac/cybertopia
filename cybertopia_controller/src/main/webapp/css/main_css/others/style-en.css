@@ -5485,6 +5485,7 @@ table tbody td:first-child {
 #form-search-products {
   display: flex;
   align-items: center;
+  margin: auto;
 }
 
 #form-search-products .form-group:first-child i {

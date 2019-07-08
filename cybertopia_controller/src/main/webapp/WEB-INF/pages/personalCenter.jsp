@@ -391,9 +391,9 @@
                                 "</p>" +
                                 "<div class=\"main-btn\">" +
                                 "<input type=\"button\"" +
-                                "onclick=\"window.location='<%=basePath%>article/detail.do?id='" +
+                                "onclick=\"window.location='<%=basePath%>comp/compDetail.do?id=" +
                                 data.competitions[i].id +
-                                "\"value=\"查看详情\">" +
+                                "'\"value=\"查看详情\">" +
                                 "</div>" +
                                 "</div>";
                         }

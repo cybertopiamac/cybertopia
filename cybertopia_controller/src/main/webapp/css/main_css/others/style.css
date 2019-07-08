@@ -3627,7 +3627,9 @@ table {
 /* Form Search Products */
 #form-search-products {
   display: flex;
-  align-items: center; }
+  align-items: center;
+  margin: auto;
+}
   #form-search-products .form-group:first-child i {
     position: relative;
     z-index: 2;

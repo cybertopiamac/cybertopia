@@ -30,7 +30,29 @@
 
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/toastr.min.css"/>
+    <script src="<%=basePath%>/js/main_js/toastr.min.js"></script>
+
     <script type="text/javascript">
+
+
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
         $(document).ready(function(){
 
             function setDefault(input_id) {
@@ -68,19 +90,19 @@
             }
 
             if (check_blank != false) {
-                var r = confirm("确认发表吗?");
-                if (r == true) {
-                    //传入评论content
-                    //向评论表写入数据
-                    post_comment();
-                    /*alert("发表成功！");*/
-                    $('#comment_textarea').val("");
-                    return true;
-                } else {
-                    //不提交表单申请
-                    alert("取消发表");
-                    return false;
-                }
+                post_comment();
+                $('#comment_textarea').val("");
+                // var r = confirm("确认发表吗?");
+                // if (r == true) {
+                //     //传入评论content
+                //     //向评论表写入数据
+                //     /*toastr.info("发表成功！");*/
+                //     return true;
+                // } else {
+                //     //不提交表单申请
+                //     toastr.info("取消发表");
+                //     return false;
+                // }
             }
             return false;
 
@@ -99,10 +121,14 @@
                 data: JSON.stringify(answer), // Note it is important
                 success: function (data) {
                     /*console.log(data);*/
-                    alert("发表成功！");
+                    toastr.info("发表成功！");
+                    // $(".article_comment").hide(400);
+                    $("#comments").empty();
+                    get_all_comment();
                 },
                 error: function() {
                     /*console.log("post error")*/
+                    toastr.error("发表失败！");
                 }
             });
         }
@@ -169,7 +195,7 @@
                 insertComment(elem);
             });
 
-            $(".article_comment").show();
+            $(".article_comment").slideDown(400);
         }
 
         function show_all_comment_empty() {
@@ -181,7 +207,7 @@
 
             /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
 
-            $(".article_comment").show();
+            $(".article_comment").show(400);
         }
 
     </script>

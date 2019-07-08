@@ -32,8 +32,28 @@
     <script src="<%=basePath%>js/main_js/infinite-scroll.pkgd.min.js"></script>
 
 
+    <link rel="stylesheet" type="text/css" href="<%=basePath%>/css/main_css/toastr.min.css"/>
+    <script src="<%=basePath%>/js/main_js/toastr.min.js"></script>
+
     <script type="text/javascript">
 
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
         $(document).ready(function () {
             $("#input_title").focus(setDefault('#input_title'));
             $("#input_content").focus(setDefault('#input_content'));
@@ -61,7 +81,8 @@
                     return true;
                 } else {
                     //不提交表单申请
-                    alert("取消发表");
+                    // toastr.info("取消发表");
+                    toastr.info("取消发表");
                     return false;
                 }
             }
@@ -101,12 +122,12 @@
                 data: JSON.stringify(article), // Note it is important
                 success: function (data) {
                     /*console.log(data);*/
-                    alert("发表成功！");
+                    toastr.info("发表成功！");
                     window.location = "<%=basePath%>article/all.do";
                 },
                 error: function() {
                     /*console.log("post error");*/
-                    alert("发表失败！");
+                    toastr.error("发表失败！");
                 }
             });
         }

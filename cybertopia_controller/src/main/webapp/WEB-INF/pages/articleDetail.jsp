@@ -264,7 +264,7 @@
                 insertComment(elem);
             });
 
-            $(".article_comment").show(400);
+            $(".article_comment").slideDown(400);
 
         }
 
@@ -286,8 +286,8 @@
            //隐藏评论区
 
             $(".all_comment_button").attr("disabled",false);//可点击按钮
+            $(".article_comment").slideUp(400);
             $("#comments").empty();
-            $(".article_comment").hide(400);
         }
 
 

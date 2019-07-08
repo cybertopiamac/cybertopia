@@ -122,6 +122,9 @@
                 success: function (data) {
                     /*console.log(data);*/
                     toastr.info("发表成功！");
+                    // $(".article_comment").hide(400);
+                    $("#comments").empty();
+                    get_all_comment();
                 },
                 error: function() {
                     /*console.log("post error")*/
@@ -192,7 +195,7 @@
                 insertComment(elem);
             });
 
-            $(".article_comment").show();
+            $(".article_comment").slideDown(400);
         }
 
         function show_all_comment_empty() {
@@ -204,7 +207,7 @@
 
             /*$(".all_comment_button").attr("disabled",false);//可点击按钮*/
 
-            $(".article_comment").show();
+            $(".article_comment").show(400);
         }
 
     </script>
